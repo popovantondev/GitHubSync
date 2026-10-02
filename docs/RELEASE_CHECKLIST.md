@@ -16,9 +16,9 @@ Preparation does not grant permission to publish or change repository visibility
 
 - [ ] Decide application licensing explicitly. This preparation retains the existing MIT license; it does not copy the more restrictive HotspotControl license.
 - [ ] Confirm the target repository/visibility and add its issue/release links. No target repository is created here.
-- [x] Test real writes only in the approved existing private TEST repository, using artificial files. Code upload/download, draft-only, separate publication, upload-and-publish and intentional conflict with no publication passed on 2026-10-02. Large live transfers remain unverified; see verification notes.
+- [x] Test real writes only in the approved existing private TEST repository, using artificial files. Earlier release/draft/publication safeguards passed on 2026-10-02. Version 1.5.3 additionally passed a 61 MiB native Code upload, one confirmed commit, preservation of existing paths, no-op and hash-matched download; see [verification](VERIFICATION-1.5.3.md). No real user uploads were used.
 - Excluded by the owner's acceptance scope: a second Windows PC, repeat real browser login/2FA and actual OS DPI changes. These are **unverified**, not passed. Synthetic 100–200% renders do not substitute for these tests.
-- [ ] Re-run checks against the final committed source and final release ZIP, review [verification notes](VERIFICATION-1.5.1.md), then upload the portable ZIP and checksum as release attachments. Do not commit runtime/builds or publish credentials.
+- [ ] Re-run checks against the final committed source and final release ZIP, review [verification notes](VERIFICATION-1.5.3.md), then obtain owner approval before uploading the portable ZIP/checksum. Do not commit runtime/builds or publish credentials.
 - [ ] Keep source and binary links distinct; do not advertise unsigned EXEs as signed or claim virus/secret absence guarantees.
 
 CI only checks/builds. It does not publish releases, authenticate a user, deploy a documentation site or create repositories.

@@ -20,7 +20,7 @@ foreach ($name in @('index.html','README.de.md','README.ru.md','ARCHITECTURE.md'
 }
 Copy-Item -LiteralPath (Join-Path $root 'assets\sync.ico'),(Join-Path $root 'assets\sync.png') -Destination (Join-Path $stage 'assets')
 Copy-Item -LiteralPath (Join-Path $root 'third-party-notices') -Destination (Join-Path $stage 'third-party-notices') -Recurse
-foreach ($name in @('SyncTransfer.cs','WindowsPathSafety.cs','GitHubWrite.cs')) { Copy-Item -LiteralPath (Join-Path $root ('src\'+$name)) -Destination (Join-Path $stage ('src\'+$name)) }
+foreach ($name in @('SyncTransfer.cs','WindowsPathSafety.cs','GitHubWrite.cs','GitCodeTransport.cs')) { Copy-Item -LiteralPath (Join-Path $root ('src\'+$name)) -Destination (Join-Path $stage ('src\'+$name)) }
 & (Join-Path $PSScriptRoot 'Test-Publication.ps1') -PackagePath $stage
 Compress-Archive -LiteralPath $stage -DestinationPath $archive -CompressionLevel Optimal
 $hash = (Get-FileHash -LiteralPath $archive).Hash.ToLowerInvariant()

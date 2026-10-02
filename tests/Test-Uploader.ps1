@@ -36,6 +36,14 @@ function Invoke-UploaderWrite($method,$uri,$body) {
     throw "Unexpected write $uri"
 }
 function Assert($condition,$message) { if(-not $condition){throw $message} }
+function Invoke-ProjectGitTransport($plan,$request) {
+    $script:writes.Add(@{method='git';uri='native/git/commits';body=@{baseTree=$plan.baseTree;parents=@($plan.baseCommit)}})
+    if($script:conflict){$script:head='someone-else';throw [GitCodeException]::new('branch-changed','new-commit')}
+    if($script:protect){throw [GitCodeException]::new('permission','new-commit')}
+    $script:head='new-commit'
+    if($script:uncertain){throw [GitCodeException]::new('connection','new-commit')}
+    return @{Commit='new-commit';NoChanges=$false}
+}
 Reset-Progress
 $script:readmeSha='older-content'
 $plan=Get-ProjectPlan $request
@@ -47,7 +55,7 @@ Send-ProjectFiles $request
 Assert ($script:head -eq 'new-commit' -and $script:states[-1] -eq 'completed') 'Confirmed commit'
 Assert ($script:progressConfirmed.Count -eq 2) 'Files only confirmed after branch update'
 Assert (@($script:writes | Where-Object uri -match '/git/commits$').Count -eq 1) 'Single commit'
-Assert (@($script:writes | Where-Object uri -match '/git/trees$')[0].body.base_tree -eq 'base-tree') 'Preserve unrelated files'
+Assert ($script:writes[0].body.baseTree -eq 'base-tree' -and $script:writes[0].method -eq 'git') 'Code uses native Git based on reviewed tree; no blob REST mutations'
 Reset-Progress; $script:conflict=$true
 $failed=$false; try {Send-ProjectFiles $request}catch{$failed=$true}
 Assert ($failed -and @($script:writes | Where-Object uri -match '/git/refs/').Count -eq 0 -and $script:progressConfirmed.Count -eq 0) 'Concurrent head stops before update'
@@ -56,7 +64,12 @@ $failed=$false; try {Send-ProjectFiles $request}catch{$failed=$true}
 Assert ($failed -and $script:head -eq 'old' -and $script:progressConfirmed.Count -eq 0) 'Protected branch leaves no confirmed files'
 Reset-Progress; $script:uncertain=$true
 Send-ProjectFiles $request
-Assert ($script:states[-1] -eq 'completed' -and @($script:writes | Where-Object uri -match '/git/refs/').Count -eq 1) 'Uncertain response checked without repeated write'
+Assert ($script:states[-1] -eq 'completed' -and $script:writes.Count -eq 1) 'Uncertain Git push checked without repeated write'
+foreach($codeLanguage in @('de','ru','en')){
+    $Language=$codeLanguage; $detail=Get-ProjectGitError ([GitCodeException]::new('connection','new-commit',502))
+    Assert ($detail -match 'HTTP 502' -and $detail -notmatch 'synthetic-secret') 'Native Git preserves safe HTTP status in every language'
+}
+$Language='ru'
 Reset-Progress
 $script:head='changed'; $failed=$false; try {Send-ProjectFiles $request}catch{$failed=$true}
 Assert ($failed -and $script:writes.Count -eq 0) 'Changed head after preview causes no writes'

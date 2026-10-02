@@ -29,7 +29,7 @@ $framework = Join-Path $env:WINDIR 'Microsoft.NET\Framework\v4.0.30319'
 $compiler = Join-Path $env:WINDIR 'Microsoft.NET\Framework64\v4.0.30319\csc.exe'
 $runner = Join-Path $fixture 'UiReview.exe'
 $launcher = Join-Path $output 'GitHubSync.exe'
-& $compiler /nologo /target:exe /codepage:65001 "/out:$runner" /reference:System.dll /reference:System.Core.dll /reference:System.Web.Extensions.dll "/reference:$framework\System.Xaml.dll" "/reference:$framework\WPF\WindowsBase.dll" "/reference:$framework\WPF\PresentationCore.dll" "/reference:$framework\WPF\PresentationFramework.dll" (Join-Path $PSScriptRoot 'UiReview.cs')
+& $compiler /nologo /target:exe /codepage:65001 "/out:$runner" /reference:System.dll /reference:System.Core.dll /reference:System.Drawing.dll /reference:System.Windows.Forms.dll /reference:System.Web.Extensions.dll "/reference:$framework\System.Xaml.dll" "/reference:$framework\WPF\WindowsBase.dll" "/reference:$framework\WPF\PresentationCore.dll" "/reference:$framework\WPF\PresentationFramework.dll" (Join-Path $PSScriptRoot 'UiReview.cs')
 if ($LASTEXITCODE -ne 0) { throw 'Could not compile the isolated UI review.' }
 $references = @('/reference:System.dll', '/reference:System.Core.dll', '/reference:System.Drawing.dll', '/reference:System.Windows.Forms.dll', '/reference:System.Web.Extensions.dll', "/reference:$framework\System.Xaml.dll", "/reference:$framework\WPF\WindowsBase.dll", "/reference:$framework\WPF\PresentationCore.dll", "/reference:$framework\WPF\PresentationFramework.dll")
 $frames=1..12 | ForEach-Object { "/resource:$(Join-Path $root ('assets\sync-frame-'+$_+'.ico')),Sync.Frame$_" }

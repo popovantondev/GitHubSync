@@ -30,6 +30,7 @@ internal sealed partial class WatchdogWindow
     private Process activeWorker;
     private Forms.NotifyIcon tray;
     private Forms.ContextMenuStrip trayMenu;
+    private Forms.ToolStripMenuItem trayOpenItem, trayUpdatesItem, trayPauseItem, trayResumeItem, trayExitItem;
     private DispatcherTimer trayAnimation, monitorTimer;
     private readonly List<System.Drawing.Icon> trayFrames = new List<System.Drawing.Icon>();
     private readonly List<BitmapSource> windowFrames = new List<BitmapSource>();
@@ -346,7 +347,7 @@ internal sealed partial class WatchdogWindow
                 }
             }
             if(trayFrames.Count==0) {Application.Current.ShutdownMode=ShutdownMode.OnMainWindowClose;return;}
-            trayMenu=new Forms.ContextMenuStrip(); tray=new Forms.NotifyIcon {Icon=trayFrames[0],Text="GitHubSync",Visible=true,ContextMenuStrip=trayMenu}; tray.DoubleClick+=delegate {Dispatcher.BeginInvoke(new Action(RestoreWindow));}; tray.BalloonTipClicked+=delegate{Dispatcher.BeginInvoke(new Action(delegate{RestoreWindow();if(!uploadRunning)ChangeDirection(true);}));}; UpdateTrayMenu();
+            InitializeTrayMenu(); tray=new Forms.NotifyIcon {Icon=trayFrames[0],Text="GitHubSync",Visible=true,ContextMenuStrip=trayMenu}; tray.DoubleClick+=delegate {Dispatcher.BeginInvoke(new Action(RestoreWindow));}; tray.BalloonTipClicked+=delegate{Dispatcher.BeginInvoke(new Action(delegate{RestoreWindow();if(!uploadRunning)ChangeDirection(true);}));}; UpdateTrayMenu();
             trayAnimation=new DispatcherTimer {Interval=TimeSpan.FromMilliseconds(1000.0/6)}; trayAnimation.Tick+=delegate { AnimateTray(); }; trayAnimation.Start();
             Closing+=delegate(object sender,System.ComponentModel.CancelEventArgs args) {if(!allowWindowClose){args.Cancel=true;Hide();}};
             Closed+=delegate {if(monitorTimer!=null)monitorTimer.Stop();if(trayAnimation!=null)trayAnimation.Stop();tray.Visible=false;tray.Dispose();trayMenu.Dispose();foreach(var icon in trayFrames)icon.Dispose();};
@@ -366,18 +367,45 @@ internal sealed partial class WatchdogWindow
     }
     private void AnimateTray()
     {
-        if(tray==null) return; bool active=uploadRunning && !checking;
+        // Shell icon changes can move/re-anchor the native popup. Keep it still
+        // until the user has finished choosing an action; the next tick resumes.
+        if(tray==null || (trayMenu!=null && trayMenu.Visible)) return; bool active=uploadRunning && !checking;
         if(active && trayFrames.Count>1) { trayFrame=(trayFrame+1)%(trayFrames.Count-1);tray.Icon=trayFrames[trayFrame+1];if(windowFrames.Count>trayFrame)Icon=windowFrames[trayFrame]; }
         else if(tray.Icon!=trayFrames[0]) {tray.Icon=trayFrames[0];using(var stream=Assembly.GetExecutingAssembly().GetManifestResourceStream("Watchdog.IconIco"))Icon=ReadWindowIcon(stream);}
     }
+    private void InitializeTrayMenu()
+    {
+        trayMenu=new Forms.ContextMenuStrip();
+        trayOpenItem=new Forms.ToolStripMenuItem("",null,delegate {Dispatcher.BeginInvoke(new Action(RestoreWindow));});
+        trayUpdatesItem=new Forms.ToolStripMenuItem("",null,delegate {Dispatcher.BeginInvoke(new Action(delegate {CheckRemoteUpdates(true);}));});
+        trayPauseItem=new Forms.ToolStripMenuItem("",null,delegate {Dispatcher.BeginInvoke(new Action(PauseDownload));});
+        trayResumeItem=new Forms.ToolStripMenuItem("",null,delegate {Dispatcher.BeginInvoke(new Action(delegate {RestoreWindow();RestorePendingDownload();}));});
+        trayExitItem=new Forms.ToolStripMenuItem("",null,delegate {Dispatcher.BeginInvoke(new Action(RequestExit));});
+        trayMenu.Items.AddRange(new Forms.ToolStripItem[] {trayOpenItem,trayUpdatesItem,trayPauseItem,trayResumeItem,new Forms.ToolStripSeparator(),trayExitItem});
+        trayMenu.Opening+=delegate {UpdateTrayMenu();};
+        trayMenu.Closed+=delegate {UpdateTrayMenu();};
+    }
+    private static void SetTrayText(Forms.ToolStripItem item,string text)
+    {
+        if(item.Text!=text) item.Text=text;
+    }
     private void UpdateTrayMenu()
     {
-        if(trayMenu==null) return; trayMenu.Items.Clear();
-        trayMenu.Items.Add(L("Öffnen","Открыть","Open"),null,delegate {Dispatcher.BeginInvoke(new Action(RestoreWindow));});
-        trayMenu.Items.Add(L("Updates prüfen","Проверить обновления","Check updates"),null,delegate {Dispatcher.BeginInvoke(new Action(delegate {CheckRemoteUpdates(true);}));});
-        if(downloadMode && uploadRunning && !checking) trayMenu.Items.Add(L("Download pausieren","Приостановить скачивание","Pause download"),null,delegate {Dispatcher.BeginInvoke(new Action(PauseDownload));});
-        else if(File.Exists(PendingPath)) trayMenu.Items.Add(L("Fortsetzen…","Продолжить…","Resume…"),null,delegate {Dispatcher.BeginInvoke(new Action(delegate{RestoreWindow();RestorePendingDownload();}));});
-        trayMenu.Items.Add(new Forms.ToolStripSeparator());trayMenu.Items.Add(L("Beenden","Выход","Exit"),null,delegate{Dispatcher.BeginInvoke(new Action(RequestExit));});
+        // UpdatePresentation runs on every progress tick. Recreating these items
+        // loses hover/keyboard selection and makes an open menu flicker/reflow.
+        // Keep permanent items, and defer even real changes until it closes.
+        if(trayMenu==null || trayMenu.IsDisposed || trayMenu.Visible) return;
+        SetTrayText(trayOpenItem,L("Öffnen","Открыть","Open"));
+        SetTrayText(trayUpdatesItem,L("Updates prüfen","Проверить обновления","Check updates"));
+        SetTrayText(trayPauseItem,L("Download pausieren","Приостановить скачивание","Pause download"));
+        SetTrayText(trayResumeItem,L("Fortsetzen…","Продолжить…","Resume…"));
+        SetTrayText(trayExitItem,L("Beenden","Выход","Exit"));
+        bool pause=downloadMode && uploadRunning && !checking, resume=!pause && File.Exists(PendingPath);
+        if(trayPauseItem.Available!=pause) trayPauseItem.Available=pause;
+        if(trayResumeItem.Available!=resume) trayResumeItem.Available=resume;
+        bool canCheck=!uploadRunning && !monitorBusy;
+        if(trayUpdatesItem.Enabled!=canCheck) trayUpdatesItem.Enabled=canCheck;
+        if(trayResumeItem.Enabled==uploadRunning) trayResumeItem.Enabled=!uploadRunning;
     }
     internal void RestoreWindow() {Show();if(WindowState==WindowState.Minimized)WindowState=WindowState.Normal;Activate();}
     private void RequestExit()

@@ -8,7 +8,7 @@ if ($PackagePath) {
     $config = Get-Content -LiteralPath (Join-Path $scanRoot 'config.json') -Raw | ConvertFrom-Json
     $example = Get-Content -LiteralPath (Join-Path $root 'config.example.json') -Raw | ConvertFrom-Json
     if ($config.Repository -ne 'OWNER/REPOSITORY' -or $config.Files.Count -ne 0 -or $config.SourceDirectory -ne 'upload' -or ($config | ConvertTo-Json -Compress) -ne ($example | ConvertTo-Json -Compress)) { $findings.Add('Package configuration differs from clean example.') }
-    foreach ($required in @('GitHubSync.exe','Release-UploadWatchdog.ps1','Uploader-Operations.ps1','Sync-Operations.ps1','src/SyncTransfer.cs','src/WindowsPathSafety.cs','src/GitHubWrite.cs','LICENSE','THIRD_PARTY.md','runtime-sources.lock.json','third-party-notices/gcm/MIT.txt','third-party-notices/gcm/README.md','third-party-notices/gcm/packages.lock.json','runtime/git/LICENSE.txt','runtime/git/mingw64/doc/git-credential-manager/LICENSE')) {
+    foreach ($required in @('GitHubSync.exe','Release-UploadWatchdog.ps1','Uploader-Operations.ps1','Sync-Operations.ps1','src/SyncTransfer.cs','src/WindowsPathSafety.cs','src/GitHubWrite.cs','src/GitCodeTransport.cs','LICENSE','THIRD_PARTY.md','runtime-sources.lock.json','third-party-notices/gcm/MIT.txt','third-party-notices/gcm/README.md','third-party-notices/gcm/packages.lock.json','runtime/git/LICENSE.txt','runtime/git/mingw64/doc/git-credential-manager/LICENSE')) {
         if ($paths -notcontains $required) { $findings.Add("Missing package file: $required") }
     }
 } else {

@@ -2,7 +2,7 @@
 
 Dateien zu GitHub senden, herunterladen und fortsetzen. Hinweise auf Updates starten keine Übertragung.
 
-Windows 10/11 · x64 · 1.5.2 · Deutsch / Русский / English
+Windows 10/11 · x64 · 1.5.3 · Deutsch / Русский / English
 
 [English](../README.md) · [Русский](README.ru.md) · [HTML-Anleitung](Guide-de.html)
 
@@ -33,6 +33,6 @@ Code-Dateien über 100 MiB ablehnen; Senden → Release-Anhänge verwenden. Kein
 
 ## Prüfung und Rechte
 
-Lokal vorbereiteter Kandidat 1.5.2, noch keine öffentliche Veröffentlichung. Symbole und Scrollabstände wurden geändert; die Übertragungslogik bleibt erhalten. Die [Abnahme 1.5.1](VERIFICATION-1.5.1.md) umfasste vier echte Übertragungen künstlicher Dateien im genehmigten privaten TEST. Für 1.5.2 wurden WPF/Worker-Prüfungen ohne neue GitHub-Uploads wiederholt. Andere PCs und physischer DPI-Wechsel bleiben unbestätigt. [Prüfung 1.5.2](VERIFICATION-1.5.2.md).
+Lokal vorbereiteter Kandidat 1.5.3, keine öffentliche Veröffentlichung. Code-Uploads verwenden das gebündelte Git statt großer base64-REST-Anfragen: ein Commit, keine Löschung anderer Dateien, kein force. Ein temporärer Branch-Snapshot verändert nicht den gewählten lokalen Ordner. Git-Objektfortschritt ist keine Dateibestätigung; Erfolg erst nach Commitprüfung auf GitHub. Das Tray-Menü wird nicht mehr jede Sekunde neu aufgebaut. Offline-Prüfungen und separat genehmigte künstliche TEST-Abnahme stehen in der [Prüfung 1.5.3](VERIFICATION-1.5.3.md). Andere PCs und physischer DPI-Wechsel bleiben unbestätigt.
 
-Release-Dateien: `GitHubSync-1.5.2-win-x64.zip` und `.sha256`. [Build/Struktur](../CONTRIBUTING.md), [Offline-Anleitung](Guide-de.html), [MIT](../LICENSE) und [Drittherstellerhinweise](../THIRD_PARTY.md).
+Release-Dateien: `GitHubSync-1.5.3-win-x64.zip` und `.sha256`. [Build/Struktur](../CONTRIBUTING.md), [Offline-Anleitung](Guide-de.html), [MIT](../LICENSE) und [Drittherstellerhinweise](../THIRD_PARTY.md).

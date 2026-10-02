@@ -79,6 +79,16 @@ function Write-ProgressState([string]$state, [string]$file = '', [long]$fileSize
             message = $message; updated = [DateTime]::UtcNow.ToString('o')
             choices = @($script:catalogChoices); account = $script:catalogAccount; createdTag = $script:createdTag; createdRepository = $script:createdRepository
         } | ConvertTo-Json -Depth 15 -Compress
+        if($state -eq 'failed' -and [IO.File]::Exists($script:progressFile)) {
+            try {
+                $previous=Get-Content -LiteralPath $script:progressFile -Raw -Encoding UTF8 | ConvertFrom-Json
+                if($previous.transferKind -eq 'git') {
+                    $record=$snapshot | ConvertFrom-Json
+                    foreach($key in @('transferKind','gitStage','gitProgressKnown','gitObjectsPercent','gitObjectsDone','gitObjectsTotal','gitPackBytes')) {if($previous.PSObject.Properties[$key]){$record | Add-Member -NotePropertyName $key -NotePropertyValue $previous.$key -Force}}
+                    $snapshot=$record | ConvertTo-Json -Depth 15 -Compress
+                }
+            }catch{}
+        }
         $temp = $script:progressFile + '.tmp'
         [System.IO.File]::WriteAllText($temp, $snapshot, (New-Object System.Text.UTF8Encoding($false)))
         if ([System.IO.File]::Exists($script:progressFile)) {

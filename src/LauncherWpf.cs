@@ -23,8 +23,8 @@ using Forms = System.Windows.Forms;
 [assembly: AssemblyDescription("Send and download GitHub files with controlled updates and resumable downloads")]
 [assembly: AssemblyCompany("Anton Popov")]
 [assembly: AssemblyProduct("GitHubSync")]
-[assembly: AssemblyVersion("1.5.2.0")]
-[assembly: AssemblyFileVersion("1.5.2.0")]
+[assembly: AssemblyVersion("1.5.3.0")]
+[assembly: AssemblyFileVersion("1.5.3.0")]
 [assembly: System.Runtime.Versioning.TargetFramework(".NETFramework,Version=v4.6.2")]
 
 internal static class Program
@@ -246,7 +246,7 @@ internal sealed partial class WatchdogWindow : Window
         var applicationName = Text("GitHubSync", 14, Muted, false);
         applicationName.TextAlignment = TextAlignment.Center;
         version.Children.Add(applicationName);
-        var versionNumber = Text("v1.5.2", applicationName.FontSize - 2, Muted, false);
+        var versionNumber = Text("v1.5.3", applicationName.FontSize - 2, Muted, false);
         versionNumber.TextAlignment = TextAlignment.Center;
         versionNumber.Margin = new Thickness(0, 2, 0, 0);
         version.Children.Add(versionNumber);
@@ -1360,7 +1360,9 @@ internal sealed partial class WatchdogWindow : Window
             if (!fileStatusLabels.TryGetValue(name, out label)) continue;
             bool confirmed = confirmedFiles.Contains(name);
             bool current = String.Equals(name, currentFile, StringComparison.OrdinalIgnoreCase);
+            bool gitPending=check.IsChecked==true && !confirmed && !downloadMode && latestSnapshot!=null && StateString(latestSnapshot,"mode","")=="code" && StateString(latestSnapshot,"transferKind","")=="git" && (phase=="preparing" || phase=="uploading" || phase=="committing" || phase=="failed");
             label.Text = confirmed ? L("Hochgeladen", "Загружен", "Uploaded")
+                : gitPending ? (phase=="failed" ? L("Nicht bestätigt","Не подтверждён","Not confirmed") : L("Commit ausstehend","Ожидание коммита","Commit pending"))
                 : current && phase == "failed" ? L("Fehler", "Ошибка", "Failed")
                 : current && phase == "retrying" ? L("Wiederholung", "Повтор", "Retrying")
                 : current && phase == "uploading" ? L("Wird geladen", "Загрузка", "Uploading")
@@ -1370,7 +1372,8 @@ internal sealed partial class WatchdogWindow : Window
             if(downloadMode && confirmed) label.Text=L("Heruntergeladen","Скачан","Downloaded");
             else if(downloadMode && current && phase=="downloading") label.Text=L("Download","Скачивание","Downloading");
             else if(downloadMode && current && phase=="paused") label.Text=L("Pausiert","Пауза","Paused");
-            label.Foreground = Brush(confirmed ? Hex("#18785A") : current && phase == "failed" ? Hex("#B32640") : current ? AccentHover : Muted);
+            label.Foreground = Brush(confirmed ? Hex("#18785A") : (current || gitPending) && phase == "failed" ? Hex("#B32640") : current || gitPending ? AccentHover : Muted);
+            label.ToolTip=label.Text;
         }
         UpdateProgressAppearance();
     }
@@ -1738,6 +1741,20 @@ internal sealed partial class WatchdogWindow : Window
         progressFileText.ToolTip = currentFile;
         if (overallBar.IsIndeterminate) progressOverallText.Text = L("Gesamt · Dauer unbekannt", "Общий · длительность неизвестна", "Overall · duration unknown");
         if (fileBar.IsIndeterminate) progressFileText.Text = String.IsNullOrEmpty(currentFile) ? L("Aktuelle Datei · —", "Текущий файл · —", "Current file · —") : currentFile;
+        if(StateString(snapshot,"transferKind","")=="git" && phase!="completed") {
+            string gitStage=StateString(snapshot,"gitStage","preparing");
+            bool sending=gitStage=="sending", known=sending && StateString(snapshot,"gitProgressKnown","false").Equals("true",StringComparison.OrdinalIgnoreCase);
+            overallBar.IsIndeterminate=phase!="failed"; // File bytes are not measurable inside a shared Git pack.
+            progressOverallText.Text=String.Format(L("Bestätigte Dateien · {0}/{1}","Подтверждено файлов · {0}/{1}","Confirmed files · {0}/{1}"),StateLong(snapshot,"filesCompleted"),StateLong(snapshot,"filesTotal"));
+            fileBar.IsIndeterminate=!known && phase!="failed";
+            fileBar.Value=known ? Math.Max(0,Math.Min(100,StateLong(snapshot,"gitObjectsPercent"))) : 0;
+            progressFileText.Text=known ? String.Format(L("Git-Objekte · {0}% ({1}/{2})","Объекты Git · {0}% ({1}/{2})","Git objects · {0}% ({1}/{2})"),StateLong(snapshot,"gitObjectsPercent"),StateLong(snapshot,"gitObjectsDone"),StateLong(snapshot,"gitObjectsTotal"))
+                : gitStage=="confirming" ? L("GitHub bestätigt den Commit…","Проверка коммита на GitHub…","Confirming commit on GitHub…")
+                : sending ? L("Git überträgt das Dateipaket…","Git передаёт пакет файлов…","Git is sending the file pack…")
+                : L("Git bereitet Dateien vor…","Git подготавливает файлы…","Git is preparing files…");
+            if(known && StateLong(snapshot,"gitPackBytes")>0)progressFileText.Text+=" · "+FormatSize(StateLong(snapshot,"gitPackBytes"));
+            progressFileText.ToolTip=progressFileText.Text;
+        }
         status.Text = "";
         status.Foreground = Brush(Muted);
         if (phase == "retrying")

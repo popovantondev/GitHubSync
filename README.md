@@ -2,7 +2,7 @@
 
 Send files to GitHub, download project files or release attachments, resume downloads, and receive update notifications. Transfers always require approval.
 
-Windows 10/11 · x64 · **1.5.2 local release candidate** · Deutsch / Русский / English
+Windows 10/11 · x64 · **1.5.3 local release candidate** · Deutsch / Русский / English
 
 [Deutsch](docs/README.de.md) · [Русский](docs/README.ru.md) · [User guide](docs/Guide-en.html) · [Security](SECURITY.md)
 
@@ -39,9 +39,9 @@ These are actual WPF demonstration renders with artificial files, fictional acco
 
 Code files above 100 MiB are rejected before writing; use Release attachments. Git LFS is not configured. `.git`/links are excluded; likely credential filenames do not start selected, but **review contents yourself**. `.gitignore` is not applied automatically. Internet and appropriate GitHub permissions are required. An empty existing repository needs an initial README/commit. Repositories created in this app get one.
 
-OneDrive Cloud placeholders are supported; real symlinks/junctions and unknown reparse tags are still blocked. Code transfers use the configured HTTP deadline (three hours by default), show streamed byte progress, and report safe operation/HTTP-status diagnostics without logging server bodies or credentials.
+OneDrive Cloud placeholders are supported; real symlinks/junctions and unknown reparse tags are still blocked. Code uploads use the bundled native Git, one non-force push and the existing cached GitHub sign-in. Git prepares a depth-one branch snapshot in a private temporary bare repository; it never checks out or changes the chosen source folder. Progress shows Git object-pack counters separately from confirmed files. Unknown preparation/confirmation duration is not presented as a percentage. The configured transfer deadline is three hours per command by default; changing it does not guarantee speed or server availability.
 
-This candidate is locally prepared, not yet claimed as a published release. Backend/API checks use mocks and artificial files. Current-version real Code commit/release publication, other PCs, physical DPI switching and real network-interruption acceptance have not been performed. A timeout/unknown write result requires checking GitHub before retrying.
+This candidate is locally prepared, not a public release. Offline checks use mocks/local repositories and artificial files; separately authorized live acceptance is recorded in the [verification notes](docs/VERIFICATION-1.5.3.md). Other PCs, physical DPI switching and real network-interruption acceptance are unverified. A timeout/unknown write result requires checking GitHub before retrying. A push reply is reconciled by a read, never a blind repeated write.
 
 Git LFS objects, submodules and Git history are not downloaded. Unsupported Windows filenames, links/junctions and unsafe paths stop the operation. GitHub blob API downloads have a 100 MiB limit. Uploads cannot byte-resume an unfinished release attachment: already confirmed files are skipped, the unfinished file is sent again.
 
@@ -49,17 +49,17 @@ Git LFS objects, submodules and Git history are not downloaded. Unsupported Wind
 
 `config.json`, `ui-settings.json` and error logs beside the extracted EXE may contain local paths, selected filenames and the account name: **do not publish them**. The app does not store tokens in these files; GCM manages authorized credentials separately in the user's credential store. No telemetry service is added. Git ignores generated apps/dependencies, local preferences, logs and keys; publication auditing checks the actual Git file set.
 
-Resumable task metadata is private under `%LOCALAPPDATA%/GitHubSync`. Partial files and replacement backups are in `.githubsync` below the chosen download folder; this directory is excluded from uploads and source archives. No authentication token or signed CDN URL is stored there.
+Resumable task metadata is private under `%LOCALAPPDATA%/GitHubSync`. Temporary Code snapshots are under `code-transfers` there; normal completion cleans the generated session, but an interrupted worker may leave private repository data. Partial files and replacement backups are in `.githubsync` below the chosen download folder; this directory is excluded from uploads and source archives. No authentication token or signed CDN URL is stored there.
 
 ## Build and release files
 
 See [CONTRIBUTING](CONTRIBUTING.md) for commands and folder structure. `Run-Checks.ps1` uses mocked GitHub/auth only. `tools/Build-Portable.ps1` builds locally and creates:
 
-- `artifacts/GitHubSync-1.5.2-Portable/GitHubSync.exe`
-- `artifacts/GitHubSync-1.5.2-win-x64.zip`
+- `artifacts/GitHubSync-1.5.3-Portable/GitHubSync.exe`
+- `artifacts/GitHubSync-1.5.3-win-x64.zip`
 - the accompanying `.zip.sha256`
 
-Generated artifacts are **not** source commits. Upload the ZIP/checksum as release attachments only after owner approval. This preparation does not create a GitHub repository, push, publish a release or deploy Pages. [Release notes](docs/RELEASE_NOTES-1.5.2.md) · [Verification](docs/VERIFICATION-1.5.2.md) · [Release checklist](docs/RELEASE_CHECKLIST.md) · [Architecture](docs/ARCHITECTURE.md) · [Design](docs/DESIGN.md) · [Changelog](CHANGELOG.md) · [Security](SECURITY.md).
+Generated artifacts are **not** source commits. Upload the ZIP/checksum as release attachments only after owner approval. This preparation does not create a GitHub repository, push, publish a release or deploy Pages. [Release notes](docs/RELEASE_NOTES-1.5.3.md) · [Verification](docs/VERIFICATION-1.5.3.md) · [Release checklist](docs/RELEASE_CHECKLIST.md) · [Architecture](docs/ARCHITECTURE.md) · [Design](docs/DESIGN.md) · [Changelog](CHANGELOG.md) · [Security](SECURITY.md).
 
 ## Rights
 

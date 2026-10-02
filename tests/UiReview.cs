@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using Forms = System.Windows.Forms;
 
 internal static class UiReview
 {
@@ -89,6 +90,23 @@ internal static class UiReview
             var codeBytes = new Dictionary<string,object>{{"state","uploading"},{"mode","code"},{"direction","upload"},{"file",Files[0]},{"fileBytes",100},{"fileSent",50},{"totalBytes",300},{"completedBytes",0},{"confirmedFiles",new string[0]},{"fileProgressKnown",true}};
             type.GetMethod("ApplyProgress",Private).Invoke(window,new object[]{codeBytes});
             Assert(!((ProgressBar)Field("fileBar")).IsIndeterminate && ((ProgressBar)Field("fileBar")).Value==50,"Code streaming shows actual byte progress");
+            var gitSnapshot=new Dictionary<string,object>{{"state","preparing"},{"mode","code"},{"direction","upload"},{"transferKind","git"},{"gitStage","preparing"},{"gitProgressKnown",false},{"filesTotal",3},{"filesCompleted",0},{"confirmedFiles",new string[0]}};
+            Invoke("ApplyProgress",gitSnapshot);
+            Assert(((ProgressBar)Field("overallBar")).IsIndeterminate && ((ProgressBar)Field("fileBar")).IsIndeterminate,"Git preparation uses unknown-duration activity");
+            Assert(!((TextBlock)Field("progressOverallText")).Text.Contains("%") && ((TextBlock)Field("progressOverallText")).Text.Contains("0/3"),"Git pack progress does not invent confirmed file bytes");
+            gitSnapshot["state"]="uploading";gitSnapshot["gitStage"]="sending";gitSnapshot["gitProgressKnown"]=true;gitSnapshot["gitObjectsPercent"]=85;gitSnapshot["gitObjectsDone"]=6;gitSnapshot["gitObjectsTotal"]=7;gitSnapshot["gitPackBytes"]=10485760;
+            Invoke("ApplyProgress",gitSnapshot);
+            Assert(!((ProgressBar)Field("fileBar")).IsIndeterminate && ((ProgressBar)Field("fileBar")).Value==85 && ((TextBlock)Field("progressFileText")).Text.Contains("6/7"),"Actual Git object progress labeled separately from files");
+            Assert(((TextBlock)Field("progressOverallText")).Text.Contains("0/3"),"Writing Git objects does not confirm files prematurely");
+            Assert(((TextBlock)Field("fileStatusLabels",Files[0])).Text=="Commit ausstehend","Selected files await the shared Git commit instead of claiming uploaded/ready");
+            Assert(((TextBlock)Field("progressFileText")).Text.Contains("MiB") && ((TextBlock)Field("progressFileText")).ToolTip.ToString()==((TextBlock)Field("progressFileText")).Text,"Git-reported pack size remains readable as text/tooltip, not invented file bytes");
+            gitSnapshot["state"]="committing";gitSnapshot["gitStage"]="confirming";gitSnapshot["gitProgressKnown"]=false;
+            Invoke("ApplyProgress",gitSnapshot);
+            Assert(((ProgressBar)Field("fileBar")).IsIndeterminate && ((TextBlock)Field("progressFileText")).Text.Contains("Commit"),"Commit readback remains a separate pending phase");
+            gitSnapshot["state"]="failed";
+            Invoke("ApplyProgress",gitSnapshot);
+            Assert(!((ProgressBar)Field("overallBar")).IsIndeterminate && !((ProgressBar)Field("fileBar")).IsIndeterminate,"Failed Git transfer stops all progress animation");
+            Assert(((TextBlock)Field("fileStatusLabels",Files[0])).Text=="Nicht bestätigt","Failed Git commit leaves selected files unconfirmed");
             Apply("failed",Files[0],0,0,new string[0]);
             Assert(!((ProgressBar)Field("fileBar")).IsIndeterminate,"Failed transfer stops activity animation");
             Apply("completed", "", 0, 300, Files);
@@ -158,7 +176,7 @@ internal static class UiReview
             view.Height = 1040;
             Layout(view, 1064, 1000);
             AssertButtonFrames();
-            var versionNumber = Find<TextBlock>((DependencyObject)view.Content).Single(item => item.Text == "v1.5.2");
+            var versionNumber = Find<TextBlock>((DependencyObject)view.Content).Single(item => item.Text == "v"+assembly.GetName().Version.ToString(3));
             var versionBlock = (StackPanel)versionNumber.Parent;
             var applicationName = versionBlock.Children.OfType<TextBlock>().Single(item => item.Text == "GitHubSync");
             Assert(versionBlock.HorizontalAlignment == HorizontalAlignment.Center && versionBlock.Orientation == Orientation.Vertical && applicationName.TextAlignment == TextAlignment.Center && versionNumber.TextAlignment == TextAlignment.Center, "App name and separate version line centered in sidebar");
@@ -546,6 +564,7 @@ internal static class UiReview
             view.Show();type.GetMethod("InitializeTray",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(window,null);
             Assert(Field("tray")!=null,"Tray is initialized with embedded icon: "+Field("trayFailure"));
             Assert(((IList)Field("trayFrames")).Count==13 && ((IList)Field("windowFrames")).Count==12,"Static icon and cached animation frames");
+            AssertTrayMenuStable(view);
             type.GetField("uploadRunning",Private).SetValue(window,true);type.GetField("checking",Private).SetValue(window,false);Invoke("AnimateTray");var animated=view.Icon;Invoke("AnimateTray");Assert(view.Icon!=animated,"Window icon advances with tray animation");
             type.GetField("uploadRunning",Private).SetValue(window,false);Invoke("AnimateTray");
             bool exitCancelled=false;type.GetField("uploadRunning",Private).SetValue(window,true);
@@ -650,6 +669,63 @@ internal static class UiReview
         Invoke("ReadProgress");
     }
 
+    private static void AssertTrayMenuStable(Window view)
+    {
+        var menu=(Forms.ContextMenuStrip)Field("trayMenu");
+        var items=menu.Items.Cast<Forms.ToolStripItem>().ToArray();
+        int mutations=0, moves=0, resizes=0;
+        menu.ItemAdded+=delegate {mutations++;}; menu.ItemRemoved+=delegate {mutations++;};
+        menu.LocationChanged+=delegate {moves++;}; menu.SizeChanged+=delegate {resizes++;};
+        var failed=new Dictionary<string,object>{{"state","failed"},{"message","Artificial tray regression"},{"direction","upload"},{"mode","code"}};
+        for(int tick=0;tick<20;tick++) Invoke("ApplyProgress",failed);
+        Assert(menu.Items.Cast<Forms.ToolStripItem>().SequenceEqual(items) && mutations==0,"Progress ticks keep permanent tray menu items instead of rebuilding them");
+        ((DispatcherTimer)Field("trayAnimation")).Stop();
+        var language=(ComboBox)Field("language"); int previousLanguage=language.SelectedIndex;
+        bool previousDownload=(bool)Field("downloadMode");
+        bool previousBusy=(bool)Field("uploadRunning"), previousChecking=(bool)Field("checking");
+        string previousProgress=(string)Field("progressPath"), progressFixture=Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"private-state","tray-progress.json");
+        try {
+            File.WriteAllText(progressFixture,new JavaScriptSerializer().Serialize(new Dictionary<string,object>{{"state","uploading"},{"direction","upload"},{"mode","code"},{"file","artificial.txt"},{"fileBytes",1024},{"fileSent",256}}));
+            type.GetField("progressPath",Private).SetValue(window,progressFixture);
+            type.GetField("uploadRunning",Private).SetValue(window,true); type.GetField("checking",Private).SetValue(window,false);
+            Invoke("AnimateTray"); var icon=view.Icon; int frame=(int)Field("trayFrame");
+            menu.Show(new System.Drawing.Point(32,32)); Forms.Application.DoEvents();
+            var exit=menu.Items.Cast<Forms.ToolStripItem>().Last(); exit.Select();
+            Assert(menu.Visible && exit.Selected,"Isolated tray menu can keep a hovered/keyboard-selected action");
+            var bounds=menu.Bounds; moves=0; resizes=0;
+            for(int tick=0;tick<20;tick++) {Invoke("UpdatePresentation");Invoke("UpdateTrayMenu");Invoke("AnimateTray");}
+            Assert(menu.Visible && menu.Bounds==bounds && moves==0 && resizes==0,"Open tray menu stays anchored across progress and animation ticks");
+            Assert(exit.Selected && menu.Items.Cast<Forms.ToolStripItem>().SequenceEqual(items),"Open menu keeps selected item identity");
+            Assert(view.Icon==icon && (int)Field("trayFrame")==frame,"Window/tray animation freezes while their context menu is open");
+            // Exercise real dispatcher ticks for more than four progress polls,
+            // not just immediate method calls. Only this isolated fixture runs.
+            ((DispatcherTimer)Field("trayAnimation")).Start();
+            var elapsed=System.Diagnostics.Stopwatch.StartNew();
+            while(elapsed.ElapsedMilliseconds<2200) {
+                Dispatcher.CurrentDispatcher.Invoke(DispatcherPriority.Background,new Action(delegate {}));
+                Forms.Application.DoEvents();System.Threading.Thread.Sleep(20);
+            }
+            ((DispatcherTimer)Field("trayAnimation")).Stop();
+            Assert(menu.Visible && menu.Bounds==bounds && exit.Selected && (int)Field("trayFrame")==frame,"Real animation/progress timers keep the open menu and its selection stable");
+            string oldText=items[0].Text;
+            language.SelectedIndex=previousLanguage==2 ? 0 : 2;
+            Assert(items[0].Text==oldText && menu.Bounds==bounds,"Language/layout changes are deferred while menu is open");
+            menu.Close(); Forms.Application.DoEvents();
+            Assert(items[0].Text!=oldText,"Deferred menu language applies after closing");
+            Invoke("AnimateTray"); Assert((int)Field("trayFrame")!=frame && view.Icon!=icon,"Animation resumes after menu closes");
+            type.GetField("uploadRunning",Private).SetValue(window,false); Invoke("UpdateTrayMenu");
+            Assert(((Forms.ToolStripMenuItem)Field("trayUpdatesItem")).Enabled,"Idle tray update action available");
+            type.GetField("downloadMode",Private).SetValue(window,true);type.GetField("uploadRunning",Private).SetValue(window,true);Invoke("UpdateTrayMenu");
+            Assert(((Forms.ToolStripMenuItem)Field("trayPauseItem")).Available && !((Forms.ToolStripMenuItem)Field("trayResumeItem")).Available,"Active download exposes pause without rebuilding menu");
+            Assert(!((Forms.ToolStripMenuItem)Field("trayUpdatesItem")).Enabled,"Tray check cannot launch a parallel operation during transfer");
+            Assert(mutations==0,"State/language updates do not add/remove tray controls");
+        } finally {
+            if(menu.Visible) menu.Close(); language.SelectedIndex=previousLanguage;
+            type.GetField("progressPath",Private).SetValue(window,previousProgress);File.Delete(progressFixture);
+            type.GetField("downloadMode",Private).SetValue(window,previousDownload);type.GetField("uploadRunning",Private).SetValue(window,previousBusy);type.GetField("checking",Private).SetValue(window,previousChecking);
+            Invoke("UpdateTrayMenu");Invoke("AnimateTray");((DispatcherTimer)Field("trayAnimation")).Start();
+        }
+    }
     private static void Layout(Window view, double width, double height)
     {
         var content = (FrameworkElement)view.Content;
