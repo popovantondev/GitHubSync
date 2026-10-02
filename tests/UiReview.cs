@@ -39,6 +39,7 @@ internal static class UiReview
             Assert(view.Icon != null, "Embedded window icon");
             var windowIcon = (BitmapSource)view.Icon;
             Assert(windowIcon.PixelWidth == 32 && windowIcon.PixelHeight == 32, "Taskbar/window chrome uses the dedicated 32px ICO frame");
+            AssertIconAssets(assembly);
             Assert(!Find<Image>((DependencyObject)view.Content).Any(), "No large decorative header icon");
             Assert(((List<CheckBox>)Field("fileChecks")).Count == 3, "Synthetic file table");
             Assert(((Button)Field("signInButton")).Height == 36, "Sign-in uses compact sidebar button");
@@ -157,7 +158,7 @@ internal static class UiReview
             view.Height = 1040;
             Layout(view, 1064, 1000);
             AssertButtonFrames();
-            var versionNumber = Find<TextBlock>((DependencyObject)view.Content).Single(item => item.Text == "v1.5.1");
+            var versionNumber = Find<TextBlock>((DependencyObject)view.Content).Single(item => item.Text == "v1.5.2");
             var versionBlock = (StackPanel)versionNumber.Parent;
             var applicationName = versionBlock.Children.OfType<TextBlock>().Single(item => item.Text == "GitHubSync");
             Assert(versionBlock.HorizontalAlignment == HorizontalAlignment.Center && versionBlock.Orientation == Orientation.Vertical && applicationName.TextAlignment == TextAlignment.Center && versionNumber.TextAlignment == TextAlignment.Center, "App name and separate version line centered in sidebar");
@@ -196,6 +197,8 @@ internal static class UiReview
                 Assert(((List<CheckBox>)Field("fileChecks")).Count == (scenario == "one" ? 1 : 30), "Table contains " + scenario + " fixture");
                 if (scenario == "many") {
                     Assert(((ScrollViewer)Field("listScroll")).ScrollableHeight > 0, "Long list scrolls inside table");
+                    AssertScrollGutter((ScrollViewer)Field("listScroll"), "virtualized table");
+                    Assert(Math.Abs(((Grid)Field("tableHeading")).ActualWidth - ((ScrollViewer)Field("listScroll")).ViewportWidth) < .5, "Table header follows row viewport excluding scrollbar and gutter");
                     for (int refresh = 0; refresh < 3; refresh++) {
                         Invoke("LoadFiles");
                         Invoke("UpdateLayoutSpace");
@@ -204,6 +207,14 @@ internal static class UiReview
                     }
                 }
                 Render(view, Path.Combine(output, scenario + ".png"), 1);
+                if(scenario == "many") {
+                    Layout(view, 1064, 620);
+                    Assert(((ScrollViewer)Field("contentScroll")).ScrollableHeight > 0, "Small window needs actual outer scrolling");
+                    AssertScrollGutter((ScrollViewer)Field("contentScroll"), "small-window page");
+                    Render(view, Path.Combine(output,"scroll-gutters-small.png"),1);
+                    Layout(view, 1064, 1000);
+                    Assert(((ScrollViewer)Field("contentScroll")).Padding.Right == 0, "Hidden outer scrollbar does not shrink cards");
+                }
             }
             folder.Text = Path.Combine(fixture, "upload");
             Invoke("LoadFiles");
@@ -568,6 +579,44 @@ internal static class UiReview
     private static object Field(string name, string key)
     {
         return ((Dictionary<string, TextBlock>)Field(name))[key];
+    }
+
+    private static void AssertIconAssets(Assembly assembly)
+    {
+        foreach(string resource in new[]{"Watchdog.IconIco"}.Concat(Enumerable.Range(1,12).Select(index=>"Sync.Frame"+index))) {
+            using(var stream=assembly.GetManifestResourceStream(resource)) {
+                Assert(stream!=null,"Embedded static/animation ICO: "+resource);
+                var decoder=BitmapDecoder.Create(stream,BitmapCreateOptions.PreservePixelFormat,BitmapCacheOption.OnLoad);
+                foreach(var frame in decoder.Frames) {
+                    var bitmap=new FormatConvertedBitmap(frame,PixelFormats.Bgra32,null,0);
+                    int width=bitmap.PixelWidth,height=bitmap.PixelHeight;
+                    byte[] pixels=new byte[width*height*4];bitmap.CopyPixels(pixels,width*4,0);
+                    foreach(int point in new[]{0,width-1,(height-1)*width,height*width-1,(height/2)*width,(height/2)*width+width-1})
+                        Assert(pixels[point*4+3]==0,"No white outer tile: "+resource+" "+width);
+                    int white=0;
+                    for(int offset=0;offset<pixels.Length;offset+=4) if(pixels[offset+3]==255 && pixels[offset]>240 && pixels[offset+1]>240 && pixels[offset+2]>240) white++;
+                    Assert(white>=Math.Max(2,Math.Floor(width*height*.01)),"Light inner hexagon retained around rotating arrows: "+resource+" "+width);
+                    int left=width,right=-1,top=height,bottom=-1;
+                    for(int y=0;y<height;y++)for(int x=0;x<width;x++) {
+                        int offset=(y*width+x)*4;
+                        if(pixels[offset+3]>=64 && pixels[offset]<100 && pixels[offset+1]<100 && pixels[offset+2]<100) {left=Math.Min(left,x);right=Math.Max(right,x);top=Math.Min(top,y);bottom=Math.Max(bottom,y);}
+                    }
+                    Assert(right-left+1>=Math.Floor(width*.78) && bottom-top+1>=Math.Floor(height*.9),"Hexagon fills small icon canvas: "+resource+" "+width);
+                }
+            }
+        }
+    }
+
+    private static void AssertScrollGutter(ScrollViewer viewer,string context)
+    {
+        Assert(viewer.ComputedVerticalScrollBarVisibility==Visibility.Visible && viewer.Padding.Right==12,"Scrollbar has 12px content gutter: "+context);
+        var bar=(System.Windows.Controls.Primitives.ScrollBar)viewer.Template.FindName("PART_VerticalScrollBar",viewer);
+        var content=(ScrollContentPresenter)viewer.Template.FindName("PART_ScrollContentPresenter",viewer);
+        Assert(bar!=null && content!=null,"Native WPF scrollbar and content presenter retained: "+context);
+        var barPoint=bar.TransformToAncestor(viewer).Transform(new Point());
+        var contentPoint=content.TransformToAncestor(viewer).Transform(new Point());
+        Assert(barPoint.X-contentPoint.X-content.ActualWidth>=11.5,"Actual visual gap before scrollbar: "+context);
+        Assert(viewer.ComputedHorizontalScrollBarVisibility==Visibility.Collapsed,"No unintended horizontal scrollbar: "+context);
     }
 
     private static object Invoke(string method, params object[] args)

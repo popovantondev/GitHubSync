@@ -2,7 +2,7 @@
 function Invoke-SyncGet([string]$uri, [string]$etag = '') {
     if ($uri -notmatch '^https://api\.github\.com/repos/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+(?:/|$)') { throw 'Invalid GitHub API resource' }
     $web = [Net.HttpWebRequest]::Create($uri)
-    $web.Method = 'GET'; $web.UserAgent = 'GitHubSync/1.5.1'; $web.Accept = 'application/vnd.github+json'
+    $web.Method = 'GET'; $web.UserAgent = 'GitHubSync/1.5.2'; $web.Accept = 'application/vnd.github+json'
     $web.Headers['X-GitHub-Api-Version'] = '2022-11-28'; $web.Timeout = 30000; $web.AllowAutoRedirect = $false
     if ($script:token) { $web.Headers['Authorization'] = 'Bearer ' + $script:token }
     if ($etag) { $web.Headers['If-None-Match'] = $etag }

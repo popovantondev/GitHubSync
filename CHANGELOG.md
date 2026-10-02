@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.2
+
+- Remove the white outer icon tile, enlarge the hexagonal symbol, and retain transparent surroundings in every static/animated ICO size. Window, executable, taskbar and tray share the updated resources.
+- Add a 12 logical-pixel gutter before visible vertical scrollbars in the page, file list and review/link dialogs. Hidden scrollbars do not reduce content width; table headers follow the row viewport after list replacement.
+- Transfer/authentication behavior is unchanged. An HTTP 401 still requires a fresh authorized sign-in; cosmetic changes do not retry writes.
+
 ## 1.5.1
 
 - Accept native OneDrive Cloud placeholders in download paths and Code sources without accepting symlinks, junctions or unknown reparse tags.

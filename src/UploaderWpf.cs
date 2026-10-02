@@ -152,7 +152,7 @@ internal sealed partial class WatchdogWindow
         var buttons = new UniformGrid { Columns=2, Margin=new Thickness(0,16,0,0) }; DockPanel.SetDock(buttons,Dock.Bottom); body.Children.Add(buttons);
         var cancel=MakeButton(L("Schließen","Закрыть","Close"),false,0); cancel.IsCancel=true; cancel.Margin=new Thickness(0,0,6,0); cancel.Click+=delegate { dialog.DialogResult=false; }; buttons.Children.Add(cancel);
         var send=MakeButton(L("Änderungen hochladen","Загрузить изменения","Upload changes"),true,0); send.Name="CodePlanSend"; send.IsEnabled=preparingCodeUpload; send.Margin=new Thickness(6,0,0,0); send.Click+=delegate { dialog.DialogResult=true; }; buttons.Children.Add(send);
-        var list=new StackPanel(); body.Children.Add(new ScrollViewer { Content=list, VerticalScrollBarVisibility=ScrollBarVisibility.Auto, HorizontalScrollBarVisibility=ScrollBarVisibility.Disabled });
+        var list=new StackPanel(); body.Children.Add(new ScrollViewer { Style=ScrollGutterStyle(), Content=list, VerticalScrollBarVisibility=ScrollBarVisibility.Auto, HorizontalScrollBarVisibility=ScrollBarVisibility.Disabled });
         foreach(object item in (IEnumerable)plan["entries"]) { var entry=item as Dictionary<string,object>; if(entry==null) continue; string action=StateString(entry,"action","");
             string label=action=="add" ? L("Neu","Добавится","Added") : action=="update" ? L("Ersetzen","Обновится","Updated") : L("Unverändert","Без изменений","Unchanged");
             var line=Text(label+" · "+StateString(entry,"target",""),15,Ink,false); line.TextWrapping=TextWrapping.Wrap; line.Margin=new Thickness(0,8,0,8); list.Children.Add(line);
@@ -223,7 +223,7 @@ internal sealed partial class WatchdogWindow
         var dialog=new Window {Owner=this,Title=L("Dateilinks","Ссылки на файлы","File links"),Width=680,Height=400,MinWidth=480,MinHeight=300,WindowStartupLocation=WindowStartupLocation.CenterOwner,Background=Brush(Pale),FontFamily=FontFamily};
         var body=new DockPanel {Margin=new Thickness(24)};
         var close=MakeButton(L("Schließen","Закрыть","Close"),false,0); close.IsCancel=true; close.Margin=new Thickness(0,12,0,0); close.Click+=delegate {dialog.Close();}; DockPanel.SetDock(close,Dock.Bottom); body.Children.Add(close);
-        var list=new StackPanel(); body.Children.Add(new ScrollViewer {Content=list,VerticalScrollBarVisibility=ScrollBarVisibility.Auto,HorizontalScrollBarVisibility=ScrollBarVisibility.Disabled});
+        var list=new StackPanel(); body.Children.Add(new ScrollViewer {Style=ScrollGutterStyle(),Content=list,VerticalScrollBarVisibility=ScrollBarVisibility.Auto,HorizontalScrollBarVisibility=ScrollBarVisibility.Disabled});
         foreach(var choice in downloadChoices) {
             var entry=choice; var row=new Grid {Margin=new Thickness(0,0,0,12)}; row.ColumnDefinitions.Add(new ColumnDefinition()); row.ColumnDefinitions.Add(new ColumnDefinition {Width=GridLength.Auto});
             var name=Text(entry.Label,15,Ink,false); name.VerticalAlignment=VerticalAlignment.Center; name.ToolTip=entry.Label; row.Children.Add(name);

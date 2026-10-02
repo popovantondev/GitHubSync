@@ -23,8 +23,8 @@ using Forms = System.Windows.Forms;
 [assembly: AssemblyDescription("Send and download GitHub files with controlled updates and resumable downloads")]
 [assembly: AssemblyCompany("Anton Popov")]
 [assembly: AssemblyProduct("GitHubSync")]
-[assembly: AssemblyVersion("1.5.1.0")]
-[assembly: AssemblyFileVersion("1.5.1.0")]
+[assembly: AssemblyVersion("1.5.2.0")]
+[assembly: AssemblyFileVersion("1.5.2.0")]
 [assembly: System.Runtime.Versioning.TargetFramework(".NETFramework,Version=v4.6.2")]
 
 internal static class Program
@@ -58,8 +58,9 @@ internal sealed partial class WatchdogWindow : Window
     private static readonly Color Accent = Hex("#F39712");
     private static readonly Color AccentHover = Hex("#D87B0F");
     private static readonly Color Pale = Hex("#F7F7F8");
-    private const double CardRadius = 14, ControlRadius = 9, FieldHeight = 44;
+    private const double CardRadius = 14, ControlRadius = 9, FieldHeight = 44, ScrollGutter = 12;
     private ScrollViewer contentScroll, listScroll;
+    private Grid tableHeading;
     private Border progressFrame;
     private static readonly Color White = Colors.White;
     private readonly string root = AppDomain.CurrentDomain.BaseDirectory;
@@ -245,7 +246,7 @@ internal sealed partial class WatchdogWindow : Window
         var applicationName = Text("GitHubSync", 14, Muted, false);
         applicationName.TextAlignment = TextAlignment.Center;
         version.Children.Add(applicationName);
-        var versionNumber = Text("v1.5.1", applicationName.FontSize - 2, Muted, false);
+        var versionNumber = Text("v1.5.2", applicationName.FontSize - 2, Muted, false);
         versionNumber.TextAlignment = TextAlignment.Center;
         versionNumber.Margin = new Thickness(0, 2, 0, 0);
         version.Children.Add(versionNumber);
@@ -314,7 +315,7 @@ internal sealed partial class WatchdogWindow : Window
         version.Margin = new Thickness(0, 18, 0, 0);
         services.Children.Add(version);
 
-        var scrolling = new ScrollViewer { VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled };
+        var scrolling = new ScrollViewer { Style = ScrollGutterStyle(), VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled };
         contentScroll = scrolling;
         scrolling.SizeChanged += delegate { QueueLayout(); };
         Loaded += delegate { QueueLayout(); };
@@ -452,7 +453,8 @@ internal sealed partial class WatchdogWindow : Window
         filesBody.Children.Add(table);
         var tableBody = new StackPanel();
         table.Child = tableBody;
-        var tableHeading = TableRow();
+        tableHeading = TableRow();
+        tableHeading.HorizontalAlignment = HorizontalAlignment.Left;
         tableHeading.Height = 38;
         tableHeading.Background = Brush(Hex("#F3F3F4"));
         nameHeader = Text("", 14, Ink, true);
@@ -485,6 +487,7 @@ internal sealed partial class WatchdogWindow : Window
         var listTemplate = new ControlTemplate(typeof(ListBox));
         var viewport = new FrameworkElementFactory(typeof(ScrollViewer));
         viewport.Name = "PART_ScrollViewer";
+        viewport.SetValue(FrameworkElement.StyleProperty, ScrollGutterStyle());
         viewport.SetValue(ScrollViewer.CanContentScrollProperty, true);
         viewport.SetValue(ScrollViewer.VerticalScrollBarVisibilityProperty, ScrollBarVisibility.Auto);
         viewport.SetValue(ScrollViewer.HorizontalScrollBarVisibilityProperty, ScrollBarVisibility.Disabled);
@@ -493,7 +496,7 @@ internal sealed partial class WatchdogWindow : Window
         fileList.Template = listTemplate;
         tableBody.Children.Add(fileList);
         fileList.ApplyTemplate();
-        listScroll = (ScrollViewer)fileList.Template.FindName("PART_ScrollViewer", fileList);
+        BindFileViewport();
         listScroll.MaxHeight = 176;
 
         var progressCard = Card();
@@ -613,6 +616,25 @@ internal sealed partial class WatchdogWindow : Window
         modePicker.SelectionChanged += delegate { if(uploadRunning || changingDirection) return; if(!downloadMode) RememberSelection(); lastModeIndex=modePicker.SelectedIndex; remoteCatalog=null; CancelFileScan(); fileChecks.Clear(); fileStatusLabels.Clear(); ResetTableItems(); if(!downloadMode) folderPath.Text=SourceFolder(); folderPath.ToolTip=folderPath.Text; ResetResult(); ApplyLanguage(); LoadFiles(); };
         BuildSyncControls(header,advancedBody,bottom);
         if(downloadMode) {folderPath.Text=StringValue("DownloadDirectory","");repositoryDestination.Text=syncPrefix;codeBranch.Text=syncBranch;}
+    }
+
+    private static Style ScrollGutterStyle()
+    {
+        // Default WPF ScrollViewer places Padding on its content presenter,
+        // before the scrollbar. Reserve the gutter only while that bar is visible.
+        var style = new Style(typeof(ScrollViewer));
+        var visible = new Trigger { Property = ScrollViewer.ComputedVerticalScrollBarVisibilityProperty, Value = Visibility.Visible };
+        visible.Setters.Add(new Setter(Control.PaddingProperty, new Thickness(0, 0, ScrollGutter, 0)));
+        style.Triggers.Add(visible);
+        return style;
+    }
+
+    private void BindFileViewport()
+    {
+        listScroll = (ScrollViewer)fileList.Template.FindName("PART_ScrollViewer", fileList);
+        // Header columns track the row viewport, excluding both gutter and bar.
+        // Rebind after replacing the virtualized list during a mode/folder change.
+        tableHeading.SetBinding(FrameworkElement.WidthProperty, new Binding("ViewportWidth") { Source = listScroll });
     }
 
     private void QueueLayout()

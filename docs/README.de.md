@@ -2,7 +2,7 @@
 
 Dateien zu GitHub senden, herunterladen und fortsetzen. Hinweise auf Updates starten keine Übertragung.
 
-Windows 10/11 · x64 · 1.5.1 · Deutsch / Русский / English
+Windows 10/11 · x64 · 1.5.2 · Deutsch / Русский / English
 
 [English](../README.md) · [Русский](README.ru.md) · [HTML-Anleitung](Guide-de.html)
 
@@ -33,6 +33,6 @@ Code-Dateien über 100 MiB ablehnen; Senden → Release-Anhänge verwenden. Kein
 
 ## Prüfung und Rechte
 
-Lokal vorbereiteter Kandidat 1.5.1, noch keine behauptete Veröffentlichung. Automatische WPF/Worker-Prüfung mit künstlichen Daten/API-Mocks; kein echter Code-Commit oder Release-Publikationstest für diese Version. Andere PCs, physischer DPI-Wechsel und Netzwerkausfälle bleiben unbestätigt.
+Lokal vorbereiteter Kandidat 1.5.2, noch keine öffentliche Veröffentlichung. Symbole und Scrollabstände wurden geändert; die Übertragungslogik bleibt erhalten. Die [Abnahme 1.5.1](VERIFICATION-1.5.1.md) umfasste vier echte Übertragungen künstlicher Dateien im genehmigten privaten TEST. Für 1.5.2 wurden WPF/Worker-Prüfungen ohne neue GitHub-Uploads wiederholt. Andere PCs und physischer DPI-Wechsel bleiben unbestätigt. [Prüfung 1.5.2](VERIFICATION-1.5.2.md).
 
-Release-Dateien: `GitHubSync-1.5.1-win-x64.zip` und `.sha256`. [Build/Struktur](../CONTRIBUTING.md), [Offline-Anleitung](Guide-de.html), [MIT](../LICENSE) und [Drittherstellerhinweise](../THIRD_PARTY.md).
+Release-Dateien: `GitHubSync-1.5.2-win-x64.zip` und `.sha256`. [Build/Struktur](../CONTRIBUTING.md), [Offline-Anleitung](Guide-de.html), [MIT](../LICENSE) und [Drittherstellerhinweise](../THIRD_PARTY.md).

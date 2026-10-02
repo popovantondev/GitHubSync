@@ -2,7 +2,7 @@
 
 Send files to GitHub, download project files or release attachments, resume downloads, and receive update notifications. Transfers always require approval.
 
-Windows 10/11 · x64 · **1.5.1 local release candidate** · Deutsch / Русский / English
+Windows 10/11 · x64 · **1.5.2 local release candidate** · Deutsch / Русский / English
 
 [Deutsch](docs/README.de.md) · [Русский](docs/README.ru.md) · [User guide](docs/Guide-en.html) · [Security](SECURITY.md)
 
@@ -55,11 +55,11 @@ Resumable task metadata is private under `%LOCALAPPDATA%/GitHubSync`. Partial fi
 
 See [CONTRIBUTING](CONTRIBUTING.md) for commands and folder structure. `Run-Checks.ps1` uses mocked GitHub/auth only. `tools/Build-Portable.ps1` builds locally and creates:
 
-- `artifacts/GitHubSync-1.5.1-Portable/GitHubSync.exe`
-- `artifacts/GitHubSync-1.5.1-win-x64.zip`
+- `artifacts/GitHubSync-1.5.2-Portable/GitHubSync.exe`
+- `artifacts/GitHubSync-1.5.2-win-x64.zip`
 - the accompanying `.zip.sha256`
 
-Generated artifacts are **not** source commits. Upload the ZIP/checksum as release attachments only after owner approval. This preparation does not create a GitHub repository, push, publish a release or deploy Pages. [Release notes](docs/RELEASE_NOTES-1.5.1.md) · [Verification](docs/VERIFICATION-1.5.1.md) · [Release checklist](docs/RELEASE_CHECKLIST.md) · [Architecture](docs/ARCHITECTURE.md) · [Design](docs/DESIGN.md) · [Changelog](CHANGELOG.md) · [Security](SECURITY.md).
+Generated artifacts are **not** source commits. Upload the ZIP/checksum as release attachments only after owner approval. This preparation does not create a GitHub repository, push, publish a release or deploy Pages. [Release notes](docs/RELEASE_NOTES-1.5.2.md) · [Verification](docs/VERIFICATION-1.5.2.md) · [Release checklist](docs/RELEASE_CHECKLIST.md) · [Architecture](docs/ARCHITECTURE.md) · [Design](docs/DESIGN.md) · [Changelog](CHANGELOG.md) · [Security](SECURITY.md).
 
 ## Rights
 

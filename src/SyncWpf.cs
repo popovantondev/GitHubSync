@@ -78,7 +78,7 @@ internal sealed partial class WatchdogWindow
         var next=new ListBox {BorderThickness=new Thickness(0),Padding=new Thickness(0),Background=Brushes.Transparent,IsTabStop=false,Template=fileList.Template,ItemsPanel=fileList.ItemsPanel,ItemTemplate=fileList.ItemTemplate,ItemContainerStyle=fileList.ItemContainerStyle};
         VirtualizingStackPanel.SetIsVirtualizing(next,true);VirtualizingStackPanel.SetVirtualizationMode(next,VirtualizationMode.Recycling);
         parent.Children.RemoveAt(index);parent.Children.Insert(index,next);fileList=next;fileList.ApplyTemplate();
-        listScroll=(ScrollViewer)fileList.Template.FindName("PART_ScrollViewer",fileList);listScroll.MaxHeight=height;
+        BindFileViewport();listScroll.MaxHeight=height;
     }
     private void ChangeDirection(bool download)
     {
@@ -197,7 +197,7 @@ internal sealed partial class WatchdogWindow
         var buttons=new System.Windows.Controls.Primitives.UniformGrid { Columns=2, Margin=new Thickness(0,14,0,0) }; DockPanel.SetDock(buttons,Dock.Bottom); body.Children.Add(buttons);
         var cancel=MakeButton(L("Abbrechen","Отмена","Cancel"),false,0); cancel.Name="DownloadCancel";cancel.IsCancel=true; cancel.Margin=new Thickness(0,0,6,0); cancel.Click+=delegate {dialog.DialogResult=false;}; buttons.Children.Add(cancel);
         var confirm=MakeButton(L("Herunterladen / ersetzen","Скачать / заменить","Download / replace"),true,0); confirm.Name="DownloadConfirm"; confirm.Margin=new Thickness(6,0,0,0); confirm.Click+=delegate {dialog.DialogResult=true;}; buttons.Children.Add(confirm);
-        var rows=new StackPanel(); body.Children.Add(new ScrollViewer { Content=rows,VerticalScrollBarVisibility=ScrollBarVisibility.Auto });
+        var rows=new StackPanel(); body.Children.Add(new ScrollViewer { Style=ScrollGutterStyle(), Content=rows,VerticalScrollBarVisibility=ScrollBarVisibility.Auto,HorizontalScrollBarVisibility=ScrollBarVisibility.Disabled });
         foreach(object value in (IEnumerable)plan["entries"]) {
             var entry=value as Dictionary<string,object>; if(entry==null) continue; string action=StateString(entry,"action","");
             string label=action=="same" ? L("Unverändert","Совпадает","Unchanged") : action=="update" ? L("Ersetzen","Заменится","Replace") : L("Herunterladen","Скачается","Download");
