@@ -339,10 +339,10 @@ internal sealed partial class WatchdogWindow
     internal void InitializeTray()
     {
         try {
-            using(var stream=Assembly.GetExecutingAssembly().GetManifestResourceStream("Watchdog.IconIco")) if(stream!=null) trayFrames.Add(NativeIcon(ReadWindowIcon(stream)));
+            using(var stream=Assembly.GetExecutingAssembly().GetManifestResourceStream("Watchdog.IconIco")) if(stream!=null) trayFrames.Add(ReadTrayIcon(stream));
             for(int index=1;index<=12;index++) {
                 using(var stream=Assembly.GetExecutingAssembly().GetManifestResourceStream("Sync.Frame"+index)) {
-                    if(stream==null) break;var frame=ReadWindowIcon(stream);frame.Freeze();windowFrames.Add(frame);trayFrames.Add(NativeIcon(frame));
+                    if(stream==null) break;var frame=ReadWindowIcon(stream);frame.Freeze();windowFrames.Add(frame);stream.Position=0;trayFrames.Add(ReadTrayIcon(stream));
                 }
             }
             if(trayFrames.Count==0) {Application.Current.ShutdownMode=ShutdownMode.OnMainWindowClose;return;}
@@ -353,13 +353,11 @@ internal sealed partial class WatchdogWindow
             Application.Current.SessionEnding+=delegate {allowWindowClose=true;PauseDownload();};
         } catch(Exception ex) {trayFailure=ex.Message;if(tray!=null)tray.Dispose(); tray=null; allowWindowClose=true; Application.Current.ShutdownMode=ShutdownMode.OnMainWindowClose; }
     }
-    [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern bool DestroyIcon(IntPtr icon);
-    private static System.Drawing.Icon NativeIcon(BitmapSource frame)
+    private static System.Drawing.Icon ReadTrayIcon(Stream stream)
     {
-        var encoder=new PngBitmapEncoder();encoder.Frames.Add(BitmapFrame.Create(frame));
-        using(var pixels=new MemoryStream()) {encoder.Save(pixels);pixels.Position=0;using(var bitmap=new System.Drawing.Bitmap(pixels)) {
-            IntPtr handle=bitmap.GetHicon();try{using(var borrowed=System.Drawing.Icon.FromHandle(handle))return (System.Drawing.Icon)borrowed.Clone();}finally{DestroyIcon(handle);}
-        }}
+        // Let Windows select the dedicated ICO size for the tray instead of
+        // downscaling the 32px WPF window bitmap. All frames have their own alpha.
+        using(var icon=new System.Drawing.Icon(stream,Forms.SystemInformation.SmallIconSize)) return (System.Drawing.Icon)icon.Clone();
     }
     private void AnimateTray()
     {

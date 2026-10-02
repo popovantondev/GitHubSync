@@ -1,6 +1,6 @@
 # GitHubSync 1.5.2 — clearer icons and scrollbar spacing
 
-The white outer icon tile is removed. The dark hexagonal ring and orange two-way arrows occupy more of the icon canvas; the light inner hexagon remains. All static ICO sizes and twelve animation frames are updated, including the window/taskbar, tray and executable resources.
+The white outer icon tile is removed. The dark hexagonal ring and orange two-way arrows occupy more of the icon canvas; the light inner hexagon remains. All static ICO sizes and twelve animation frames are updated, including the window/taskbar, tray and executable resources. The tray loads the native ICO size for the system's small-icon slot rather than downscaling the window bitmap.
 
 Visible vertical scrollbars now have a 12 logical-pixel content gutter in the main page, virtualized file list and scrollable review/link dialogs. Table headers match the row viewport. Hidden scrollbars do not reserve this extra space. Native scrolling, virtualization, keyboard behavior and pinned progress/actions remain intact.
 
