@@ -353,11 +353,16 @@ internal sealed partial class WatchdogWindow
             Application.Current.SessionEnding+=delegate {allowWindowClose=true;PauseDownload();};
         } catch(Exception ex) {trayFailure=ex.Message;if(tray!=null)tray.Dispose(); tray=null; allowWindowClose=true; Application.Current.ShutdownMode=ShutdownMode.OnMainWindowClose; }
     }
+    [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern bool DestroyIcon(IntPtr icon);
     private static System.Drawing.Icon ReadTrayIcon(Stream stream)
     {
-        // Let Windows select the dedicated ICO size for the tray instead of
-        // downscaling the 32px WPF window bitmap. All frames have their own alpha.
-        using(var icon=new System.Drawing.Icon(stream,Forms.SystemInformation.SmallIconSize)) return (System.Drawing.Icon)icon.Clone();
+        // Decode the dedicated small ICO frame with WPF. .NET Framework's
+        // Icon(Stream, Size) can render small PNG-in-ICO frames incorrectly.
+        var frame=ReadWindowIcon(stream,Forms.SystemInformation.SmallIconSize.Width);
+        var encoder=new PngBitmapEncoder();encoder.Frames.Add(BitmapFrame.Create(frame));
+        using(var pixels=new MemoryStream()) {encoder.Save(pixels);pixels.Position=0;using(var bitmap=new System.Drawing.Bitmap(pixels)) {
+            IntPtr handle=bitmap.GetHicon();try{using(var borrowed=System.Drawing.Icon.FromHandle(handle))return (System.Drawing.Icon)borrowed.Clone();}finally{DestroyIcon(handle);}
+        }}
     }
     private void AnimateTray()
     {

@@ -13,7 +13,7 @@ internal static class GenerateIcons
         var svg=XDocument.Load(args[0]); string output=args[1]; Directory.CreateDirectory(output);
         for(int frame=0;frame<=12;frame++) {
             string stem=frame==0 ? "sync" : "sync-frame-"+frame;
-            int[] sizes=frame==0 ? new[]{16,24,32,48,64,128,256} : new[]{16,24,32,48};
+            int[] sizes=frame==0 ? new[]{16,20,24,32,40,48,64,128,256} : new[]{16,20,24,32,40,48};
             var pixels=sizes.Select(size=>Render(svg,size,frame==0 ? 0 : (frame-1)*30)).ToArray();
             using(var file=File.Create(Path.Combine(output,stem+".ico"))) using(var writer=new BinaryWriter(file)) {
                 writer.Write((ushort)0);writer.Write((ushort)1);writer.Write((ushort)sizes.Length); int offset=6+16*sizes.Length;

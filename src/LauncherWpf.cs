@@ -200,10 +200,10 @@ internal sealed partial class WatchdogWindow : Window
     }
 
     private static Color Hex(string value) { return (Color)ColorConverter.ConvertFromString(value); }
-    private static BitmapSource ReadWindowIcon(Stream stream)
+    private static BitmapSource ReadWindowIcon(Stream stream, int desiredSize = 32)
     {
         var decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
-        var frame = decoder.Frames.OrderBy(item => Math.Abs(item.PixelWidth - 32) + Math.Abs(item.PixelHeight - 32)).FirstOrDefault();
+        var frame = decoder.Frames.OrderBy(item => Math.Abs(item.PixelWidth - desiredSize) + Math.Abs(item.PixelHeight - desiredSize)).FirstOrDefault();
         return frame;
     }
     private static readonly Dictionary<Color,SolidColorBrush> themeBrushes = new Dictionary<Color,SolidColorBrush>();
