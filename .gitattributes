@@ -1,0 +1,12 @@
+* text=auto eol=lf
+*.cs text eol=crlf
+*.ps1 text eol=crlf
+*.cmd text eol=crlf
+*.html text eol=lf
+*.css text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.png binary
+*.ico binary
+# Preserve vendored upstream notice bytes, including their original line endings.
+third-party-notices/** -text

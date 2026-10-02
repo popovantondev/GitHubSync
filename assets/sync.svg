@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <rect x="0" y="0" width="256" height="256" rx="52" fill="#FAFAFA" />
+  <path d="M128,18 L224,74 L224,182 L128,238 L32,182 L32,74 Z M128,61 L187,96 L187,160 L128,195 L69,160 L69,96 Z" fill="#343A40" fill-rule="evenodd" />
+  <path data-animate="arrows" d="M103,78 L77,110 L92,110 L92,164 L114,164 L114,110 L129,110 Z M153,178 L127,146 L142,146 L142,92 L164,92 L164,146 L179,146 Z" fill="#F39712" />
+</svg>

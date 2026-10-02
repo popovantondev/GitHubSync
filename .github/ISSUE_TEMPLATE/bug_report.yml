@@ -1,0 +1,33 @@
+name: Bug report / Ошибка / Fehler
+description: Report a reproducible problem without private data.
+body:
+  - type: markdown
+    attributes:
+      value: "Do not include tokens, private keys, personal config/logs or private paths. / Не прикладывайте ключи, личные настройки и необработанные журналы."
+  - type: input
+    id: version
+    attributes:
+      label: App version / Версия
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version, DPI and app language
+    validations:
+      required: true
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Mode / Режим
+      options:
+        - Project files / Code
+        - Download files / Releases
+        - Sign-in or interface
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps, expected result and actual result
+      description: Use artificial filenames and redacted screenshots.
+    validations:
+      required: true

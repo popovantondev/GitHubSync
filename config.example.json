@@ -1,0 +1,19 @@
+{
+  "Repository": "OWNER/REPOSITORY",
+  "UploadMode": "release",
+  "Direction": "upload",
+  "DownloadDirectory": "",
+  "DownloadBranch": "",
+  "DownloadPrefix": "",
+  "DownloadReleaseId": 0,
+  "MonitorEnabled": true,
+  "PublishAfterUpload": true,
+  "ReleaseTag": "v1.0.0",
+  "SourceDirectory": "upload",
+  "Files": [],
+  "WaitForProcessId": null,
+  "MaxAttempts": 5,
+  "RetryBaseSeconds": 10,
+  "PollSeconds": 20,
+  "HttpTimeoutHours": 3
+}

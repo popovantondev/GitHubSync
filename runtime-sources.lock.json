@@ -1,0 +1,742 @@
+{
+  "schemaVersion": 1,
+  "runtime": "MinGit-2.53.0.3-64-bit.zip",
+  "inventoryLines": 66,
+  "uniquePackageVersions": 64,
+  "date": "2026-10-02",
+  "status": "candidate; collection is not a compliance certificate or a source offer",
+  "archives": [
+    {
+      "archive": "bash-5.2.037-1.src.tar.gz",
+      "url": "https://github.com/git-for-windows/pacman-repo/releases/download/2024-09-24T09-17-25.000Z/bash-5.2.037-1.src.tar.gz",
+      "sha256": "826eb11e20a6d0a9b2cb84c4579242a0abf02830a5d67c1448fa07dcd72ef1ec",
+      "bytes": 11013067,
+      "packages": [
+        "bash 5.2.037-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "GPL"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "bzip2-1.0.8-4.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/bzip2-1.0.8-4.src.tar.zst",
+      "sha256": "a7e9ea6335ef2902508de0bbbb70e2e9909b6b7b6d05fc207f8fdf0cf44ad053",
+      "bytes": 842603,
+      "packages": [
+        "libbz2 1.0.8-4"
+      ],
+      "recipeLicenseDeclarations": [
+        "custom"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "coreutils-8.32-5.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/coreutils-8.32-5.src.tar.zst",
+      "sha256": "2b8689413bc50367a9995adf50ea84cd3caaff0ec68a8f32d8328842c3f83835",
+      "bytes": 5561991,
+      "packages": [
+        "coreutils 8.32-5"
+      ],
+      "recipeLicenseDeclarations": [
+        "GPL3"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "cyrus-sasl-2.1.28-5.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/cyrus-sasl-2.1.28-5.src.tar.zst",
+      "sha256": "5b94ab5e9c21e41b37635db88f131aeb760e4ca0bdf7bf0400335304cd8af718",
+      "bytes": 3708611,
+      "packages": [
+        "libsasl 2.1.28-5"
+      ],
+      "recipeLicenseDeclarations": [
+        "custom"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "dash-0.5.13.1-1.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/dash-0.5.13.1-1.src.tar.zst",
+      "sha256": "a3a424eaefdec373ad800a3963fb9b17c177e92d2896996619a40c6381bb26f6",
+      "bytes": 261763,
+      "packages": [
+        "dash 0.5.13.1-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "BSD"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "diffutils-3.12-1.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/diffutils-3.12-1.src.tar.zst",
+      "sha256": "474c4a3528a2afbb8d9608c65ad1bdbbd81ff42c143a438d7d56272a61b1bfac",
+      "bytes": 1941123,
+      "packages": [
+        "diffutils 3.12-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "spdx:GPL-3.0-or-later"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "file-5.46-2.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/file-5.46-2.src.tar.zst",
+      "sha256": "fa5960ee27bdf5f142e6621c436d1ee04cf4cc5a57a028d1e7d018d7341018d2",
+      "bytes": 1316050,
+      "packages": [
+        "file 5.46-2"
+      ],
+      "recipeLicenseDeclarations": [
+        "custom"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "filesystem-2025.05.08-2.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/filesystem-2025.05.08-2.src.tar.zst",
+      "sha256": "d31be47d5ab0a03627956a4a25e2c7e4bd47c497e9fe019314f4e1da8d49c016",
+      "bytes": 93243,
+      "packages": [
+        "filesystem 2025.05.08-2"
+      ],
+      "recipeLicenseDeclarations": [
+        "spdx:BSD-3-Clause"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "findutils-4.10.0-2.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/findutils-4.10.0-2.src.tar.zst",
+      "sha256": "e19640714a3c1f43c250aaebc6a2e94aec43a67a031c31ff675edbc166d333d3",
+      "bytes": 2242859,
+      "packages": [
+        "findutils 4.10.0-2"
+      ],
+      "recipeLicenseDeclarations": [
+        "GPL3"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "gawk-5.3.2-1.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/gawk-5.3.2-1.src.tar.zst",
+      "sha256": "0b62bc9cc7c1d1371b8ada968449e5dcd0088a66ce57b11bd4affefbb7c69bdf",
+      "bytes": 6563721,
+      "packages": [
+        "gawk 5.3.2-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "GPL"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "gcc-15.2.0-1.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/gcc-15.2.0-1.src.tar.zst",
+      "sha256": "711af8f46db0d55c092c2444c13f5e07fed02833944a4852b6b5023ed2eb1604",
+      "bytes": 101097111,
+      "packages": [
+        "gcc-libs 15.2.0-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "spdx:GPL-3.0-or-later AND GPL-2.0-or-later AND LGPL-2.1-or-later AND LGPL-3.0-or-later AND GCC-exception-3.1 AND GFDL-1.3-or-later"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "gettext-0.22.5-1.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/gettext-0.22.5-1.src.tar.zst",
+      "sha256": "e07a0b3e6716aae86dc0edd2dcdc8864731d56051345592b53659a3840ccfbd8",
+      "bytes": 21732949,
+      "packages": [
+        "libintl 0.22.5-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "GPL"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "gmp-6.3.0-2.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/gmp-6.3.0-2.src.tar.zst",
+      "sha256": "02356ca25ce362edb883ce7c060050de2cec5f2b1227a1c56ef7c0a0f99ff667",
+      "bytes": 2096699,
+      "packages": [
+        "gmp 6.3.0-2"
+      ],
+      "recipeLicenseDeclarations": [
+        "LGPL3"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "grep-1~3.0-7.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/grep-1~3.0-7.src.tar.zst",
+      "sha256": "acba43b9b2c3eb393f9a75d02a1eca34fa23d959541150a7ac4ffbafce3cae4e",
+      "bytes": 1378706,
+      "packages": [
+        "grep 1~3.0-7"
+      ],
+      "recipeLicenseDeclarations": [
+        "GPL3"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "heimdal-7.8.0-5.src.tar.gz",
+      "url": "https://github.com/git-for-windows/pacman-repo/releases/download/2025-02-17T19-44-32.968336700Z/heimdal-7.8.0-5.src.tar.gz",
+      "sha256": "beb950ac5f0d11e18bbcb81a9e7e6ef9446cc2fa9ebb486ee2fb5670b06fd9e5",
+      "bytes": 9939780,
+      "packages": [
+        "heimdal-libs 7.8.0-5"
+      ],
+      "recipeLicenseDeclarations": [
+        "custom"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "libcbor-0.11.0-1.src.tar.gz",
+      "url": "https://github.com/git-for-windows/pacman-repo/releases/download/2024-02-05T16-30-39.000Z/libcbor-0.11.0-1.src.tar.gz",
+      "sha256": "63bce3f2d476c3551c9fd08e0c80475711cfc2b4a192a07f8b9869b2127240a1",
+      "bytes": 294840,
+      "packages": [
+        "libcbor 0.11.0-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "MIT"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "libfido2-1.15.0-1.src.tar.gz",
+      "url": "https://github.com/git-for-windows/pacman-repo/releases/download/2024-06-14T09-31-36.000Z/libfido2-1.15.0-1.src.tar.gz",
+      "sha256": "bf12ccd31a868bfb20a66cbfb7147b9d683bc31f30dca30ad70f38d6e935300e",
+      "bytes": 673066,
+      "packages": [
+        "libfido2 1.15.0-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "BSD-2-Clause"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "libiconv-1.18-2.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/libiconv-1.18-2.src.tar.zst",
+      "sha256": "e8f699f04dad8cb6894e5d9d92177988286b8b36684e793d841e76fff4665ae0",
+      "bytes": 5035903,
+      "packages": [
+        "libiconv 1.18-2"
+      ],
+      "recipeLicenseDeclarations": [
+        "LGPL"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "libxcrypt-4.5.2-1.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/libxcrypt-4.5.2-1.src.tar.zst",
+      "sha256": "dc3e44cea067417ff61c25c981d7d58bb0f343b824ba10fd2a0a3b8badc55746",
+      "bytes": 672527,
+      "packages": [
+        "libxcrypt 4.5.2-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "spdx:LGPL-2.1-or-later"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "mingw-w64-brotli-1.2.0-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-brotli-1.2.0-1.src.tar.zst",
+      "sha256": "2f0f93875aac21990d20f1eaf0ad8b970eb6f186c663c77ae47aaaf9e5711fcf",
+      "bytes": 644113,
+      "packages": [
+        "mingw-w64-x86_64-brotli 1.2.0-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "spdx:MIT"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "mingw-w64-ca-certificates-20250419-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-ca-certificates-20250419-1.src.tar.zst",
+      "sha256": "71a8bc9648d58361845b985fb5073ff7a35ff536661c9072453a692d04d9c9f5",
+      "bytes": 288665,
+      "packages": [
+        "mingw-w64-x86_64-ca-certificates 20250419-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "MPL",
+        "GPL"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "mingw-w64-curl-8.18.0-1.src.tar.gz",
+      "url": "https://github.com/git-for-windows/pacman-repo/releases/download/2026-01-07T21-55-10.690988000Z/mingw-w64-curl-8.18.0-1.src.tar.gz",
+      "sha256": "f91343dd888182f73da6c434c11f42167e8c238d7daca447ccce7f3c62c343eb",
+      "bytes": 3250232,
+      "packages": [
+        "mingw-w64-x86_64-curl-openssl-alternate 8.18.0-1",
+        "mingw-w64-x86_64-curl-winssl 8.18.0-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "spdx:MIT"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "mingw-w64-expat-2.7.4-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-expat-2.7.4-1.src.tar.zst",
+      "sha256": "bfafe5d0751a705941510e4f0ebfd52d38ea4a20d6c132c66f3953a12f17f633",
+      "bytes": 509725,
+      "packages": [
+        "mingw-w64-x86_64-expat 2.7.4-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "spdx:MIT"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "mingw-w64-gcc-15.2.0-11.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-gcc-15.2.0-11.src.tar.zst",
+      "sha256": "a27c7024383d51d6cb5817eaeea51f97ab1abecb6f07bf41cbeeb00af8e876d7",
+      "bytes": 101090946,
+      "packages": [
+        "mingw-w64-x86_64-gcc-libs 15.2.0-11"
+      ],
+      "recipeLicenseDeclarations": [
+        "spdx:GPL-3.0-or-later",
+        "spdx:GPL-3.0-or-later WITH GCC-exception-3.1 AND LGPL-2.1-or-later"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "mingw-w64-gettext-1.0-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-gettext-1.0-1.src.tar.zst",
+      "sha256": "cca0d0c8f60353faccc5ad40405240014e4a7ccc8b1c6ca9f4626aef3097d26e",
+      "bytes": 10267655,
+      "packages": [
+        "mingw-w64-x86_64-gettext-runtime 1.0-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "spdx:GPL-3.0-or-later AND LGPL-2.1-or-later",
+        "spdx:GPL-3.0-or-later"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "mingw-w64-git-2.53.0.3-1.src.tar.gz",
+      "url": "https://github.com/git-for-windows/pacman-repo/releases/download/2026-04-14T17-06-35.858808200Z/mingw-w64-git-2.53.0.3-1.src.tar.gz",
+      "sha256": "95dfd523521fa5c07c2c5e1eb0a59c478457768ebd2551ccccf3900a747bc61d",
+      "bytes": 12364594,
+      "packages": [
+        "mingw-w64-x86_64-git 2.53.0.3-1",
+        "mingw-w64-x86_64-git-credential-wincred 2.53.0.3-1",
+        "mingw-w64-x86_64-git-for-windows-addons 2.53.0.3-1",
+        "mingw-w64-x86_64-git-gui 2.53.0.3-1",
+        "mingw-w64-x86_64-git-perl 2.53.0.3-1",
+        "mingw-w64-x86_64-git-send-email 2.53.0.3-1",
+        "mingw-w64-x86_64-git-subtree 2.53.0.3-1",
+        "mingw-w64-x86_64-gitk 2.53.0.3-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "GPL2"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "mingw-w64-git-extra-1.1.687.f502a63dc-1.src.tar.gz",
+      "url": "https://github.com/git-for-windows/pacman-repo/releases/download/2026-01-09T11-45-08.990663400Z/mingw-w64-git-extra-1.1.687.f502a63dc-1.src.tar.gz",
+      "sha256": "9d5a8dde06c5ec8602f06d3a4304143545ccad175b6d80d42c746c43930b6678",
+      "bytes": 54201,
+      "packages": [
+        "mingw-w64-x86_64-git-extra 1.1.687.f502a63dc-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "GPL"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "mingw-w64-libffi-3.5.2-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-libffi-3.5.2-1.src.tar.zst",
+      "sha256": "bfe3f7d5bf9b09ab22e42ccd527d1a5a94277547b04524177a1c46e1cd930172",
+      "bytes": 1423649,
+      "packages": [
+        "mingw-w64-x86_64-libffi 3.5.2-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "spdx:MIT"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "mingw-w64-libiconv-1.18-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-libiconv-1.18-1.src.tar.zst",
+      "sha256": "d40dc594479c0fba9aa492c5cbf63dd81a7cc4b91cc1d93619bb43c622d04709",
+      "bytes": 5032448,
+      "packages": [
+        "mingw-w64-x86_64-libiconv 1.18-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "spdx:GPL-3.0-or-later",
+        "spdx:LGPL-2.1-or-later",
+        "documentation:spdx:GPL-3.0-or-later"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "mingw-w64-libidn2-2.3.8-4.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-libidn2-2.3.8-4.src.tar.zst",
+      "sha256": "cd83e8514fbeb6a4499299b88691b9b9ecc3114cca1e2be4f6c54aab6ae9ddd0",
+      "bytes": 2147337,
+      "packages": [
+        "mingw-w64-x86_64-libidn2 2.3.8-4"
+      ],
+      "recipeLicenseDeclarations": [
+        "spdx:GPL-2.0-or-later",
+        "spdx:LGPL-3.0-or-later"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "mingw-w64-libpsl-0.21.5-3.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-libpsl-0.21.5-3.src.tar.zst",
+      "sha256": "102b4ab4c60322162e808c5c81f545438c346c659e8fb63e0851066f07a0e76b",
+      "bytes": 6829368,
+      "packages": [
+        "mingw-w64-x86_64-libpsl 0.21.5-3"
+      ],
+      "recipeLicenseDeclarations": [
+        "spdx:MIT"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "mingw-w64-libssh2-1.11.1-2.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-libssh2-1.11.1-2.src.tar.zst",
+      "sha256": "bb78f8354441190221ece18a96c09f631fe02648f5dd7d1e247ae8d00a9fea5f",
+      "bytes": 1094498,
+      "packages": [
+        "mingw-w64-x86_64-libssh2-wincng 1.11.1-2"
+      ],
+      "recipeLicenseDeclarations": [
+        "spdx:BSD-3-Clause"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "mingw-w64-libtasn1-4.21.0-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-libtasn1-4.21.0-1.src.tar.zst",
+      "sha256": "c626129c5131eef0a45c736274f0844747605a105161cc0f7d39f6e1c70ed0ff",
+      "bytes": 1732161,
+      "packages": [
+        "mingw-w64-x86_64-libtasn1 4.21.0-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "GPL3, LGPL"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "mingw-w64-libunistring-1.3-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-libunistring-1.3-1.src.tar.zst",
+      "sha256": "b5f564e63acd3d5a3c56a040d81aa47d8fa9d4e11dc60aa64fc28d038717afff",
+      "bytes": 4719176,
+      "packages": [
+        "mingw-w64-x86_64-libunistring 1.3-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "spdx:LGPL-3.0-or-later OR GPL-3.0-or-later"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "mingw-w64-nghttp2-1.68.0-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-nghttp2-1.68.0-1.src.tar.zst",
+      "sha256": "aeccef14fc24153d6bd852284e9836342db3ff49519e59d2f2a8e5f9fd0387fa",
+      "bytes": 1693738,
+      "packages": [
+        "mingw-w64-x86_64-nghttp2 1.68.0-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "spdx:MIT"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "mingw-w64-openssl-3.5.5-1.src.tar.gz",
+      "url": "https://github.com/git-for-windows/pacman-repo/releases/download/2026-01-27T20-36-22.546922300Z/mingw-w64-openssl-3.5.5-1.src.tar.gz",
+      "sha256": "bbb69c364a12ed14ddf925dd2dbfaefbc32614e1901ea2aa6e7d54fca9112378",
+      "bytes": 53088017,
+      "packages": [
+        "mingw-w64-x86_64-openssl 3.5.5-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "spdx:Apache-2.0"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "mingw-w64-pcre2-10.47-1.src.tar.gz",
+      "url": "https://github.com/git-for-windows/pacman-repo/releases/download/2025-11-04T09-21-59.197225000Z/mingw-w64-pcre2-10.47-1.src.tar.gz",
+      "sha256": "4517735dbcc0e37d92d847e7aac60b263bf3bf78505bc47645b339f87435eed6",
+      "bytes": 2148708,
+      "packages": [
+        "mingw-w64-x86_64-pcre2 10.47-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "BSD"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "mingw-w64-winpthreads-13.0.0.r488.g3fedac280-2.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-winpthreads-13.0.0.r488.g3fedac280-2.src.tar.zst",
+      "sha256": "6ff438f105deea9f76fc4e38da0bbf59f1adb2f72c961742378d073bca26ec89",
+      "bytes": 51129240,
+      "packages": [
+        "mingw-w64-x86_64-libwinpthread 13.0.0.r488.g3fedac280-2"
+      ],
+      "recipeLicenseDeclarations": [
+        "spdx:MIT AND BSD-3-Clause-Clear"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "mingw-w64-zlib-1.3.1-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-zlib-1.3.1-1.src.tar.zst",
+      "sha256": "9f274086ee2aa74e449908443f5e225855a4fe20f2abddadb4d18c0194c1ceff",
+      "bytes": 1311495,
+      "packages": [
+        "mingw-w64-x86_64-zlib 1.3.1-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "spdx:Zlib"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "mingw-w64-zstd-1.5.7-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-zstd-1.5.7-1.src.tar.zst",
+      "sha256": "0e369f559046468bb605c8f4c8d93c7a4e7e88e8dc412226ebbad92ac1d5bd28",
+      "bytes": 2401857,
+      "packages": [
+        "mingw-w64-x86_64-zstd 1.5.7-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "spdx:BSD-3-Clause OR GPL-2.0-or-later"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "mpfr-4.2.2-1.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/mpfr-4.2.2-1.src.tar.zst",
+      "sha256": "e0c56e3af3819471e74dd37e32660e4eb8f58761c4d214dabd2d62f57c548869",
+      "bytes": 1507563,
+      "packages": [
+        "mpfr 4.2.2-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "spdx:LGPL-3.0-or-later"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "msys2-runtime-3.6.6-1.src.tar.gz",
+      "url": "https://github.com/git-for-windows/pacman-repo/releases/download/2026-01-15T22-34-40.508011800Z/msys2-runtime-3.6.6-1.src.tar.gz",
+      "sha256": "275fa22d4f6ac7c6023ada822f74e470111b047c1258124555f51b366e3c7600",
+      "bytes": 145170269,
+      "packages": [
+        "msys2-runtime 3.6.6-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "GPL"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "ncurses-6.6-1.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/ncurses-6.6-1.src.tar.zst",
+      "sha256": "0bd0d82ab11ea4d219dedfa5de282b9d252ffdaa78624daa5412605894326e6c",
+      "bytes": 3785671,
+      "packages": [
+        "ncurses 6.6-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "spdx:MIT"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "openssh-10.2p1-1.src.tar.gz",
+      "url": "https://github.com/git-for-windows/pacman-repo/releases/download/2025-10-10T11-57-54.774519200Z/openssh-10.2p1-1.src.tar.gz",
+      "sha256": "6a63733730a14bd9ac917b823693adf197287bf007338d9c5ad4a8f42d0ab47c",
+      "bytes": 1976600,
+      "packages": [
+        "openssh 10.2p1-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "custom:BSD"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "openssl-3.5.5-1.src.tar.gz",
+      "url": "https://github.com/git-for-windows/pacman-repo/releases/download/2026-01-27T17-20-29.895194200Z/openssl-3.5.5-1.src.tar.gz",
+      "sha256": "b9cd320c0d604edd1e36aa57ff8f5f29921a897b3e24f9de50732ba286f4e00c",
+      "bytes": 53078999,
+      "packages": [
+        "libopenssl 3.5.5-1",
+        "openssl 3.5.5-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "spdx:Apache-2.0"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "pcre-8.45-5.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/pcre-8.45-5.src.tar.zst",
+      "sha256": "f7104aa31f29655689b404ead9923332e2fa6aadfe97c060d0dfc02f4661d6b5",
+      "bytes": 1577595,
+      "packages": [
+        "libpcre 8.45-5"
+      ],
+      "recipeLicenseDeclarations": [
+        "BSD"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "readline-8.3.003-1.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/readline-8.3.003-1.src.tar.zst",
+      "sha256": "8b9e2370bf80d30cdb1bfeb00be1e2be2c9ec8b92838ffcb5ddc4805ac0a899e",
+      "bytes": 3355502,
+      "packages": [
+        "libreadline 8.3.003-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "GPL"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "rebase-4.5.0-5.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/rebase-4.5.0-5.src.tar.zst",
+      "sha256": "5e9c24c35a881888c045aa04b676f79d238e870a7391f595665e9bd9d26b09c9",
+      "bytes": 341196,
+      "packages": [
+        "rebase 4.5.0-5"
+      ],
+      "recipeLicenseDeclarations": [
+        "custom"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "sed-4.9-1.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/sed-4.9-1.src.tar.zst",
+      "sha256": "a9686da7c1f3cb2ba7ae5f20f30d9ef38f7bba993f9c777b43bd13c7fbd7cc58",
+      "bytes": 1399712,
+      "packages": [
+        "sed 4.9-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "GPL3"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "sqlite-3.51.2-1.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/sqlite-3.51.2-1.src.tar.zst",
+      "sha256": "93c882947ddb2daeb3678627068227930a6759c45c5a7862528d32cbcbbeb91b",
+      "bytes": 24794812,
+      "packages": [
+        "libsqlite 3.51.2-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "PublicDomain"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "util-linux-2.40.2-2.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/util-linux-2.40.2-2.src.tar.zst",
+      "sha256": "ea018e116866c0e2d9a3d6cee3f0d09801e6725789b6f99fd1979dfc7a68b703",
+      "bytes": 8864602,
+      "packages": [
+        "libutil-linux 2.40.2-2"
+      ],
+      "recipeLicenseDeclarations": [
+        "spdx:GPL-2.0-or-later"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "xz-5.8.2-1.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/xz-5.8.2-1.src.tar.zst",
+      "sha256": "c660a4639c406f50df43e3b228c423cd0e13c4b73b17950dc8be680f81bc9162",
+      "bytes": 1602623,
+      "packages": [
+        "liblzma 5.8.2-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "GPL",
+        "LGPL",
+        "custom"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "zlib-1.3.1-1.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/zlib-1.3.1-1.src.tar.zst",
+      "sha256": "84c07b395d0e83e0e6a93acb85e3544dff66d084b9ad8dd17e0e8e576fb56c89",
+      "bytes": 1308355,
+      "packages": [
+        "zlib 1.3.1-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "custom"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "zstd-1.5.7-1.src.tar.zst",
+      "url": "https://repo.msys2.org/msys/sources/zstd-1.5.7-1.src.tar.zst",
+      "sha256": "19e11d517b005cba22d0f04969a74ffa08443429ff9dc80596d323b9483534f5",
+      "bytes": 2401343,
+      "packages": [
+        "libzstd 1.5.7-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "BSD"
+      ],
+      "reviewStatus": "source-and-recipe-collected"
+    },
+    {
+      "archive": "git-credential-manager-2.7.3-5fa7116.tar.gz",
+      "url": "https://codeload.github.com/git-ecosystem/git-credential-manager/tar.gz/5fa7116896c82164996a609accd1c5ad90fe730a",
+      "sha256": "0ee49f74b0db873e47a499523ab893a72277e1330847c17db3069988419a3147",
+      "bytes": 2285758,
+      "packages": [
+        "mingw-w64-x86_64-git-credential-manager 2.7.3-1"
+      ],
+      "recipeLicenseDeclarations": [
+        "MIT"
+      ],
+      "reviewStatus": "upstream-tag-source-collected; MinGit packaging recipe and transitive notices review pending"
+    }
+  ]
+}

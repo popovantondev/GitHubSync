@@ -1,0 +1,895 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-02",
+  "runtime": "MinGit-2.53.0.3-64-bit.zip",
+  "comparison": "Entire non-certificate PE bytes, excluding checksum and certificate-directory fields; not whole-file SHA256 or independent Authenticode validation",
+  "uniqueMatchedDLLs": 43,
+  "packages": [
+    {
+      "Id": "Avalonia",
+      "Version": "11.1.3",
+      "URL": "https://api.nuget.org/v3-flatcontainer/avalonia/11.1.3/avalonia.11.1.3.nupkg",
+      "SHA256": "933fa4fef92e5a82f45c1bd14fc49a74c3a699108593d5bf27893f20cea8617d",
+      "Copyright": "Copyright 2013-2024 © The AvaloniaUI Project",
+      "LicenseType": "expression",
+      "LicenseDeclaration": "MIT",
+      "LicenseURL": "https://licenses.nuget.org/MIT",
+      "RepositoryURL": "https://github.com/AvaloniaUI/Avalonia/",
+      "RepositoryCommit": "45a2d36e3214ac4b3623940ba728b2503de5c668",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "Avalonia.dll",
+          "PackageMember": "lib/netstandard2.0/Avalonia.dll",
+          "NonCertificatePE_SHA256": "efcce055c62a35972e6f3c997295d4d8e5298f1ca3006f1ac929df754d4f4592"
+        },
+        {
+          "File": "Avalonia.Base.dll",
+          "PackageMember": "lib/netstandard2.0/Avalonia.Base.dll",
+          "NonCertificatePE_SHA256": "1cb92016ecdf5a46f42bc61bd69b027f855475ab9c1502058f80fa5a06813b08"
+        },
+        {
+          "File": "Avalonia.Controls.dll",
+          "PackageMember": "lib/netstandard2.0/Avalonia.Controls.dll",
+          "NonCertificatePE_SHA256": "82a60482a2d81a6bbb5ddd962dc5f8528c1860822450d40600b5423bf6e52b62"
+        },
+        {
+          "File": "Avalonia.DesignerSupport.dll",
+          "PackageMember": "lib/netstandard2.0/Avalonia.DesignerSupport.dll",
+          "NonCertificatePE_SHA256": "8b69cefa4c12cd8f118c3f11bf6303a768111fdb2bc600757ed4c35fb8804616"
+        },
+        {
+          "File": "Avalonia.Dialogs.dll",
+          "PackageMember": "lib/netstandard2.0/Avalonia.Dialogs.dll",
+          "NonCertificatePE_SHA256": "5adce0058c3d9a2cb742e7aec5de9234597eff620dbd2ead52e37d15ba531ee1"
+        },
+        {
+          "File": "Avalonia.Metal.dll",
+          "PackageMember": "lib/netstandard2.0/Avalonia.Metal.dll",
+          "NonCertificatePE_SHA256": "e1291f9d0f0cb5b109ba285527e05f865aa68da261d1faad1b04dad1e96792e3"
+        },
+        {
+          "File": "Avalonia.MicroCom.dll",
+          "PackageMember": "lib/net6.0/Avalonia.MicroCom.dll",
+          "NonCertificatePE_SHA256": "7477ec1a3f0aabb39cc3e2f0e45bcee494530829c64ecb60a7acae9151d0eb5c"
+        },
+        {
+          "File": "Avalonia.MicroCom.dll",
+          "PackageMember": "lib/net8.0/Avalonia.MicroCom.dll",
+          "NonCertificatePE_SHA256": "7477ec1a3f0aabb39cc3e2f0e45bcee494530829c64ecb60a7acae9151d0eb5c"
+        },
+        {
+          "File": "Avalonia.MicroCom.dll",
+          "PackageMember": "lib/netstandard2.0/Avalonia.MicroCom.dll",
+          "NonCertificatePE_SHA256": "7477ec1a3f0aabb39cc3e2f0e45bcee494530829c64ecb60a7acae9151d0eb5c"
+        },
+        {
+          "File": "Avalonia.OpenGL.dll",
+          "PackageMember": "lib/netstandard2.0/Avalonia.OpenGL.dll",
+          "NonCertificatePE_SHA256": "0982d34351fdf0204c39add5fa1d01d1ebb1fc93213f78188a5b61f05f929a1a"
+        },
+        {
+          "File": "Avalonia.Vulkan.dll",
+          "PackageMember": "lib/netstandard2.0/Avalonia.Vulkan.dll",
+          "NonCertificatePE_SHA256": "b9e04c146ee5fac835f5782c16b8c0f11dd12d922bb20ee52db5ed64308ab558"
+        },
+        {
+          "File": "Avalonia.Markup.Xaml.dll",
+          "PackageMember": "lib/netstandard2.0/Avalonia.Markup.Xaml.dll",
+          "NonCertificatePE_SHA256": "577457c83f05714f9e7cfc5efd7680833abf69dc6ca02a849b0d594c0baf1e10"
+        },
+        {
+          "File": "Avalonia.Markup.dll",
+          "PackageMember": "lib/netstandard2.0/Avalonia.Markup.dll",
+          "NonCertificatePE_SHA256": "5efe51b0e194e74343ae7f103ef21c85036f827f06ed904001373f04eb6393d1"
+        }
+      ],
+      "NoticeMembers": []
+    },
+    {
+      "Id": "Avalonia.Win32",
+      "Version": "11.1.3",
+      "URL": "https://api.nuget.org/v3-flatcontainer/avalonia.win32/11.1.3/avalonia.win32.11.1.3.nupkg",
+      "SHA256": "cdcc53a449e92dfe74a7c61a8b2964e7f092f4c3437bb94ad6e5f508f6890547",
+      "Copyright": "Copyright 2013-2024 © The AvaloniaUI Project",
+      "LicenseType": "expression",
+      "LicenseDeclaration": "MIT",
+      "LicenseURL": "https://licenses.nuget.org/MIT",
+      "RepositoryURL": "https://github.com/AvaloniaUI/Avalonia/",
+      "RepositoryCommit": "45a2d36e3214ac4b3623940ba728b2503de5c668",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "Avalonia.Win32.dll",
+          "PackageMember": "lib/netstandard2.0/Avalonia.Win32.dll",
+          "NonCertificatePE_SHA256": "95c720c02ba4931932554923f9bba7c3f84d73d596bf24983e06d94b104901c0"
+        }
+      ],
+      "NoticeMembers": []
+    },
+    {
+      "Id": "Avalonia.Skia",
+      "Version": "11.1.3",
+      "URL": "https://api.nuget.org/v3-flatcontainer/avalonia.skia/11.1.3/avalonia.skia.11.1.3.nupkg",
+      "SHA256": "12d07cea0fa7cfa8bcc0beb1cad324625d84860b7718530c34fcd07e16dfa293",
+      "Copyright": "Copyright 2013-2024 © The AvaloniaUI Project",
+      "LicenseType": "expression",
+      "LicenseDeclaration": "MIT",
+      "LicenseURL": "https://licenses.nuget.org/MIT",
+      "RepositoryURL": "https://github.com/AvaloniaUI/Avalonia/",
+      "RepositoryCommit": "45a2d36e3214ac4b3623940ba728b2503de5c668",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "Avalonia.Skia.dll",
+          "PackageMember": "lib/netstandard2.0/Avalonia.Skia.dll",
+          "NonCertificatePE_SHA256": "a438bcaf896287c73f2ce49fbd0b105d5eb35d36dc68440cd4567e0d1f318d24"
+        }
+      ],
+      "NoticeMembers": []
+    },
+    {
+      "Id": "Avalonia.Themes.Fluent",
+      "Version": "11.1.3",
+      "URL": "https://api.nuget.org/v3-flatcontainer/avalonia.themes.fluent/11.1.3/avalonia.themes.fluent.11.1.3.nupkg",
+      "SHA256": "a9f9912b680b192807c7874d21e55eb16c4b523728a24f444f6c6bbbf5f28b0f",
+      "Copyright": "Copyright 2013-2024 © The AvaloniaUI Project",
+      "LicenseType": "expression",
+      "LicenseDeclaration": "MIT",
+      "LicenseURL": "https://licenses.nuget.org/MIT",
+      "RepositoryURL": "https://github.com/AvaloniaUI/Avalonia/",
+      "RepositoryCommit": "45a2d36e3214ac4b3623940ba728b2503de5c668",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "Avalonia.Themes.Fluent.dll",
+          "PackageMember": "lib/netstandard2.0/Avalonia.Themes.Fluent.dll",
+          "NonCertificatePE_SHA256": "7ddf3f8cae3192955a7780c7a87b448406ac356bb1be8b269119e1c72bff0050"
+        }
+      ],
+      "NoticeMembers": []
+    },
+    {
+      "Id": "Avalonia.Angle.Windows.Natives",
+      "Version": "2.1.22045.20230930",
+      "URL": "https://api.nuget.org/v3-flatcontainer/avalonia.angle.windows.natives/2.1.22045.20230930/avalonia.angle.windows.natives.2.1.22045.20230930.nupkg",
+      "SHA256": "4713dc5944f76fff91dd3bb91397eda6be69a422d9ae19be393b22d12c16de97",
+      "Copyright": "Copyright 2013-2023 © The AvaloniaUI Project",
+      "LicenseType": "file",
+      "LicenseDeclaration": "LICENSE",
+      "LicenseURL": "https://aka.ms/deprecateLicenseUrl",
+      "RepositoryURL": "https://github.com/AvaloniaUI/angle/",
+      "RepositoryCommit": "26406952a84f41c4be1e762884cda61fd2e022a9",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "av_libglesv2.dll",
+          "PackageMember": "runtimes/win-x64/native/av_libglesv2.dll",
+          "NonCertificatePE_SHA256": "1af763991af620e2c7245a4c9a414881597d9975d94dca82f8c294c41e75b0c8"
+        }
+      ],
+      "NoticeMembers": [
+        {
+          "FullName": "LICENSE",
+          "Length": 1675
+        }
+      ]
+    },
+    {
+      "Id": "MicroCom.Runtime",
+      "Version": "0.11.0",
+      "URL": "https://api.nuget.org/v3-flatcontainer/microcom.runtime/0.11.0/microcom.runtime.0.11.0.nupkg",
+      "SHA256": "55dc293f97ec725bcda89ba9a5a3afc04c2fda87e7008e594b3d95f9411d2c5d",
+      "Copyright": "Copyright 2021 © Nikita Tsukanov",
+      "LicenseType": "expression",
+      "LicenseDeclaration": "MIT",
+      "LicenseURL": "https://licenses.nuget.org/MIT",
+      "RepositoryURL": "https://github.com/kekekeks/MicroCom",
+      "RepositoryCommit": "",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "MicroCom.Runtime.dll",
+          "PackageMember": "lib/netstandard2.0/MicroCom.Runtime.dll",
+          "NonCertificatePE_SHA256": "ea99e3c130d68058b7551f6243f336a75a90919ffd84acecf38764f40202ad18"
+        }
+      ],
+      "NoticeMembers": []
+    },
+    {
+      "Id": "HarfBuzzSharp",
+      "Version": "7.3.0.2",
+      "URL": "https://api.nuget.org/v3-flatcontainer/harfbuzzsharp/7.3.0.2/harfbuzzsharp.7.3.0.2.nupkg",
+      "SHA256": "89b828ab34f5355ed0a397bb5f65ba56defdf3d4caae4776336a6efa58520e0f",
+      "Copyright": "© Microsoft Corporation. All rights reserved.",
+      "LicenseType": "",
+      "LicenseDeclaration": "",
+      "LicenseURL": "https://go.microsoft.com/fwlink/?linkid=868514",
+      "RepositoryURL": "https://github.com/mono/SkiaSharp",
+      "RepositoryCommit": "7af1d0840a381c0ce7ef2877454a88dbb2949686",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "HarfBuzzSharp.dll",
+          "PackageMember": "lib/net462/HarfBuzzSharp.dll",
+          "NonCertificatePE_SHA256": "29f5d3f58dcdd4da2c8adadcbd2b7b3493841744c3929881c74fa948413aa0c7"
+        }
+      ],
+      "NoticeMembers": [
+        {
+          "FullName": "LICENSE.txt",
+          "Length": 1129
+        },
+        {
+          "FullName": "THIRD-PARTY-NOTICES.txt",
+          "Length": 139775
+        }
+      ]
+    },
+    {
+      "Id": "HarfBuzzSharp.NativeAssets.Win32",
+      "Version": "7.3.0.2",
+      "URL": "https://api.nuget.org/v3-flatcontainer/harfbuzzsharp.nativeassets.win32/7.3.0.2/harfbuzzsharp.nativeassets.win32.7.3.0.2.nupkg",
+      "SHA256": "c7888cdcd1ecf55cb0786e7bc40ef8c9de2e2ee5e5cb5e3ba287b49af350f33a",
+      "Copyright": "© Microsoft Corporation. All rights reserved.",
+      "LicenseType": "",
+      "LicenseDeclaration": "",
+      "LicenseURL": "https://go.microsoft.com/fwlink/?linkid=868514",
+      "RepositoryURL": "https://github.com/mono/SkiaSharp",
+      "RepositoryCommit": "7af1d0840a381c0ce7ef2877454a88dbb2949686",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "libHarfBuzzSharp.dll",
+          "PackageMember": "runtimes/win-x64/native/libHarfBuzzSharp.dll",
+          "NonCertificatePE_SHA256": "ea9fd59f34e26412197f5cf9a399caedec0f7b148995c4b33dca4eb231f642f5"
+        }
+      ],
+      "NoticeMembers": [
+        {
+          "FullName": "LICENSE.txt",
+          "Length": 1129
+        },
+        {
+          "FullName": "THIRD-PARTY-NOTICES.txt",
+          "Length": 139775
+        }
+      ]
+    },
+    {
+      "Id": "SkiaSharp",
+      "Version": "2.88.8",
+      "URL": "https://api.nuget.org/v3-flatcontainer/skiasharp/2.88.8/skiasharp.2.88.8.nupkg",
+      "SHA256": "ac3e607384a79514d7c33dfaeee1e6f171b9780210a599681aa2d11a7bcdbb40",
+      "Copyright": "© Microsoft Corporation. All rights reserved.",
+      "LicenseType": "",
+      "LicenseDeclaration": "",
+      "LicenseURL": "https://go.microsoft.com/fwlink/?linkid=868514",
+      "RepositoryURL": "https://github.com/mono/SkiaSharp",
+      "RepositoryCommit": "7af1d0840a381c0ce7ef2877454a88dbb2949686",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "SkiaSharp.dll",
+          "PackageMember": "lib/net462/SkiaSharp.dll",
+          "NonCertificatePE_SHA256": "b4a829790d1e71c78c6c9e56e626985fe5889a9832bb7dcee71e4affe9d1899b"
+        }
+      ],
+      "NoticeMembers": [
+        {
+          "FullName": "LICENSE.txt",
+          "Length": 1129
+        },
+        {
+          "FullName": "THIRD-PARTY-NOTICES.txt",
+          "Length": 139775
+        }
+      ]
+    },
+    {
+      "Id": "SkiaSharp.NativeAssets.Win32",
+      "Version": "2.88.8",
+      "URL": "https://api.nuget.org/v3-flatcontainer/skiasharp.nativeassets.win32/2.88.8/skiasharp.nativeassets.win32.2.88.8.nupkg",
+      "SHA256": "6fc55bf78acd8f03ca4890d0819d17bf675657b80c5459791b04cafd08993cf3",
+      "Copyright": "© Microsoft Corporation. All rights reserved.",
+      "LicenseType": "",
+      "LicenseDeclaration": "",
+      "LicenseURL": "https://go.microsoft.com/fwlink/?linkid=868514",
+      "RepositoryURL": "https://github.com/mono/SkiaSharp",
+      "RepositoryCommit": "7af1d0840a381c0ce7ef2877454a88dbb2949686",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "libSkiaSharp.dll",
+          "PackageMember": "runtimes/win-x64/native/libSkiaSharp.dll",
+          "NonCertificatePE_SHA256": "f826cf99b43db9f396b73c69ef16b019d72f312d6d873422bffa09a4f8ec16ca"
+        }
+      ],
+      "NoticeMembers": [
+        {
+          "FullName": "LICENSE.txt",
+          "Length": 1129
+        },
+        {
+          "FullName": "THIRD-PARTY-NOTICES.txt",
+          "Length": 139775
+        }
+      ]
+    },
+    {
+      "Id": "Microsoft.Identity.Client",
+      "Version": "4.65.0",
+      "URL": "https://api.nuget.org/v3-flatcontainer/microsoft.identity.client/4.65.0/microsoft.identity.client.4.65.0.nupkg",
+      "SHA256": "8240552dbf1a70b61ec4d338673309d2a7c3a7652a8d4b74ca2bb731f31c5a28",
+      "Copyright": "© Microsoft Corporation. All rights reserved.",
+      "LicenseType": "expression",
+      "LicenseDeclaration": "MIT",
+      "LicenseURL": "https://licenses.nuget.org/MIT",
+      "RepositoryURL": "https://github.com/AzureAD/microsoft-authentication-library-for-dotnet",
+      "RepositoryCommit": "e8baa99af1726fe40b9a0ba302dfb9f3bde12803",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "Microsoft.Identity.Client.dll",
+          "PackageMember": "lib/net472/Microsoft.Identity.Client.dll",
+          "NonCertificatePE_SHA256": "9df6a5ff4b0b0f9f69bb788095d01c26fa41c9b6fcb6d3ec8d2b18cb8b1eb8d2"
+        }
+      ],
+      "NoticeMembers": []
+    },
+    {
+      "Id": "Microsoft.Identity.Client.Broker",
+      "Version": "4.65.0",
+      "URL": "https://api.nuget.org/v3-flatcontainer/microsoft.identity.client.broker/4.65.0/microsoft.identity.client.broker.4.65.0.nupkg",
+      "SHA256": "3deed5ac059f6ae5d56117396b4f877192346dba5dde2b6fd2ef719c5534239d",
+      "Copyright": "© Microsoft Corporation. All rights reserved.",
+      "LicenseType": "expression",
+      "LicenseDeclaration": "MIT",
+      "LicenseURL": "https://licenses.nuget.org/MIT",
+      "RepositoryURL": "https://github.com/AzureAD/microsoft-authentication-library-for-dotnet",
+      "RepositoryCommit": "e8baa99af1726fe40b9a0ba302dfb9f3bde12803",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "Microsoft.Identity.Client.Broker.dll",
+          "PackageMember": "lib/net462/Microsoft.Identity.Client.Broker.dll",
+          "NonCertificatePE_SHA256": "22d0058f4146a43fadeac43fa2940ab3714acca30c2461c00521ca8a69d90384"
+        }
+      ],
+      "NoticeMembers": []
+    },
+    {
+      "Id": "Microsoft.Identity.Client.Extensions.Msal",
+      "Version": "4.65.0",
+      "URL": "https://api.nuget.org/v3-flatcontainer/microsoft.identity.client.extensions.msal/4.65.0/microsoft.identity.client.extensions.msal.4.65.0.nupkg",
+      "SHA256": "5e6cbf7af89c2ef99b0beeb2b71c1513ae3ab95709079c8ca442bbdc7e6dcc3d",
+      "Copyright": "© Microsoft Corporation. All rights reserved.",
+      "LicenseType": "expression",
+      "LicenseDeclaration": "MIT",
+      "LicenseURL": "https://licenses.nuget.org/MIT",
+      "RepositoryURL": "https://github.com/AzureAD/microsoft-authentication-library-for-dotnet",
+      "RepositoryCommit": "e8baa99af1726fe40b9a0ba302dfb9f3bde12803",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "Microsoft.Identity.Client.Extensions.Msal.dll",
+          "PackageMember": "lib/netstandard2.0/Microsoft.Identity.Client.Extensions.Msal.dll",
+          "NonCertificatePE_SHA256": "eb5d16ead519a07355504f9bbb67ba7701d04e1209839470ee1c18bec8de78cc"
+        }
+      ],
+      "NoticeMembers": []
+    },
+    {
+      "Id": "Microsoft.Identity.Client.NativeInterop",
+      "Version": "0.16.2",
+      "URL": "https://api.nuget.org/v3-flatcontainer/microsoft.identity.client.nativeinterop/0.16.2/microsoft.identity.client.nativeinterop.0.16.2.nupkg",
+      "SHA256": "8652c52e9e9afaf9d04f5babb771a5228f781b70286b0733620a2868292f7cd5",
+      "Copyright": "© Microsoft Corporation. All rights reserved.",
+      "LicenseType": "expression",
+      "LicenseDeclaration": "MIT",
+      "LicenseURL": "https://licenses.nuget.org/MIT",
+      "RepositoryURL": "https://github.com/AzureAD/microsoft-authentication-library-for-cpp.git",
+      "RepositoryCommit": "",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "msalruntime_x86.dll",
+          "PackageMember": "runtimes/win-x86/native/msalruntime_x86.dll",
+          "NonCertificatePE_SHA256": "42ed677acc3ed5090ba7acb965dcdfdf581e29150e968018129dd1fbbd7e0921"
+        },
+        {
+          "File": "msalruntime.dll",
+          "PackageMember": "runtimes/win-x64/native/msalruntime.dll",
+          "NonCertificatePE_SHA256": "8ee71c87203e14fc6b45fbe189e7a7f303e206a059e5bd7dbfe87e4ce20817ed"
+        },
+        {
+          "File": "Microsoft.Identity.Client.NativeInterop.dll",
+          "PackageMember": "lib/net461/Microsoft.Identity.Client.NativeInterop.dll",
+          "NonCertificatePE_SHA256": "7c54b2da5656745c0eeb891ae61e3d6e7e8152569b224940de88c34a3e6b6f71"
+        }
+      ],
+      "NoticeMembers": []
+    },
+    {
+      "Id": "Microsoft.IdentityModel.Abstractions",
+      "Version": "6.35.0",
+      "URL": "https://api.nuget.org/v3-flatcontainer/microsoft.identitymodel.abstractions/6.35.0/microsoft.identitymodel.abstractions.6.35.0.nupkg",
+      "SHA256": "6f1c98bbafd081a0384d0601af977e6f32022fe92d964772fed6ffd5f06ed344",
+      "Copyright": "© Microsoft Corporation. All rights reserved.",
+      "LicenseType": "expression",
+      "LicenseDeclaration": "MIT",
+      "LicenseURL": "https://licenses.nuget.org/MIT",
+      "RepositoryURL": "https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet",
+      "RepositoryCommit": "c94c7fc235501d478221e979062bd8837a55575b",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "Microsoft.IdentityModel.Abstractions.dll",
+          "PackageMember": "lib/net472/Microsoft.IdentityModel.Abstractions.dll",
+          "NonCertificatePE_SHA256": "8757f405b5286bf8563e5fbb04889a2d4d575b2406211dcb3040fe0029224593"
+        }
+      ],
+      "NoticeMembers": []
+    },
+    {
+      "Id": "Microsoft.Bcl.AsyncInterfaces",
+      "Version": "8.0.0",
+      "URL": "https://api.nuget.org/v3-flatcontainer/microsoft.bcl.asyncinterfaces/8.0.0/microsoft.bcl.asyncinterfaces.8.0.0.nupkg",
+      "SHA256": "f5a5a68b03092ab2abf68843d4a4aea25dfbcbe8dd0f13c625cb779b6fc1927c",
+      "Copyright": "© Microsoft Corporation. All rights reserved.",
+      "LicenseType": "expression",
+      "LicenseDeclaration": "MIT",
+      "LicenseURL": "https://licenses.nuget.org/MIT",
+      "RepositoryURL": "https://github.com/dotnet/runtime",
+      "RepositoryCommit": "5535e31a712343a63f5d7d796cd874e563e5ac14",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "Microsoft.Bcl.AsyncInterfaces.dll",
+          "PackageMember": "lib/net462/Microsoft.Bcl.AsyncInterfaces.dll",
+          "NonCertificatePE_SHA256": "73a636c1ddb5ab958454f7d7ecc4a17e22c6c0c477c83152a611c86cc86e0310"
+        }
+      ],
+      "NoticeMembers": [
+        {
+          "FullName": "LICENSE.TXT",
+          "Length": 1139
+        },
+        {
+          "FullName": "THIRD-PARTY-NOTICES.TXT",
+          "Length": 68911
+        }
+      ]
+    },
+    {
+      "Id": "System.CommandLine",
+      "Version": "2.0.0-beta4.22272.1",
+      "URL": "https://api.nuget.org/v3-flatcontainer/system.commandline/2.0.0-beta4.22272.1/system.commandline.2.0.0-beta4.22272.1.nupkg",
+      "SHA256": "cd23be0989cc1fc75e0470c8f431e108f8fbf427b718ecc70b21f5fd3887c5c7",
+      "Copyright": "© Microsoft Corporation. All rights reserved.",
+      "LicenseType": "expression",
+      "LicenseDeclaration": "MIT",
+      "LicenseURL": "https://licenses.nuget.org/MIT",
+      "RepositoryURL": "https://github.com/dotnet/command-line-api",
+      "RepositoryCommit": "209b724a3c843253d3071e8348c353b297b0b8b5",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "System.CommandLine.dll",
+          "PackageMember": "lib/netstandard2.0/System.CommandLine.dll",
+          "NonCertificatePE_SHA256": "259b61a649032bacf05d78e951f8f80b57cb50681d29b8d8bc2fc7d60b3d32ef"
+        }
+      ],
+      "NoticeMembers": []
+    },
+    {
+      "Id": "System.Buffers",
+      "Version": "4.5.1",
+      "URL": "https://api.nuget.org/v3-flatcontainer/system.buffers/4.5.1/system.buffers.4.5.1.nupkg",
+      "SHA256": "c30b3dd2c7e2f4cee4b823d692fd42118309b42ab1f5007f923d329a5b0d6b12",
+      "Copyright": "© Microsoft Corporation. All rights reserved.",
+      "LicenseType": "",
+      "LicenseDeclaration": "",
+      "LicenseURL": "https://github.com/dotnet/corefx/blob/master/LICENSE.TXT",
+      "RepositoryURL": "",
+      "RepositoryCommit": "",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "System.Buffers.dll",
+          "PackageMember": "lib/net461/System.Buffers.dll",
+          "NonCertificatePE_SHA256": "d465dc3586932ffb0dd0c1ac2f3192bd28751421573f3b7d55330532593dd462"
+        }
+      ],
+      "NoticeMembers": [
+        {
+          "FullName": "LICENSE.TXT",
+          "Length": 1139
+        },
+        {
+          "FullName": "THIRD-PARTY-NOTICES.TXT",
+          "Length": 15835
+        }
+      ]
+    },
+    {
+      "Id": "System.ComponentModel.Annotations",
+      "Version": "4.5.0",
+      "URL": "https://api.nuget.org/v3-flatcontainer/system.componentmodel.annotations/4.5.0/system.componentmodel.annotations.4.5.0.nupkg",
+      "SHA256": "d79c84d8da13f6f98bf681826b11c29504758cb5b58f579fe611cc839e7146ca",
+      "Copyright": "© Microsoft Corporation.  All rights reserved.",
+      "LicenseType": "",
+      "LicenseDeclaration": "",
+      "LicenseURL": "https://github.com/dotnet/corefx/blob/master/LICENSE.TXT",
+      "RepositoryURL": "",
+      "RepositoryCommit": "",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "System.ComponentModel.Annotations.dll",
+          "PackageMember": "lib/net461/System.ComponentModel.Annotations.dll",
+          "NonCertificatePE_SHA256": "5f90d3b6dd87df4e846fb522f4f69cc6e6fd34f36b0a66831d4b6c066025a205"
+        }
+      ],
+      "NoticeMembers": [
+        {
+          "FullName": "LICENSE.TXT",
+          "Length": 1139
+        },
+        {
+          "FullName": "THIRD-PARTY-NOTICES.TXT",
+          "Length": 15835
+        }
+      ]
+    },
+    {
+      "Id": "System.Diagnostics.DiagnosticSource",
+      "Version": "6.0.1",
+      "URL": "https://api.nuget.org/v3-flatcontainer/system.diagnostics.diagnosticsource/6.0.1/system.diagnostics.diagnosticsource.6.0.1.nupkg",
+      "SHA256": "5e2f30ad48d5962a33fff4cf423147a9c57f406853aa74df51c96db0d95c089e",
+      "Copyright": "© Microsoft Corporation. All rights reserved.",
+      "LicenseType": "expression",
+      "LicenseDeclaration": "MIT",
+      "LicenseURL": "https://licenses.nuget.org/MIT",
+      "RepositoryURL": "https://github.com/dotnet/runtime",
+      "RepositoryCommit": "5edef4b20babd4c3ddac7460e536f86fd0f2d724",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "System.Diagnostics.DiagnosticSource.dll",
+          "PackageMember": "lib/net461/System.Diagnostics.DiagnosticSource.dll",
+          "NonCertificatePE_SHA256": "822b4313beefca31482dceecf58c6e737e1a40373bc761c0e0d486e4d8926e76"
+        }
+      ],
+      "NoticeMembers": [
+        {
+          "FullName": "LICENSE.TXT",
+          "Length": 1139
+        },
+        {
+          "FullName": "THIRD-PARTY-NOTICES.TXT",
+          "Length": 47728
+        }
+      ]
+    },
+    {
+      "Id": "System.IO.FileSystem.AccessControl",
+      "Version": "5.0.0",
+      "URL": "https://api.nuget.org/v3-flatcontainer/system.io.filesystem.accesscontrol/5.0.0/system.io.filesystem.accesscontrol.5.0.0.nupkg",
+      "SHA256": "73d3250ca25f8fadd846f97b6eb44136ce7da25ae66cbf86d40ea84d2f32b447",
+      "Copyright": "© Microsoft Corporation. All rights reserved.",
+      "LicenseType": "expression",
+      "LicenseDeclaration": "MIT",
+      "LicenseURL": "https://licenses.nuget.org/MIT",
+      "RepositoryURL": "git://github.com/dotnet/runtime",
+      "RepositoryCommit": "cf258a14b70ad9069470a108f13765e0e5988f51",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "System.IO.FileSystem.AccessControl.dll",
+          "PackageMember": "lib/net461/System.IO.FileSystem.AccessControl.dll",
+          "NonCertificatePE_SHA256": "1ed2503de9f40135eb3eadcf5b856487da54696e64758287e40181b5bd9d6c39"
+        },
+        {
+          "File": "System.IO.FileSystem.AccessControl.dll",
+          "PackageMember": "runtimes/win/lib/net461/System.IO.FileSystem.AccessControl.dll",
+          "NonCertificatePE_SHA256": "1ed2503de9f40135eb3eadcf5b856487da54696e64758287e40181b5bd9d6c39"
+        }
+      ],
+      "NoticeMembers": [
+        {
+          "FullName": "LICENSE.TXT",
+          "Length": 1139
+        },
+        {
+          "FullName": "THIRD-PARTY-NOTICES.TXT",
+          "Length": 44279
+        }
+      ]
+    },
+    {
+      "Id": "System.Memory",
+      "Version": "4.5.5",
+      "URL": "https://api.nuget.org/v3-flatcontainer/system.memory/4.5.5/system.memory.4.5.5.nupkg",
+      "SHA256": "10f43da352a29fb2b3188e4edd4dcf5100194c8b526e4f61fe2e2b5623775a22",
+      "Copyright": "© Microsoft Corporation. All rights reserved.",
+      "LicenseType": "",
+      "LicenseDeclaration": "",
+      "LicenseURL": "https://github.com/dotnet/corefx/blob/master/LICENSE.TXT",
+      "RepositoryURL": "",
+      "RepositoryCommit": "",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "System.Memory.dll",
+          "PackageMember": "lib/net461/System.Memory.dll",
+          "NonCertificatePE_SHA256": "a46c07cfa938addd057bae24e4ad789efa0782fbe0b3ead5f5bc8e78ff719b27"
+        }
+      ],
+      "NoticeMembers": [
+        {
+          "FullName": "LICENSE.TXT",
+          "Length": 1139
+        },
+        {
+          "FullName": "THIRD-PARTY-NOTICES.TXT",
+          "Length": 15835
+        }
+      ]
+    },
+    {
+      "Id": "System.Numerics.Vectors",
+      "Version": "4.5.0",
+      "URL": "https://api.nuget.org/v3-flatcontainer/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg",
+      "SHA256": "a9d49320581fda1b4f4be6212c68c01a22cdf228026099c20a8eabefcf90f9cf",
+      "Copyright": "© Microsoft Corporation.  All rights reserved.",
+      "LicenseType": "",
+      "LicenseDeclaration": "",
+      "LicenseURL": "https://github.com/dotnet/corefx/blob/master/LICENSE.TXT",
+      "RepositoryURL": "",
+      "RepositoryCommit": "",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "System.Numerics.Vectors.dll",
+          "PackageMember": "lib/net46/System.Numerics.Vectors.dll",
+          "NonCertificatePE_SHA256": "990e22c8fbbce46263f19941db035070a9f7d6995f439a3b2dd54b9cfc3d7ce6"
+        }
+      ],
+      "NoticeMembers": [
+        {
+          "FullName": "LICENSE.TXT",
+          "Length": 1139
+        },
+        {
+          "FullName": "THIRD-PARTY-NOTICES.TXT",
+          "Length": 15835
+        }
+      ]
+    },
+    {
+      "Id": "System.Runtime.CompilerServices.Unsafe",
+      "Version": "6.0.0",
+      "URL": "https://api.nuget.org/v3-flatcontainer/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg",
+      "SHA256": "6c41b53e70e9eee298cff3a02ce5acdd15b04125589be0273f0566026720a762",
+      "Copyright": "© Microsoft Corporation. All rights reserved.",
+      "LicenseType": "expression",
+      "LicenseDeclaration": "MIT",
+      "LicenseURL": "https://licenses.nuget.org/MIT",
+      "RepositoryURL": "https://github.com/dotnet/runtime",
+      "RepositoryCommit": "4822e3c3aa77eb82b2fb33c9321f923cf11ddde6",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "System.Runtime.CompilerServices.Unsafe.dll",
+          "PackageMember": "lib/net461/System.Runtime.CompilerServices.Unsafe.dll",
+          "NonCertificatePE_SHA256": "a07099f3f5b7effb27e6016f08b53a37530b756714d060c57a94ea2c972288f7"
+        }
+      ],
+      "NoticeMembers": [
+        {
+          "FullName": "LICENSE.TXT",
+          "Length": 1139
+        },
+        {
+          "FullName": "THIRD-PARTY-NOTICES.TXT",
+          "Length": 46990
+        }
+      ]
+    },
+    {
+      "Id": "System.Security.AccessControl",
+      "Version": "5.0.0",
+      "URL": "https://api.nuget.org/v3-flatcontainer/system.security.accesscontrol/5.0.0/system.security.accesscontrol.5.0.0.nupkg",
+      "SHA256": "b9e486f989fcd9ebf1c86067138f4de03fa780e0c35e0a2b9e506d4373a6c39e",
+      "Copyright": "© Microsoft Corporation. All rights reserved.",
+      "LicenseType": "expression",
+      "LicenseDeclaration": "MIT",
+      "LicenseURL": "https://licenses.nuget.org/MIT",
+      "RepositoryURL": "git://github.com/dotnet/runtime",
+      "RepositoryCommit": "cf258a14b70ad9069470a108f13765e0e5988f51",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "System.Security.AccessControl.dll",
+          "PackageMember": "lib/net461/System.Security.AccessControl.dll",
+          "NonCertificatePE_SHA256": "c959919aad1d21b18bd6399e9df8266b7dcad60090a64596751171e26864592f"
+        },
+        {
+          "File": "System.Security.AccessControl.dll",
+          "PackageMember": "runtimes/win/lib/net461/System.Security.AccessControl.dll",
+          "NonCertificatePE_SHA256": "c959919aad1d21b18bd6399e9df8266b7dcad60090a64596751171e26864592f"
+        }
+      ],
+      "NoticeMembers": [
+        {
+          "FullName": "LICENSE.TXT",
+          "Length": 1139
+        },
+        {
+          "FullName": "THIRD-PARTY-NOTICES.TXT",
+          "Length": 44279
+        }
+      ]
+    },
+    {
+      "Id": "System.Security.Cryptography.ProtectedData",
+      "Version": "4.5.0",
+      "URL": "https://api.nuget.org/v3-flatcontainer/system.security.cryptography.protecteddata/4.5.0/system.security.cryptography.protecteddata.4.5.0.nupkg",
+      "SHA256": "67e5f5676944acb2fb627b768c5b3392eebf220ae780edd5d5b49f6530621487",
+      "Copyright": "© Microsoft Corporation.  All rights reserved.",
+      "LicenseType": "",
+      "LicenseDeclaration": "",
+      "LicenseURL": "https://github.com/dotnet/corefx/blob/master/LICENSE.TXT",
+      "RepositoryURL": "",
+      "RepositoryCommit": "",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "System.Security.Cryptography.ProtectedData.dll",
+          "PackageMember": "lib/net461/System.Security.Cryptography.ProtectedData.dll",
+          "NonCertificatePE_SHA256": "fac2b825a831208d68e4d4a0c68a4f2c85813dd00ff96b1feb5c3b0d14cb9759"
+        },
+        {
+          "File": "System.Security.Cryptography.ProtectedData.dll",
+          "PackageMember": "runtimes/win/lib/net461/System.Security.Cryptography.ProtectedData.dll",
+          "NonCertificatePE_SHA256": "fac2b825a831208d68e4d4a0c68a4f2c85813dd00ff96b1feb5c3b0d14cb9759"
+        }
+      ],
+      "NoticeMembers": [
+        {
+          "FullName": "LICENSE.TXT",
+          "Length": 1139
+        },
+        {
+          "FullName": "THIRD-PARTY-NOTICES.TXT",
+          "Length": 15835
+        }
+      ]
+    },
+    {
+      "Id": "System.Security.Principal.Windows",
+      "Version": "5.0.0",
+      "URL": "https://api.nuget.org/v3-flatcontainer/system.security.principal.windows/5.0.0/system.security.principal.windows.5.0.0.nupkg",
+      "SHA256": "081390c25f6f78592b28ada853c24514488a221fe9f9a24efaaf5373643ff3d6",
+      "Copyright": "© Microsoft Corporation. All rights reserved.",
+      "LicenseType": "expression",
+      "LicenseDeclaration": "MIT",
+      "LicenseURL": "https://licenses.nuget.org/MIT",
+      "RepositoryURL": "git://github.com/dotnet/runtime",
+      "RepositoryCommit": "cf258a14b70ad9069470a108f13765e0e5988f51",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "System.Security.Principal.Windows.dll",
+          "PackageMember": "lib/net461/System.Security.Principal.Windows.dll",
+          "NonCertificatePE_SHA256": "151fdeb6f356f180adc0ff4fa85541adfa0751b32c1f9e57301f5dfaaf6c1b68"
+        },
+        {
+          "File": "System.Security.Principal.Windows.dll",
+          "PackageMember": "runtimes/win/lib/net461/System.Security.Principal.Windows.dll",
+          "NonCertificatePE_SHA256": "151fdeb6f356f180adc0ff4fa85541adfa0751b32c1f9e57301f5dfaaf6c1b68"
+        }
+      ],
+      "NoticeMembers": [
+        {
+          "FullName": "LICENSE.TXT",
+          "Length": 1139
+        },
+        {
+          "FullName": "THIRD-PARTY-NOTICES.TXT",
+          "Length": 44279
+        }
+      ]
+    },
+    {
+      "Id": "System.Text.Encodings.Web",
+      "Version": "8.0.0",
+      "URL": "https://api.nuget.org/v3-flatcontainer/system.text.encodings.web/8.0.0/system.text.encodings.web.8.0.0.nupkg",
+      "SHA256": "21442442457da68d4b0b442caab8a5ab03733ef9dcfb8795beafa10afabc7ef1",
+      "Copyright": "© Microsoft Corporation. All rights reserved.",
+      "LicenseType": "expression",
+      "LicenseDeclaration": "MIT",
+      "LicenseURL": "https://licenses.nuget.org/MIT",
+      "RepositoryURL": "https://github.com/dotnet/runtime",
+      "RepositoryCommit": "5535e31a712343a63f5d7d796cd874e563e5ac14",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "System.Text.Encodings.Web.dll",
+          "PackageMember": "lib/net462/System.Text.Encodings.Web.dll",
+          "NonCertificatePE_SHA256": "93c5bf8763206f3fdf148ce61c7782fb5e8538dbda149da9bd23e6f9c1845809"
+        }
+      ],
+      "NoticeMembers": [
+        {
+          "FullName": "LICENSE.TXT",
+          "Length": 1139
+        },
+        {
+          "FullName": "THIRD-PARTY-NOTICES.TXT",
+          "Length": 68911
+        }
+      ]
+    },
+    {
+      "Id": "System.Text.Json",
+      "Version": "8.0.5",
+      "URL": "https://api.nuget.org/v3-flatcontainer/system.text.json/8.0.5/system.text.json.8.0.5.nupkg",
+      "SHA256": "c8ac68e78c39a1d593ea73ebb9456c697e77a0f45efa02b31af2e79f1b703faf",
+      "Copyright": "© Microsoft Corporation. All rights reserved.",
+      "LicenseType": "expression",
+      "LicenseDeclaration": "MIT",
+      "LicenseURL": "https://licenses.nuget.org/MIT",
+      "RepositoryURL": "https://github.com/dotnet/runtime",
+      "RepositoryCommit": "81cabf2857a01351e5ab578947c7403a5b128ad1",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "System.Text.Json.dll",
+          "PackageMember": "lib/net462/System.Text.Json.dll",
+          "NonCertificatePE_SHA256": "148437792de63c26075a7e71441792c86046ab47d540e6fcab99e2c02e9f6c8c"
+        }
+      ],
+      "NoticeMembers": [
+        {
+          "FullName": "LICENSE.TXT",
+          "Length": 1139
+        },
+        {
+          "FullName": "THIRD-PARTY-NOTICES.TXT",
+          "Length": 68910
+        }
+      ]
+    },
+    {
+      "Id": "System.Threading.Tasks.Extensions",
+      "Version": "4.5.4",
+      "URL": "https://api.nuget.org/v3-flatcontainer/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg",
+      "SHA256": "a304a963cc0796c5179f9c6b7d8022bbce3b2fa7c029eb6196f631f7b462d678",
+      "Copyright": "© Microsoft Corporation. All rights reserved.",
+      "LicenseType": "",
+      "LicenseDeclaration": "",
+      "LicenseURL": "https://github.com/dotnet/corefx/blob/master/LICENSE.TXT",
+      "RepositoryURL": "",
+      "RepositoryCommit": "",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "System.Threading.Tasks.Extensions.dll",
+          "PackageMember": "lib/net461/System.Threading.Tasks.Extensions.dll",
+          "NonCertificatePE_SHA256": "dafb8340c8c28ecb07b86af1de5f60bf04023930514de38a90db7a5dd34f71f0"
+        }
+      ],
+      "NoticeMembers": [
+        {
+          "FullName": "LICENSE.TXT",
+          "Length": 1139
+        },
+        {
+          "FullName": "THIRD-PARTY-NOTICES.TXT",
+          "Length": 15835
+        }
+      ]
+    },
+    {
+      "Id": "System.ValueTuple",
+      "Version": "4.5.0",
+      "URL": "https://api.nuget.org/v3-flatcontainer/system.valuetuple/4.5.0/system.valuetuple.4.5.0.nupkg",
+      "SHA256": "9e21fa9767d4e76bc0cee065c1d40cc34384a114bfec4d70e6c981168a926802",
+      "Copyright": "© Microsoft Corporation.  All rights reserved.",
+      "LicenseType": "",
+      "LicenseDeclaration": "",
+      "LicenseURL": "https://github.com/dotnet/corefx/blob/master/LICENSE.TXT",
+      "RepositoryURL": "",
+      "RepositoryCommit": "",
+      "MatchedRuntimeFiles": [
+        {
+          "File": "System.ValueTuple.dll",
+          "PackageMember": "lib/net47/System.ValueTuple.dll",
+          "NonCertificatePE_SHA256": "d4376930cfc4bf1793074e1a10f5a879e88f5f587c25a7a15a9550d724037342"
+        }
+      ],
+      "NoticeMembers": [
+        {
+          "FullName": "LICENSE.TXT",
+          "Length": 1139
+        },
+        {
+          "FullName": "THIRD-PARTY-NOTICES.TXT",
+          "Length": 15835
+        }
+      ]
+    }
+  ]
+}

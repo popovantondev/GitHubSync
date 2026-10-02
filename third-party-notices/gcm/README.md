@@ -1,0 +1,11 @@
+# Git Credential Manager dependency notices
+
+These supplementary notices are for the DLLs supplied in official MinGit 2.53.0.3, not new application dependencies. Do not remove the original runtime's GCM LICENSE/NOTICE or other runtime licenses.
+
+The package directories preserve original NuGet `package.nuspec` metadata, including copyright, package version, license declaration and repository references. Where supplied by a package, LICENSE and THIRD-PARTY-NOTICES resources are extracted verbatim. For packages declaring the MIT expression without a separate license file, [MIT.txt](MIT.txt) accompanies their original copyright statements. No package license is replaced by the GitHubSync MIT license.
+
+The reviewed package versions map to 43 distinct runtime DLLs. Whole-file SHA-256 differs because the distributed DLLs have Authenticode signatures. The comparison covered the complete PE file outside the terminal certificate region, checksum field and certificate-directory entry, not just filenames or version strings. These signing exclusions are documented in [Microsoft's PE specification](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format). This comparison is evidence of non-certificate content correspondence, not an independent signature-verification service or a security guarantee.
+
+Avalonia 11.1.3, MicroCom.Runtime 0.11.0, Microsoft Identity Client 4.65.0, NativeInterop 0.16.2, IdentityModel.Abstractions 6.35.0 and System.CommandLine 2.0.0-beta4.22272.1 declare MIT. ANGLE, SkiaSharp and HarfBuzzSharp package notices are retained in full, including their underlying native component notices. The .NET support package licenses/notices are also retained. System.Text.Json **package 8.0.5** supplies the matching DLL; its DLL product version is 8.0.10, which is not a NuGet package version.
+
+This directory supplies notices, not NuGet binaries or a new dependency installation. The independently archived upstream package-source material is described in [THIRD_PARTY.md](../../THIRD_PARTY.md). Public redistribution still requires review of the complete runtime source package mappings and provision of the required source materials with the binary; this preparation makes no written source offer.

@@ -1,0 +1,21 @@
+name: Offline checks and build
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Pinned runtime, mocked backend checks and publication audit
+        shell: powershell
+        run: ./Run-Checks.ps1 -SkipUi
+      - name: Compile WPF launcher
+        shell: powershell
+        run: ./tools/Build-Launcher.ps1
+# No publishing, real sign-in, repository creation or GitHub uploads in CI.

@@ -1,0 +1,10 @@
+{
+  "gitVersion": "2.53.0.windows.3",
+  "gcmVersion": "2.7.3",
+  "archiveName": "MinGit-2.53.0.3-64-bit.zip",
+  "url": "https://github.com/git-for-windows/git/releases/download/v2.53.0.windows.3/MinGit-2.53.0.3-64-bit.zip",
+  "sha256": "0d7c85a26e45668b35d0d0aeb763289376cfc039e55e0938a617ed0dfa32e433",
+  "release": "https://github.com/git-for-windows/git/releases/tag/v2.53.0.windows.3",
+  "gitSource": "https://github.com/git-for-windows/git/tree/v2.53.0.windows.3",
+  "gcmSource": "https://github.com/git-ecosystem/git-credential-manager/tree/v2.7.3"
+}
