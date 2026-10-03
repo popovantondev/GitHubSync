@@ -22,6 +22,7 @@ Add-Type -AssemblyName System.IO.Compression.FileSystem
 $zip=[IO.Compression.ZipFile]::Open($output,[IO.Compression.ZipArchiveMode]::Create)
 try {
     [IO.Compression.ZipFileExtensions]::CreateEntryFromFile($zip,$catalogPath,'runtime-sources.lock.json',[IO.Compression.CompressionLevel]::NoCompression) | Out-Null
+    [IO.Compression.ZipFileExtensions]::CreateEntryFromFile($zip,(Join-Path $root ("docs\RUNTIME_SOURCE_REVIEW-$version.md")),"RUNTIME_SOURCE_REVIEW-$version.md",[IO.Compression.CompressionLevel]::NoCompression) | Out-Null
     foreach($entry in $catalog.archives){
         [IO.Compression.ZipFileExtensions]::CreateEntryFromFile($zip,(Join-Path $sourceRoot $entry.archive),('upstream/'+$entry.archive),[IO.Compression.CompressionLevel]::NoCompression) | Out-Null
     }
@@ -35,7 +36,7 @@ try {
         $writer.WriteLine('No packaging recipe was executed during collection. Extract only into a separate trusted build environment.')
         $writer.WriteLine('Supplementary GCM dependency notices are collected separately in third-party-notices/gcm and included in the portable package.')
         $writer.WriteLine('Those notices cover the inspected dependency inventory; they do not certify licensing compliance or complete source correspondence.')
-        $writer.WriteLine('Complete runtime source correspondence and public availability remain review gates.')
+        $writer.WriteLine('See the included technical source-input/provenance review for accepted evidence and explicit limits.')
         $writer.WriteLine('If distributing binaries, supply the reviewed required source material alongside them; do not substitute only this application''s source ZIP.')
         $writer.WriteLine('This preparation makes no written source offer on the owner''s behalf.')
     } finally {$writer.Dispose()}

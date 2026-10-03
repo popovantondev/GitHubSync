@@ -2,9 +2,11 @@
 
 Send files to GitHub, download project files or release attachments, resume downloads, and receive update notifications. Transfers always require approval.
 
-Windows 10/11 · x64 · **1.5.3 local release candidate** · Deutsch / Русский / English
+Windows 10/11 · x64 · **1.5.3** · Deutsch / Русский / English
 
-[Deutsch](docs/README.de.md) · [Русский](docs/README.ru.md) · [User guide](docs/Guide-en.html) · [Security](SECURITY.md)
+[Deutsch](docs/README.de.md) · [Русский](docs/README.ru.md) · [User guide](https://popovantondev.github.io/GitHubSync/Guide-en.html) · [Security](SECURITY.md)
+
+[Download portable ZIP](https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip) · [SHA-256](https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip.sha256) · [Release and separate source archives](https://github.com/popovantondev/GitHubSync/releases/tag/v1.5.3)
 
 ## First steps
 
@@ -41,7 +43,7 @@ Code files above 100 MiB are rejected before writing; use Release attachments. G
 
 OneDrive Cloud placeholders are supported; real symlinks/junctions and unknown reparse tags are still blocked. Code uploads use the bundled native Git, one non-force push and the existing cached GitHub sign-in. Git prepares a depth-one branch snapshot in a private temporary bare repository; it never checks out or changes the chosen source folder. Progress shows Git object-pack counters separately from confirmed files. Unknown preparation/confirmation duration is not presented as a percentage. The configured transfer deadline is three hours per command by default; changing it does not guarantee speed or server availability.
 
-This candidate is locally prepared, not a public release. Offline checks use mocks/local repositories and artificial files; separately authorized live acceptance is recorded in the [verification notes](docs/VERIFICATION-1.5.3.md). Other PCs, physical DPI switching and real network-interruption acceptance are unverified. A timeout/unknown write result requires checking GitHub before retrying. A push reply is reconciled by a read, never a blind repeated write.
+Offline checks use mocks/local repositories and artificial files; separately authorized live acceptance is recorded in the [verification notes](docs/VERIFICATION-1.5.3.md). Other PCs, physical DPI switching and real network-interruption acceptance are unverified. A timeout/unknown write result requires checking GitHub before retrying. A push reply is reconciled by a read, never a blind repeated write.
 
 Git LFS objects, submodules and Git history are not downloaded. Unsupported Windows filenames, links/junctions and unsafe paths stop the operation. GitHub blob API downloads have a 100 MiB limit. Uploads cannot byte-resume an unfinished release attachment: already confirmed files are skipped, the unfinished file is sent again.
 
