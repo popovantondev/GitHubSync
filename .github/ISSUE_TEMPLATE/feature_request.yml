@@ -1,0 +1,23 @@
+{
+  "name": "Feature request — English",
+  "description": "Suggest an improvement.",
+  "title": "[Feature] ",
+  "body": [
+    {
+      "type": "markdown",
+      "attributes": {
+        "value": "Do not attach tokens, private files, personal settings or raw logs. Redact screenshots and error messages."
+      }
+    },
+    {
+      "type": "textarea",
+      "id": "proposal",
+      "attributes": {
+        "label": "Problem and proposed improvement"
+      },
+      "validations": {
+        "required": true
+      }
+    }
+  ]
+}

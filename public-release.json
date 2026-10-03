@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "name": "GitHubSync",
+  "repo": "GitHubSync",
+  "version": "1.5.3",
+  "platform": "Windows 10/11 · x64",
+  "status": "source",
+  "tag": "",
+  "source_url": "https://github.com/popovantondev/GitHubSync",
+  "release_url": "",
+  "description": {
+    "ru": "Отправляет файлы в GitHub и скачивает исходники или файлы выпусков после подтверждения пользователя.",
+    "de": "Überträgt Dateien zu GitHub und lädt Projektdateien oder Release-Dateien nach Bestätigung herunter.",
+    "en": "Upload files to GitHub and download project files or release attachments after your confirmation."
+  },
+  "requirements": {
+    "ru": "Windows PowerShell 5.1 и .NET Framework 4.6.2+ с WPF; Git/GCM входят в подготовленный portable-пакет. Публичного выпуска пока нет.",
+    "de": "Windows PowerShell 5.1 und .NET Framework 4.6.2+ mit WPF; Git/GCM sind im vorbereiteten Portable-Paket enthalten. Noch kein öffentlicher Release.",
+    "en": "Windows PowerShell 5.1 and .NET Framework 4.6.2+ with WPF; Git/GCM are included in the prepared portable package. No public release yet."
+  },
+  "start": {
+    "ru": "Для локального кандидата проверьте SHA-256, распакуйте весь portable-пакет и откройте GitHubSync.exe.",
+    "de": "Beim lokalen Kandidaten SHA-256 prüfen, das vollständige Portable-Paket entpacken und GitHubSync.exe öffnen.",
+    "en": "For the local candidate, verify SHA-256, extract the complete portable package and open GitHubSync.exe."
+  },
+  "readmes": {
+    "en": [
+      "README.md"
+    ],
+    "de": [
+      "docs/README.de.md"
+    ],
+    "ru": [
+      "docs/README.ru.md"
+    ]
+  },
+  "guides": {
+    "ru": "Guide-ru.html",
+    "de": "Guide-de.html",
+    "en": "Guide-en.html"
+  },
+  "help_url": "https://popovantondev.github.io/GitHubSync/Guide-{lang}.html",
+  "feedback_url": "https://github.com/popovantondev/GitHubSync/issues/new/choose",
+  "assets": [],
+  "downloads": [],
+  "checksums": [],
+  "version_files": [
+    {
+      "path": "VERSION",
+      "pattern": "^\\s*(\\S+)\\s*$"
+    }
+  ]
+}

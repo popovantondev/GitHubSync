@@ -1,19 +1,19 @@
 {
-  "name": "Bug report — English",
-  "description": "Report unexpected GitHubSync behavior.",
+  "name": "Fehler melden — Deutsch",
+  "description": "Unerwartetes Verhalten von GitHubSync melden.",
   "title": "[Bug] ",
   "body": [
     {
       "type": "markdown",
       "attributes": {
-        "value": "Do not attach tokens, private files, personal settings or raw logs. Redact screenshots and error messages."
+        "value": "Keine Tokens, privaten Dateien, persönlichen Einstellungen oder unbearbeiteten Logs anhängen. Screenshots und Fehlermeldungen anonymisieren."
       }
     },
     {
       "type": "input",
       "id": "version",
       "attributes": {
-        "label": "App and Windows version",
+        "label": "App- und Windows-Version",
         "placeholder": "GitHubSync 1.5.3; Windows 11; x64"
       },
       "validations": {
@@ -24,13 +24,13 @@
       "type": "dropdown",
       "id": "mode",
       "attributes": {
-        "label": "Direction and destination",
+        "label": "Richtung und Ziel",
         "options": [
           "Upload: Code",
-          "Upload: Release attachments",
+          "Upload: Release-Dateien",
           "Download: Code",
-          "Download: Release attachments",
-          "Sign-in or interface"
+          "Download: Release-Dateien",
+          "Anmeldung oder Oberfläche"
         ]
       },
       "validations": {
@@ -41,7 +41,7 @@
       "type": "textarea",
       "id": "steps",
       "attributes": {
-        "label": "Steps to reproduce"
+        "label": "Schritte zur Reproduktion"
       },
       "validations": {
         "required": true
@@ -51,7 +51,7 @@
       "type": "textarea",
       "id": "result",
       "attributes": {
-        "label": "Expected and actual result"
+        "label": "Erwartetes und tatsächliches Ergebnis"
       },
       "validations": {
         "required": true

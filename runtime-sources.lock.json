@@ -736,7 +736,16 @@
       "recipeLicenseDeclarations": [
         "MIT"
       ],
-      "reviewStatus": "upstream-tag-source-collected; MinGit packaging recipe and transitive notices review pending"
+      "reviewStatus": "upstream-tag-source-and-build-files-collected; supplementary dependency notices collected; exact MinGit packaging provenance reviewed separately"
+    },
+    {
+      "archive": "git-for-windows-build-extra-a762e427.tar.gz",
+      "url": "https://codeload.github.com/git-for-windows/build-extra/tar.gz/a762e4274c28611f8692fb01b894627326d04b32",
+      "sha256": "93958563d7780f1fef93a9a2dcf57ae9493eae755ffc4afa76e784368850c063",
+      "bytes": 14891194,
+      "packages": [],
+      "recipeLicenseDeclarations": ["upstream LICENSE.txt retained"],
+      "reviewStatus": "pinned MinGit packaging scripts; versions inventory exactly matches supplied 2.53.0.3 runtime"
     }
   ]
 }

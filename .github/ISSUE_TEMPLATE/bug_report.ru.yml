@@ -1,0 +1,61 @@
+{
+  "name": "Сообщить об ошибке — Русский",
+  "description": "Сообщить о неожиданном поведении GitHubSync.",
+  "title": "[Bug] ",
+  "body": [
+    {
+      "type": "markdown",
+      "attributes": {
+        "value": "Не прикладывайте токены, личные файлы, настройки или необработанные журналы. Обезличьте снимки и сообщения ошибок."
+      }
+    },
+    {
+      "type": "input",
+      "id": "version",
+      "attributes": {
+        "label": "Версия приложения и Windows",
+        "placeholder": "GitHubSync 1.5.3; Windows 11; x64"
+      },
+      "validations": {
+        "required": true
+      }
+    },
+    {
+      "type": "dropdown",
+      "id": "mode",
+      "attributes": {
+        "label": "Направление и назначение",
+        "options": [
+          "Отправка: Code",
+          "Отправка: файлы выпуска",
+          "Скачивание: Code",
+          "Скачивание: файлы выпуска",
+          "Вход или интерфейс"
+        ]
+      },
+      "validations": {
+        "required": true
+      }
+    },
+    {
+      "type": "textarea",
+      "id": "steps",
+      "attributes": {
+        "label": "Шаги воспроизведения"
+      },
+      "validations": {
+        "required": true
+      }
+    },
+    {
+      "type": "textarea",
+      "id": "result",
+      "attributes": {
+        "label": "Ожидаемый и фактический результат"
+      },
+      "validations": {
+        "required": true
+      }
+    }
+  ]
+}

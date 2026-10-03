@@ -1,0 +1,23 @@
+{
+  "name": "Verbesserung — Deutsch",
+  "description": "Eine Verbesserung vorschlagen.",
+  "title": "[Feature] ",
+  "body": [
+    {
+      "type": "markdown",
+      "attributes": {
+        "value": "Keine Tokens, privaten Dateien, persönlichen Einstellungen oder unbearbeiteten Logs anhängen. Screenshots und Fehlermeldungen anonymisieren."
+      }
+    },
+    {
+      "type": "textarea",
+      "id": "proposal",
+      "attributes": {
+        "label": "Problem und Verbesserungsvorschlag"
+      },
+      "validations": {
+        "required": true
+      }
+    }
+  ]
+}

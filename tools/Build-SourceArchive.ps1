@@ -1,4 +1,4 @@
-﻿param([switch]$IncludeUncommitted)
+﻿param([switch]$IncludeUncommitted,[string]$OutputDirectory)
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
 $version = (Get-Content -LiteralPath (Join-Path $root 'VERSION') -Raw).Trim()
@@ -12,7 +12,8 @@ $listing = & git -C $root ls-files -z
 if ($LASTEXITCODE -ne 0) { throw 'Cannot enumerate source index.' }
 $paths = @(($listing -join "`n").Split([char]0) | Where-Object { $_ })
 if ($paths.Count -eq 0) { throw 'Source index is empty.' }
-$output = Join-Path $root 'artifacts'
+$output = if($OutputDirectory){[IO.Path]::GetFullPath($OutputDirectory)}else{Join-Path $root 'artifacts'}
+if(-not(Test-Path -LiteralPath $output)){New-Item -ItemType Directory -Path $output | Out-Null}
 $stage = Join-Path ([IO.Path]::GetTempPath()) ("GitHubSync-$version-Source-" + [guid]::NewGuid().ToString('N'))
 $archive = Join-Path $output "GitHubSync-$version-source.zip"
 if ((Test-Path -LiteralPath $stage) -or (Test-Path -LiteralPath $archive)) { throw 'Source output already exists; never overwrite reviewed artifacts.' }

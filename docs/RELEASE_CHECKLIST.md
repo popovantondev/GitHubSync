@@ -4,12 +4,13 @@ Preparation does not grant permission to publish or change repository visibility
 
 ## Local checks
 
-- [x] Run `Run-Checks.ps1` in Windows PowerShell 5.1. No real network/auth in tests. Latest candidate run: 2026-10-02, exit 0; final committed-source rerun remains required below.
-- [ ] Review `git diff --cached`; run `tools/Test-Publication.ps1` and a redacted secret scan against the publication set.
-- [ ] Check DE/RU/EN screenshots for private paths, names and unintended secrets.
-- [ ] Build one clean portable folder with `tools/Build-Portable.ps1`; audit it separately. Never upload a used installation.
-- [ ] Verify ZIP SHA-256; test extraction/start/help from a path containing spaces.
-- [ ] Make source ZIP with `tools/Build-SourceArchive.ps1`, using only reviewed tracked files. `-IncludeUncommitted` is explicit for an uncommitted local candidate.
+- [x] Run `Run-Checks.ps1` in Windows PowerShell 5.1. Final committed application source `b4f24a7` passed all 16 suites on 2026-10-02. Offline tests use mocks/local repositories, not real network/authentication.
+- [x] Review the source publication set; run `tools/Test-Publication.ps1` and a redacted credential-signature/private-path scan. No findings in the reviewed set; this is not a guarantee of absence of every secret.
+- [x] Review DE/RU/EN demonstration renders with artificial data and neutral paths. Three-language synthetic 100–200% renders passed; these are not physical OS-DPI tests.
+- [x] Build and independently audit a clean portable folder: 505 files, neutral example configuration, required runtime/notices/help included. Never upload a used installation.
+- [x] Verify both release ZIP SHA-256 files; independently extract the portable into a path containing spaces and check packaged native compilation, icon resources and offline help links.
+- [ ] Accept a fresh end-user GUI launch/sign-in/help on another Windows PC. Existing fixture/packaged checks do not prove this scenario.
+- [x] Make the application source ZIP from reviewed tracked source without `.git`, runtime, user settings or generated builds.
 - [ ] Preserve application and upstream licenses/notices. Review GPL/LGPL corresponding-source availability for all bundled runtime components before public binary redistribution.
 
 ## Owner acceptance before a public release
@@ -18,7 +19,9 @@ Preparation does not grant permission to publish or change repository visibility
 - [ ] Confirm the target repository/visibility and add its issue/release links. No target repository is created here.
 - [x] Test real writes only in the approved existing private TEST repository, using artificial files. Earlier release/draft/publication safeguards passed on 2026-10-02. Version 1.5.3 additionally passed a 61 MiB native Code upload, one confirmed commit, preservation of existing paths, no-op and hash-matched download; see [verification](VERIFICATION-1.5.3.md). No real user uploads were used.
 - Excluded by the owner's acceptance scope: a second Windows PC, repeat real browser login/2FA and actual OS DPI changes. These are **unverified**, not passed. Synthetic 100–200% renders do not substitute for these tests.
-- [ ] Re-run checks against the final committed source and final release ZIP, review [verification notes](VERIFICATION-1.5.3.md), then obtain owner approval before uploading the portable ZIP/checksum. Do not commit runtime/builds or publish credentials.
-- [ ] Keep source and binary links distinct; do not advertise unsigned EXEs as signed or claim virus/secret absence guarantees.
+- [x] Re-run checks against committed application source and independently audited release ZIP; review [verification notes](VERIFICATION-1.5.3.md). Evidence and archive hashes are recorded in the private release-ready folder's `ACCEPTANCE-STATUS.txt`.
+- [ ] After any subsequent source/documentation change, review the exact final diff, rebuild affected archives without overwriting the prior candidate, and recheck publication contents/hashes. The earlier ZIPs remain snapshots of `b4f24a7`, not of later checklist edits.
+- [ ] Obtain owner approval before creating a public repository, pushing or uploading release artifacts. Do not commit runtime/builds or publish credentials.
+- [x] Documentation distinguishes application source, runtime source material and portable binary. The EXE is unsigned; no signing, antivirus or absolute secret-absence guarantee is claimed.
 
 CI only checks/builds. It does not publish releases, authenticate a user, deploy a documentation site or create repositories.
