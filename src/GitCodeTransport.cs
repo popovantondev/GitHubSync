@@ -30,6 +30,12 @@ public interface IGitCodeRunner
 }
 public sealed class GitCodeNativeRunner : IGitCodeRunner
 {
+    private static readonly object InputHandleGate=new object();
+    [StructLayout(LayoutKind.Sequential)] private struct SecurityAttributes { public int Length; public IntPtr Descriptor; public int Inherit; }
+    [DllImport("kernel32.dll",SetLastError=true)] private static extern bool CreatePipe(out SafeFileHandle read,out SafeFileHandle write,ref SecurityAttributes attributes,uint size);
+    [DllImport("kernel32.dll",SetLastError=true)] private static extern bool SetHandleInformation(SafeFileHandle handle,uint mask,uint flags);
+    [DllImport("kernel32.dll")] private static extern IntPtr GetStdHandle(int kind);
+    [DllImport("kernel32.dll",SetLastError=true)] private static extern bool SetStdHandle(int kind,IntPtr handle);
     private static void AppendTail(StringBuilder buffer,string line)
     {
         const int maximum=65536;
@@ -63,7 +69,7 @@ public sealed class GitCodeNativeRunner : IGitCodeRunner
     }
     public GitCommandResult Run(string executable, string directory, string[] arguments, Stream input, int seconds, Action<string> progress)
     {
-        var info=new ProcessStartInfo {FileName=executable,WorkingDirectory=directory,Arguments=String.Join(" ",arguments.Select(QuoteArgument)),UseShellExecute=false,CreateNoWindow=true,WindowStyle=ProcessWindowStyle.Hidden,RedirectStandardInput=true,RedirectStandardOutput=true,RedirectStandardError=true,StandardOutputEncoding=Encoding.UTF8,StandardErrorEncoding=Encoding.UTF8};
+        var info=new ProcessStartInfo {FileName=executable,WorkingDirectory=directory,Arguments=String.Join(" ",arguments.Select(QuoteArgument)),UseShellExecute=false,CreateNoWindow=true,WindowStyle=ProcessWindowStyle.Hidden,RedirectStandardInput=false,RedirectStandardOutput=true,RedirectStandardError=true,StandardOutputEncoding=Encoding.UTF8,StandardErrorEncoding=Encoding.UTF8};
         // Inherited Git environment must not redirect objects/indexes or trace credentials.
         foreach(string key in info.EnvironmentVariables.Keys.Cast<string>().ToArray())
             if(key.StartsWith("GIT_",StringComparison.OrdinalIgnoreCase) || key.StartsWith("GCM_",StringComparison.OrdinalIgnoreCase)) info.EnvironmentVariables.Remove(key);
@@ -83,14 +89,28 @@ public sealed class GitCodeNativeRunner : IGitCodeRunner
                     lock(gate){AppendTail(error,e.Data);}
                     if(progress!=null)try{progress(e.Data);}catch{/* Snapshot errors do not repeat a push. */}
                 };
-                if(!process.Start())throw new GitCodeException("process-control");
+                // Supply a raw inherited pipe, not Framework's encoding-dependent
+                // StreamWriter. This works in a winexe with no console as well.
+                var attributes=new SecurityAttributes {Length=Marshal.SizeOf(typeof(SecurityAttributes)),Inherit=1};
+                SafeFileHandle inputRead,inputWrite;
+                if(!CreatePipe(out inputRead,out inputWrite,ref attributes,0))throw new GitCodeException("process-control");
+                using(inputRead) using(inputWrite) {
+                if(!SetHandleInformation(inputWrite,1,0))throw new GitCodeException("process-control");
+                lock(InputHandleGate) {
+                    IntPtr prior=GetStdHandle(-10);
+                    if(!SetStdHandle(-10,inputRead.DangerousGetHandle()))throw new GitCodeException("process-control");
+                    try {if(!process.Start())throw new GitCodeException("process-control");}
+                    finally {SetStdHandle(-10,prior);}
+                }
+                inputRead.Dispose(); // Child owns its duplicate; parent must not keep EOF open.
                 if(!AssignProcessToJobObject(job,process.Handle)){try{process.Kill();}catch{}throw new GitCodeException("process-control");}
                 process.BeginOutputReadLine();process.BeginErrorReadLine();
-                var writer=Task.Run(delegate {try{if(input!=null)input.CopyTo(process.StandardInput.BaseStream,262144);}finally{try{process.StandardInput.Close();}catch{}}});
+                var writer=Task.Run(delegate {using(var pipe=new FileStream(inputWrite,FileAccess.Write,262144,false)){if(input!=null)input.CopyTo(pipe,262144);}});
                 if(!process.WaitForExit(seconds*1000)){job.Dispose();try{process.WaitForExit(5000);}catch{}throw new GitCodeException("timeout");}
                 process.WaitForExit(); // Drain asynchronous output handlers before disposing.
                 try{writer.GetAwaiter().GetResult();}catch{if(process.ExitCode==0)throw new GitCodeException("local-read");}
                 lock(gate)return new GitCommandResult {ExitCode=process.ExitCode,Output=output.ToString(),Error=error.ToString()};
+                }
             }
         }
     }

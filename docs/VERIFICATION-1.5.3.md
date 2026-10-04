@@ -4,6 +4,8 @@ This candidate changes Code upload transport and tray stability, while retaining
 
 ## Offline checks
 
+The pre-release GitHub Actions run exposed an additional UTF-8-console BOM regression in .NET Framework redirected standard input. An initial console-encoding workaround failed independent review of a GUI executable without a console and was rejected before publication. The runner instead supplies a raw inherited Windows pipe, without a text writer or console-encoding change. Fixtures cover a BOM-bearing UTF-8 console and a separate hidden winexe with no attached console; raw Git blob hashes must match the original bytes in both environments.
+
 The native Git fixture sends a real local 61 MiB incompressible binary, nested Unicode/apostrophe paths, CRLF text and an empty file to an isolated bare repository. It checks one direct-parent commit, raw blob hashes, preserved executable mode and unrelated file/symlink entries, no-op without a push, a stale branch, a remote rewind immediately before push, protected/access rejection, a lost push reply, invalid paths and the 100 MiB guard. Hidden subprocess deadline/job termination is tested separately. No network or credentials are used by this suite.
 
 The worker mocks check read-only preview, one native write, commit readback after a lost reply, access/conflict failures and no empty commit. Progress serialization preserves only whitelisted Git fields on failure. WPF checks distinguish Git object counts from confirmed files and stop activity on failure. Tray checks repeatedly apply failed snapshots, run real timers with an isolated open native context menu, and verify stable geometry, selection, item identity, frozen icons and deferred language/action updates.

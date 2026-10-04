@@ -67,8 +67,11 @@ internal static class GitCodeReview
             string caches=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"GitHubSync","code-transfers");
             var priorCaches=new HashSet<string>(System.IO.Directory.Exists(caches) ? System.IO.Directory.GetDirectories(caches) : new string[0],StringComparer.OrdinalIgnoreCase);
             var native=new GitCodeNativeRunner();string server=Path.Combine(directory,"server.git"),progress=Path.Combine(directory,"progress.json");
+            // Reproduce UTF-8 Windows/CI consoles whose encoding has a BOM.
+            Console.InputEncoding=new UTF8Encoding(true);
             NativeCommand(native,git,directory,new[]{"init","--bare","--object-format=sha1",server});
             string keep=Blob(native,git,directory,server,Encoding.UTF8.GetBytes("untouched\n")),old=Blob(native,git,directory,server,Encoding.UTF8.GetBytes("old script\n")),link=Blob(native,git,directory,server,Encoding.UTF8.GetBytes("keep.txt"));
+            Assert(keep==Hash(Encoding.UTF8.GetBytes("untouched\n")),"UTF-8 console cannot inject BOM into raw Git input");
             NativeCommand(native,git,directory,new[]{"--git-dir="+server,"update-index","--add","-z","--index-info"},Encoding.UTF8.GetBytes("100644 "+keep+"\tkeep.txt\0"+"100755 "+old+"\tscript.sh\0"+"120000 "+link+"\tlink\0"));
             string tree=NativeCommand(native,git,directory,new[]{"--git-dir="+server,"write-tree"}),baseCommit=Commit(native,git,directory,server,tree);
             NativeCommand(native,git,directory,new[]{"--git-dir="+server,"update-ref","refs/heads/main",baseCommit});

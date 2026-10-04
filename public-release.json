@@ -1,58 +1,79 @@
 {
-  "schema_version": 1,
-  "name": "GitHubSync",
-  "repo": "GitHubSync",
-  "version": "1.5.3",
-  "platform": "Windows 10/11 · x64",
-  "status": "release",
-  "tag": "v1.5.3",
-  "source_url": "https://github.com/popovantondev/GitHubSync",
-  "release_url": "https://github.com/popovantondev/GitHubSync/releases/tag/v1.5.3",
-  "description": {
-    "ru": "Отправляет файлы в GitHub и скачивает исходники или файлы выпусков после подтверждения пользователя.",
-    "de": "Überträgt Dateien zu GitHub und lädt Projektdateien oder Release-Dateien nach Bestätigung herunter.",
-    "en": "Upload files to GitHub and download project files or release attachments after your confirmation."
-  },
-  "requirements": {
-    "ru": "Windows PowerShell 5.1 и .NET Framework 4.6.2+ с WPF; Git/GCM входят в portable. EXE без цифровой подписи. Для отправки нужны интернет и права записи в проект.",
-    "de": "Windows PowerShell 5.1 und .NET Framework 4.6.2+ mit WPF; Git/GCM sind enthalten. EXE ohne digitale Signatur. Uploads benötigen Internet und Schreibzugriff.",
-    "en": "Windows PowerShell 5.1 and .NET Framework 4.6.2+ with WPF; Git/GCM are bundled. EXE is unsigned. Uploads require internet and repository write access."
-  },
-  "start": {
-    "ru": "Проверьте SHA-256, распакуйте весь portable-пакет и откройте GitHubSync.exe. Выберите отправку или скачивание, проект, назначение и файлы; подтвердите действие.",
-    "de": "SHA-256 prüfen, das vollständige Portable-Paket entpacken und GitHubSync.exe öffnen. Senden/Herunterladen, Projekt, Ziel und Dateien wählen; bestätigen.",
-    "en": "Verify SHA-256, extract the complete portable package and open GitHubSync.exe. Choose Send/Download, repository, destination and files, then confirm."
-  },
-  "readmes": {
-    "en": [
-      "README.md"
-    ],
-    "de": [
-      "docs/README.de.md"
-    ],
-    "ru": [
-      "docs/README.ru.md"
-    ]
-  },
-  "guides": {
-    "ru": "Guide-ru.html",
-    "de": "Guide-de.html",
-    "en": "Guide-en.html"
-  },
-  "help_url": "https://popovantondev.github.io/GitHubSync/Guide-{lang}.html",
-  "feedback_url": "https://github.com/popovantondev/GitHubSync/issues/new/choose",
-  "assets": [
-    {"name":"GitHubSync-1.5.3-win-x64.zip","size":44889249,"url":"https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip"},
-    {"name":"GitHubSync-1.5.3-win-x64.zip.sha256","size":96,"url":"https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip.sha256"},
-    {"name":"GitHubSync-1.5.3-runtime-sources.zip","size":708179939,"url":"https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-runtime-sources.zip"},
-    {"name":"GitHubSync-1.5.3-runtime-sources.zip.sha256","size":104,"url":"https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-runtime-sources.zip.sha256"}
-  ],
-  "downloads": ["GitHubSync-1.5.3-win-x64.zip"],
-  "checksums": ["GitHubSync-1.5.3-win-x64.zip.sha256","GitHubSync-1.5.3-runtime-sources.zip.sha256"],
-  "version_files": [
-    {
-      "path": "VERSION",
-      "pattern": "^\\s*(\\S+)\\s*$"
-    }
-  ]
+    "schema_version":  1,
+    "name":  "GitHubSync",
+    "repo":  "GitHubSync",
+    "version":  "1.5.3",
+    "platform":  "Windows 10/11 · x64",
+    "status":  "release",
+    "tag":  "v1.5.3",
+    "source_url":  "https://github.com/popovantondev/GitHubSync",
+    "release_url":  "https://github.com/popovantondev/GitHubSync/releases/tag/v1.5.3",
+    "description":  {
+                        "ru":  "Отправляет файлы в GitHub и скачивает исходники или файлы выпусков после подтверждения пользователя.",
+                        "de":  "Überträgt Dateien zu GitHub und lädt Projektdateien oder Release-Dateien nach Bestätigung herunter.",
+                        "en":  "Upload files to GitHub and download project files or release attachments after your confirmation."
+                    },
+    "requirements":  {
+                         "ru":  "Windows PowerShell 5.1 и .NET Framework 4.6.2+ с WPF; Git/GCM входят в portable. EXE без цифровой подписи. Для отправки нужны интернет и права записи в проект.",
+                         "de":  "Windows PowerShell 5.1 und .NET Framework 4.6.2+ mit WPF; Git/GCM sind enthalten. EXE ohne digitale Signatur. Uploads benötigen Internet und Schreibzugriff.",
+                         "en":  "Windows PowerShell 5.1 and .NET Framework 4.6.2+ with WPF; Git/GCM are bundled. EXE is unsigned. Uploads require internet and repository write access."
+                     },
+    "start":  {
+                  "ru":  "Проверьте SHA-256, распакуйте весь portable-пакет и откройте GitHubSync.exe. Выберите отправку или скачивание, проект, назначение и файлы; подтвердите действие.",
+                  "de":  "SHA-256 prüfen, das vollständige Portable-Paket entpacken und GitHubSync.exe öffnen. Senden/Herunterladen, Projekt, Ziel und Dateien wählen; bestätigen.",
+                  "en":  "Verify SHA-256, extract the complete portable package and open GitHubSync.exe. Choose Send/Download, repository, destination and files, then confirm."
+              },
+    "readmes":  {
+                    "en":  [
+                               "README.md"
+                           ],
+                    "de":  [
+                               "docs/README.de.md"
+                           ],
+                    "ru":  [
+                               "docs/README.ru.md"
+                           ]
+                },
+    "guides":  {
+                   "ru":  "Guide-ru.html",
+                   "de":  "Guide-de.html",
+                   "en":  "Guide-en.html"
+               },
+    "help_url":  "https://popovantondev.github.io/GitHubSync/Guide-{lang}.html",
+    "feedback_url":  "https://github.com/popovantondev/GitHubSync/issues/new/choose",
+    "assets":  [
+                   {
+                       "name":  "GitHubSync-1.5.3-win-x64.zip",
+                       "size":  44889968,
+                       "url":  "https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip"
+                   },
+                   {
+                       "name":  "GitHubSync-1.5.3-win-x64.zip.sha256",
+                       "size":  96,
+                       "url":  "https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip.sha256"
+                   },
+                   {
+                       "name":  "GitHubSync-1.5.3-runtime-sources.zip",
+                       "size":  708179939,
+                       "url":  "https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-runtime-sources.zip"
+                   },
+                   {
+                       "name":  "GitHubSync-1.5.3-runtime-sources.zip.sha256",
+                       "size":  104,
+                       "url":  "https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-runtime-sources.zip.sha256"
+                   }
+               ],
+    "downloads":  [
+                      "GitHubSync-1.5.3-win-x64.zip"
+                  ],
+    "checksums":  [
+                      "GitHubSync-1.5.3-win-x64.zip.sha256",
+                      "GitHubSync-1.5.3-runtime-sources.zip.sha256"
+                  ],
+    "version_files":  [
+                          {
+                              "path":  "VERSION",
+                              "pattern":  "^\\s*(\\S+)\\s*$"
+                          }
+                      ]
 }

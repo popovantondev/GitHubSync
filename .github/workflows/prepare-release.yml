@@ -1,0 +1,31 @@
+name: Prepare owner-approved full release draft
+on:
+  push:
+    branches: [release-preparation]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: githubsync-release-draft-1.5.3
+  cancel-in-progress: false
+jobs:
+  prepare:
+    permissions:
+      contents: write
+    if: github.repository == 'popovantondev/GitHubSync'
+    runs-on: windows-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify pinned runtime and all non-UI regression suites
+        shell: powershell
+        run: ./Run-Checks.ps1 -SkipUi
+      - name: Build clean full draft and verify every attachment digest
+        shell: powershell
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: ./tools/Prepare-CloudRelease.ps1
+# No public exposure, release publication, user sign-in, or production transfers.
