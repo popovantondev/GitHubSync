@@ -17,7 +17,10 @@ function GhJson([string[]]$Arguments){
     if([string]::IsNullOrWhiteSpace($text)){return $null}
     return ($text | ConvertFrom-Json)
 }
-function ReadApi([string]$Path){GhJson -Arguments @('api',"repos/$repository/$Path")}
+function ReadApi([string]$Path){
+    Write-Host ('Reading GitHub release gate: '+$Path)
+    GhJson -Arguments @('api',"repos/$repository/$Path")
+}
 function PatchApi([string]$Path,$Payload){
     $request=Join-Path $output ('body-'+[guid]::NewGuid().ToString('N')+'.json')
     $requestJson=$Payload | ConvertTo-Json -Depth 8
