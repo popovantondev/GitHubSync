@@ -1,0 +1,27 @@
+name: Finalize independently reviewed GitHubSync 1.5.3
+on:
+  push:
+    branches: [release-finalization]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: githubsync-finalize-1.5.3
+  cancel-in-progress: false
+jobs:
+  publish-private:
+    if: github.repository == 'popovantondev/GitHubSync'
+    runs-on: windows-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Verify six immutable assets and publish reviewed private release
+        shell: powershell
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: ./tools/Finalize-CloudRelease.ps1 -Publish -ReleaseNotesPath ./docs/RELEASE-1.5.3.md
+# No repository visibility change or deletion is authorized by this workflow.
