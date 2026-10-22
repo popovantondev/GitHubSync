@@ -1,0 +1,32 @@
+{
+  "folder": "docs",
+  "shots": {
+    "ru": "Ui-ru-code.png",
+    "de": "Ui-de-code.png",
+    "en": "Ui-en-code.png"
+  },
+  "icon": "presentation-icon.png",
+  "palette": {
+    "accent": "#345f9a",
+    "tint": "#e9eff9",
+    "hero": "#14233a",
+    "hero-end": "#34557f"
+  },
+  "flow": {
+    "ru": [
+      "Выбрать репозиторий",
+      "Проверить файлы",
+      "Загрузить в Code или Releases"
+    ],
+    "de": [
+      "Repository wählen",
+      "Dateien prüfen",
+      "In Code oder Releases hochladen"
+    ],
+    "en": [
+      "Select a repository",
+      "Review files",
+      "Upload to Code or Releases"
+    ]
+  }
+}
