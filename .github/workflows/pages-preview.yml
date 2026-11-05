@@ -13,4 +13,4 @@ jobs:
       - name: Prepare local site only
         shell: powershell
         run: ./tools/Build-DocumentationSite.ps1
-# Preparation only. No Pages deployment or upload permission is enabled.
+# Builds the documentation site locally only; nothing is deployed or uploaded.

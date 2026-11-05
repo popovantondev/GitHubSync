@@ -1,6 +1,6 @@
 # Verification of GitHubSync 1.5.3
 
-This candidate changes Code upload transport and tray stability, while retaining WPF, the bundled runtime, three languages and existing release/download behavior. Live acceptance is restricted to artificial files in the owner's existing private TEST repository; no real Downloads files or production repository writes are permitted.
+This version changes Code upload transport and tray stability, while retaining WPF, the bundled runtime, three languages and existing release/download behavior. Live acceptance is restricted to artificial files in the existing private TEST repository; no real Downloads files or production repository writes are permitted.
 
 ## Offline checks
 
@@ -14,7 +14,7 @@ Windows PowerShell 5.1 completed all 16 suites (15 non-UI plus WPF), including 3
 
 Physical Windows DPI switching, a second computer and a new real browser login/2FA are not claimed. Synthetic 100–200% WPF renders do not replace those checks. The native large-file fixture now lives in local Temp rather than the OneDrive source tree; the dedicated Cloud suite still checks three actual OneDrive ancestors and rejects a real junction escape.
 
-## Approved live acceptance
+## Live acceptance
 
 On 2026-10-02 the production native Git transport/worker functions uploaded a 61 MiB incompressible synthetic binary, TXT and nested Unicode TXT into a unique owned folder in the approved private TEST repository. The selected branch confirmed one direct-parent commit, `c6227607829687bb68137338c5cbab9b46db8522`, based on `ca9d068486684fafa32b2db91dc419b43d29b120`. All three Git blob hashes matched. All four pre-existing file entries kept their SHA/mode. A second unchanged request created no commit or push. Code download then reproduced all source SHA-256 hashes, including the large binary: `464a8966fdb29a3246d10a3ceac12520031346d175be514d7e3a0b57e3871155`.
 

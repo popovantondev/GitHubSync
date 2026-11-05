@@ -1,32 +1,44 @@
 {
   "folder": "docs",
-  "shots": {
-    "ru": "Ui-ru-code.png",
-    "de": "Ui-de-code.png",
-    "en": "Ui-en-code.png"
-  },
+  "shots": {"ru": "Ui-ru-code.png", "de": "Ui-de-code.png", "en": "Ui-en-code.png"},
   "icon": "presentation-icon.png",
+  "stack": "C# · WPF",
   "palette": {
-    "accent": "#345f9a",
-    "tint": "#e9eff9",
-    "hero": "#14233a",
-    "hero-end": "#34557f"
+    "light": {"accent": "#345f9a", "tint": "#e9eff9", "hero": "#14233a", "hero-end": "#34557f"},
+    "dark": {"accent": "#86b4f0", "tint": "#16294a", "hero": "#0e1b30", "hero-end": "#28487a"}
   },
-  "flow": {
-    "ru": [
-      "Выбрать репозиторий",
-      "Проверить файлы",
-      "Загрузить в Code или Releases"
+  "flow": {"ru":["Выбрать репозиторий","Проверить файлы","Загрузить в Code или Releases"],"de":["Repository wählen","Dateien prüfen","In Code oder Releases hochladen"],"en":["Select a repository","Review files","Upload to Code or Releases"]},
+  "bento": {
+    "terminal": [
+      ["ps", "PS> Get-FileHash .\\{zip} -Algorithm SHA256"],
+      ["ps", "PS> Get-Content .\\{sha}"],
+      ["dim", {"de": "Beide Werte müssen übereinstimmen.", "en": "Both values must match.", "ru": "Оба значения должны совпадать."}],
+      ["ps", "PS> Expand-Archive .\\{zip} -DestinationPath .\\GitHubSync"],
+      ["ps", "PS> .\\GitHubSync\\GitHubSync-{version}-Portable\\GitHubSync.exe"]
     ],
-    "de": [
-      "Repository wählen",
-      "Dateien prüfen",
-      "In Code oder Releases hochladen"
-    ],
-    "en": [
-      "Select a repository",
-      "Review files",
-      "Upload to Code or Releases"
-    ]
+    "features": {
+      "de": ["Senden zu GitHub", "Herunterladen", "Release-Anhänge", "Download pausieren und fortsetzen", "Infobereich (Tray)", "Update-Hinweise alle 15 Minuten", "OneDrive-Platzhalter", "Projekt erstellen", "DE · EN · RU"],
+      "en": ["Send to GitHub", "Download", "Release attachments", "Pause and resume downloads", "System tray", "Update notices every 15 minutes", "OneDrive placeholders", "Create a project", "DE · EN · RU"],
+      "ru": ["Отправка в GitHub", "Скачивание", "Файлы выпусков", "Пауза и продолжение загрузки", "Значок в трее", "Уведомления об обновлениях каждые 15 минут", "Заглушки OneDrive", "Создание проекта", "RU · DE · EN"]
+    },
+    "third": {
+      "live": false,
+      "title": {"de": "Verbindung", "en": "Connection", "ru": "Подключение"},
+      "text": {
+        "de": "Spricht nur mit GitHub (API und Dateidownloads über HTTPS). Die Anmeldung läuft im Browser; die App speichert keine Passwörter oder Tokens und fügt keine Telemetrie hinzu.",
+        "en": "Talks only to GitHub (API and file downloads over HTTPS). Sign-in happens in the browser; the app stores no passwords or tokens and adds no telemetry.",
+        "ru": "Работает только с GitHub (API и загрузка файлов по HTTPS). Вход выполняется в браузере; приложение не хранит пароли и токены и не добавляет телеметрию."
+      },
+      "label": {
+        "de": ["GitHub API", "HTTPS", "Anmeldung im Browser"],
+        "en": ["GitHub API", "HTTPS", "Browser sign-in"],
+        "ru": ["GitHub API", "HTTPS", "Вход в браузере"]
+      }
+    },
+    "checks": {
+      "de": ["Testskripte auf Windows per GitHub Actions (mit simuliertem GitHub, ohne echtes Konto)", "Build des Launchers im CI", "Prüfung der Veröffentlichungsdateien", "SHA-256-Prüfsumme für das Portable-ZIP", "MIT-Lizenz mit Hinweisen zu Drittanbietern", "Oberfläche und Anleitung in Deutsch, Russisch und Englisch"],
+      "en": ["Test scripts on Windows with GitHub Actions (simulated GitHub, no real account)", "Launcher build in CI", "Publication file audit", "SHA-256 checksum for the portable ZIP", "MIT license with third-party notices", "Interface and guide in German, Russian and English"],
+      "ru": ["Тестовые сценарии на Windows через GitHub Actions (имитация GitHub, без настоящего аккаунта)", "Сборка лаунчера в CI", "Проверка публикуемых файлов", "Контрольная сумма SHA-256 для переносного ZIP", "Лицензия MIT и сведения о сторонних компонентах", "Интерфейс и руководство на немецком, русском и английском"]
+    }
   }
 }

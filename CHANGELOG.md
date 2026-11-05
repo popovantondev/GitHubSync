@@ -32,7 +32,7 @@
 - Lazy row visuals keep mode switching responsive after a 6000-file list; deterministic software WPF rendering avoids GPU-driver failures in the simple interface.
 - Backward-compatible settings, offline three-language tutorials and clean portable/source build.
 
-## 1.4.1 — local release candidate
+## 1.4.1
 
 - Mode switching no longer recursively scans and creates the complete file list in the UI thread.
 - Background scan, cancellation on mode/folder changes, bounded row-building batches and virtualized row containers.
@@ -48,4 +48,4 @@
 - Release uploads with optional confirmed publication, later publication and page/asset links.
 - Legacy settings retain draft-only behavior; separate Code/release selections.
 
-Earlier development builds are not included in the public source or current portable package. Version-specific verification notes distinguish offline checks from owner-approved real-account acceptance.
+Earlier development builds are not included in the public source or current portable package. Version-specific verification notes distinguish offline checks from real-account acceptance.

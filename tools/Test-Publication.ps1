@@ -48,7 +48,7 @@ foreach ($relative in @($paths | Where-Object { $_ -notmatch '^runtime/' -and $_
     $content = [IO.File]::ReadAllText($document)
     $pattern = if ($relative.EndsWith('.html')) { '(?:href|src)="([^"]+)"' } else { '\]\(([^)\s]+)\)' }
     foreach ($match in [regex]::Matches($content,$pattern)) {
-        $link = [Uri]::UnescapeDataString($match.Groups[1].Value.Split('#')[0])
+        $link = [Uri]::UnescapeDataString($match.Groups[1].Value.Split('#')[0].Split('?')[0])
         if ($link -and $link -notmatch '^[A-Za-z][A-Za-z0-9+.-]*:' -and -not (Test-Path -LiteralPath (Join-Path (Split-Path $document) $link))) { $findings.Add("Broken local documentation link: $relative -> $link") }
     }
 }

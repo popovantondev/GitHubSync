@@ -240,7 +240,7 @@ public static class SyncTransfer
         bool anonymous=false;
         for (int redirect = 0; redirect < 7; redirect++) {
             using (var request = new HttpRequestMessage(HttpMethod.Get, uri)) {
-                request.Headers.UserAgent.ParseAdd("GitHubSync/1.5.1"); request.Headers.Accept.ParseAdd(entry.accept);
+                request.Headers.UserAgent.ParseAdd("GitHubSync/1.5.3"); request.Headers.Accept.ParseAdd(entry.accept);
                 request.Headers.AcceptEncoding.ParseAdd("identity");
                 if (uri.Host == "api.github.com") {
                     request.Headers.Add("X-GitHub-Api-Version", "2022-11-28");

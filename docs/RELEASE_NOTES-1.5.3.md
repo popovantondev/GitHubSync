@@ -8,7 +8,7 @@ Progress distinguishes actual Git object-pack counters from confirmed files. Pre
 
 The tray menu no longer recreates its items every second. Icon animation pauses while the popup is open, preserving position and the selected item. The larger transparent icons and scrollbar gutters from 1.5.2 remain.
 
-Owner-approved private TEST acceptance passed a 61 MiB artificial binary plus text/Unicode files: one confirmed commit, existing content preserved, no-op without a new commit, and download SHA-256 equality. The upload took about 36 minutes on the test connection; this fix does not promise faster internet or eliminate all possible GitHub/network errors.
+Private TEST acceptance passed a 61 MiB artificial binary plus text/Unicode files: one confirmed commit, existing content preserved, no-op without a new commit, and download SHA-256 equality. The upload took about 36 minutes on the test connection; this fix does not promise faster internet or eliminate all possible GitHub/network errors.
 
 Extract the entire new portable folder, including its Git/GCM runtime. Existing settings can be copied after closing the older app; never publish a used installation. Public release/push is not performed by preparing this local candidate.
 

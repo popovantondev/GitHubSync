@@ -8,4 +8,4 @@ Visible vertical scrollbars have a shared 12px content gutter; hidden bars reser
 
 Offline guides use the same approved icon and orange/graphite palette. Public images are real WPF demonstration renders with artificial files, fictional account/project and neutral `C:\Projects\Demo` paths; no real credentials or upload content. Density renders at 100/125/150/200% are not physical Windows-DPI acceptance.
 
-Documentation layout follows the owner's public HotspotControl/Kaktus pattern: clear purpose, platform/status, language links, first steps, synthetic screenshots, requirements/limitations, checksums, privacy/build/rights. No external app assets/code were copied, and this preparation does not publish a GitHub Pages site.
+Documentation layout follows the same pattern as HotspotControl and Kaktus Backup & Sync: clear purpose, platform/status, language links, first steps, synthetic screenshots, requirements/limitations, checksums, privacy/build/rights. No external app assets/code were copied.

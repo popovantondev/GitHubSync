@@ -32,3 +32,11 @@ id_rsa*
 id_ed25519*
 **/.githubsync/
 pending-download.json
+
+# Working files of the build tools never belong to the public source.
+.autopilot/
+AGENTS.md
+CLAUDE.md
+CONTEXT.md
+docs/adr/
+docs/architecture.md

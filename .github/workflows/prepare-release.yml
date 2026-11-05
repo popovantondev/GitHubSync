@@ -1,4 +1,4 @@
-name: Prepare owner-approved full release draft
+name: Prepare full release draft
 on:
   push:
     branches: [release-preparation]

@@ -2,9 +2,9 @@
 $ErrorActionPreference='Stop'
 $ProgressPreference='SilentlyContinue'
 $root=Split-Path -Parent $PSScriptRoot
-if($env:GITHUB_ACTIONS -ne 'true' -or $env:GITHUB_REPOSITORY -ne $Repository){throw 'Only the owner-approved GitHub Actions repository may run this release helper'}
+if($env:GITHUB_ACTIONS -ne 'true' -or $env:GITHUB_REPOSITORY -ne $Repository){throw 'Only the project GitHub Actions repository may run this release helper'}
 $version=(Get-Content (Join-Path $root 'VERSION') -Raw).Trim()
-if($version -ne '1.5.3'){throw 'This release preparation is approved for 1.5.3 only'}
+if($version -ne '1.5.3'){throw 'This release helper supports version 1.5.3 only'}
 $output=Join-Path $root 'artifacts/cloud-release'
 $cache=Join-Path $root 'artifacts/runtime-source-cache'
 if(& git -C $root status --porcelain){throw 'Release checkout must be clean'}

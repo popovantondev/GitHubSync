@@ -117,7 +117,7 @@ public static class GitHubWrite
         using (var handler = transport ?? new HttpClientHandler { AllowAutoRedirect = false })
         using (var client = new HttpClient(handler) { Timeout = TimeSpan.FromSeconds(timeoutSeconds), MaxResponseContentBufferSize = 1024 * 1024 })
         using (var request = new HttpRequestMessage(new HttpMethod(method), uri)) {
-            request.Headers.UserAgent.ParseAdd("GitHubSync/1.5.1"); request.Headers.Accept.ParseAdd("application/vnd.github+json");
+            request.Headers.UserAgent.ParseAdd("GitHubSync/1.5.3"); request.Headers.Accept.ParseAdd("application/vnd.github+json");
             request.Headers.Add("X-GitHub-Api-Version", "2022-11-28");
             if (!String.IsNullOrEmpty(token)) request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             request.Content = base64 != null ? (HttpContent)new BlobContent(base64, Progress(progressPath)) : new StringContent(json, Encoding.UTF8, "application/json");

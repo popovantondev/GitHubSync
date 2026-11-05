@@ -1,6 +1,6 @@
 # Verification of GitHubSync 1.5.1
 
-This is a local release candidate, not a publicly distributed release. Earlier sections record offline preparation; the live acceptance section below records the subsequent owner-approved tests.
+This document records the verification of version 1.5.1. Earlier sections record offline preparation; the live acceptance section below records the subsequent tests.
 
 The regression suite `tests/Test-TransferFixes.ps1` verifies all sixteen Windows Cloud tag variants, native metadata from the actual source ancestry under OneDrive, ordinary/Cloud Code source validation, and an actual NTFS junction escape rejected by both upload and download. It re-runs the download transport fixtures under OneDrive with artificial data, covering Code and release downloads, Unicode, binary bytes, replacements/backups, partial resume, checksum errors, long paths and credential-free metadata.
 
@@ -34,9 +34,9 @@ A clean isolated build copied the current bytes of all 172 indexed source paths,
 
 All 63 binary package mappings to the 54 package-source archives match exact `.SRCINFO` version, release and epoch (including grep's epoch). The remaining GCM entry is pinned separately to its official 2.7.3 commit. The Git-object source packages were extracted only into isolated inspection directories and checked offline, with lazy fetching disabled and no recipes executed: MSYS2/Cygwin commit `c6680700f8d37effd928698fa818ffc4a927df42` (6846 source-tree paths), winpthreads `3fedac28018c447ccdd9519c9d556340dfa1c87e` (6877 paths), and rebase `4b9c18ba098855504dac71cdfcf24e892750e89d` (47 paths). Pinned commits/trees and object connectivity passed. Dependency compilation was not independently reproduced. The distributor must supply the reviewed required source materials with any public binary; collecting them locally does not constitute public availability or a written offer.
 
-## Owner-approved live acceptance, 2026-10-02
+## Live acceptance, 2026-10-02
 
-The owner selected the existing private `popovantondev/TEST`, not a new repository, and accepted GitHub noreply for the initial local source commit. Cached authentication was checked without another interactive login; the account and repository write permission matched the approved target. Test data was generated in an ignored fixture under the actual OneDrive source ancestry. No existing user upload or repository file was used as test data.
+The existing private `popovantondev/TEST` was used, not a new repository, and GitHub noreply was accepted for the initial local source commit. Cached authentication was checked without another interactive login; the account and repository write permission matched the approved target. Test data was generated in an ignored fixture under the actual OneDrive source ancestry. No existing user upload or repository file was used as test data.
 
 All four transfer scenarios passed using the production worker functions/transport and, for release uploads, an isolated copy of the actual worker entrypoint: Code upload and download, release upload and download. Code included a 64 KiB artificial binary, Unicode nested filename and TXT. Git blob hashes and downloaded SHA-256 hashes matched. Every pre-existing repository file retained its hash/mode. An unchanged upload created no commit. A subsequent replacement was confirmed; submitting the stale preview was rejected without another branch update. Test commits: `c1a2eb846272da3cd3097262b880f43f12f2ff2d` and `ca9d068486684fafa32b2db91dc419b43d29b120`, under the unique prefix `githubsync-acceptance-20261002-094558-6aec29`.
 
@@ -44,4 +44,4 @@ Release `401624543` retained its draft state after upload, was then separately p
 
 A preliminary 61 MiB live blob transfer was intentionally stopped because the connection was slow. A subsequent read confirmed its unique destination was absent from the branch: no test commit had been written. This large live transfer is **not passed**; large streaming remains covered by the 61 MiB offline transport fixture. Live transfers above 64 KiB, actual server-side branch protection/access rejection and real interrupted-download byte resume remain unverified; rejection/resume are covered by offline fixtures. These tests did not exercise interactive GUI clicks or another browser login.
 
-The production publication repository/visibility is still unspecified. Preparing the local source commit and archives does not authorize a public push/release. Other-PC/repeated-login/physical-OS-DPI checks remain excluded by the owner and unverified.
+The production publication repository/visibility is still unspecified. Preparing the local source commit and archives does not authorize a public push/release. Other-PC/repeated-login/physical-OS-DPI checks remain excluded and unverified.

@@ -32,4 +32,4 @@ The worker PS1 files and `src/SyncTransfer.cs` remain beside the packaged EXE fo
 
 ## Before publication
 
-Run `tools/Test-Publication.ps1`, inspect `git diff --cached`, and scan the index with Gitleaks or another secret scanner. `.gitignore` alone is not a security guarantee. Review screenshots, vendor licenses and source availability. A locally built ZIP is not a published GitHub release. Publishing/changing repository visibility requires a separate explicit owner action. Do not add a workflow that uploads releases automatically.
+Run `tools/Test-Publication.ps1`, inspect `git diff --cached`, and scan the index with Gitleaks or another secret scanner. `.gitignore` alone is not a security guarantee. Review screenshots, vendor licenses and source availability. A locally built ZIP is not a published GitHub release. Publishing/changing repository visibility requires a separate explicit decision by the maintainer. Do not add a workflow that uploads releases automatically.

@@ -1,51 +1,269 @@
-"""Build localized product introductions from reviewed release metadata."""
+"""Build the localized product introductions (landing pages) on the shared kit.
+
+Inputs: public-release.json (release metadata) and tools/presentation.json
+(page data: screenshots, palette, stack, installation steps, features, checks).
+Outputs: index.html (German), index-en.html, index-ru.html, the redirect
+index-de.html and presentation.css. Guide pages are refreshed by polish_guides.py.
+"""
 from pathlib import Path
+import hashlib
 import json
+import re
 from html import escape as e
 
-ROOT=Path(__file__).resolve().parents[1]
-LANGS=('ru','de','en')
-TEXT={
-'ru':dict(all='Все программы',guide='Руководство',download='Скачать для',source='Исходный код',requirements='Перед запуском',start='Первые шаги',shot='Демонстрационный интерфейс с искусственными данными. Открыть изображение целиком.',illustration='Демонстрационная иллюстрация, не снимок работающей программы. Открыть целиком.',study='Демонстрация рабочего пространства на русском; локализованные снимки пока не опубликованы.',support='Сообщить о проблеме',release='Выпуск',preview='Предварительная версия',only='Только исходники',flow='Как это работает',rights='Условия использования',source_note='Готового установочного пакета нет. Инструкции описывают настройку из исходников.'),
-'de':dict(all='Alle Programme',guide='Anleitung',download='Herunterladen für',source='Quellcode',requirements='Vor dem Start',start='Erste Schritte',shot='Demo-Oberfläche mit künstlichen Daten. Vollständiges Bild öffnen.',illustration='Demo-Illustration, kein Screenshot der laufenden Anwendung. Vollständig öffnen.',study='Demo-Arbeitsbereich auf Russisch; lokalisierte Ansichten sind noch nicht veröffentlicht.',support='Problem melden',release='Release',preview='Vorabversion',only='Nur Quellcode',flow='So funktioniert es',rights='Nutzungsbedingungen',source_note='Kein fertiges Installationspaket. Die Anleitung beschreibt die Einrichtung aus dem Quellcode.'),
-'en':dict(all='All applications',guide='User guide',download='Download for',source='Source code',requirements='Before you start',start='First steps',shot='Demonstration interface with artificial data. Open the full image.',illustration='Demonstration illustration, not a screenshot of the running application. Open in full.',study='Demonstration workspace in Russian; localized screenshots have not been published yet.',support='Report a problem',release='Release',preview='Preview',only='Source only',flow='How it works',rights='Terms of use',source_note='No ready-to-install package. The guide explains how to set up the source version.')}
-CSS='''
-:root{color-scheme:light;--bg:#f3f6fb;--panel:#fff;--ink:#172a42;--muted:#52647b;--line:#d9e3ee;--accent:#225fba;--tint:#eaf2ff;--hero:#112d50;--hero-end:#23578d}
-*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:radial-gradient(ellipse at 80% 0,var(--tint),transparent 55%),var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:var(--accent);text-underline-offset:4px}a:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:4px}img{max-width:100%;height:auto}h1,h2,p{overflow-wrap:anywhere}h1{font-size:clamp(32px,4.5vw,56px);line-height:1.1;letter-spacing:-.035em;margin:12px 0 22px}h2{font-size:24px;line-height:1.3;margin:0 0 14px}p{margin:0 0 16px}.shell{max-width:1200px;margin:auto;padding:0 28px}.top{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding:22px 0}.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);font-weight:750}.brand img{width:44px;height:44px;object-fit:contain}.navigation{display:flex;gap:16px;align-items:center;flex-wrap:wrap}.catalog-link{font-size:14px;font-weight:650;text-decoration:none}.languages{display:flex;gap:4px;border:1px solid var(--line);border-radius:12px;padding:4px;background:var(--panel)}.languages a{display:inline-flex;min-width:44px;min-height:44px;align-items:center;justify-content:center;border-radius:8px;text-decoration:none;font-size:14px;font-weight:700}.languages a[aria-current]{background:var(--tint)}.product-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:38px;align-items:center;margin:20px 0 36px}.copy{min-width:0;padding:24px 0}.eyebrow{color:var(--accent);font-size:14px;font-weight:700;letter-spacing:.04em}.lead{font-size:19px;color:var(--muted)}.status{display:inline-block;border-radius:8px;padding:5px 10px;background:var(--tint);font-size:14px;font-weight:700;color:var(--accent)}.actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:23px 0 16px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:10px 16px;border:1px solid var(--line);border-radius:11px;background:var(--panel);color:var(--accent);font-size:15px;line-height:1.4;font-weight:700;text-decoration:none;max-width:100%;overflow-wrap:anywhere}.button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.button:hover{filter:brightness(.96)}.requirements{font-size:14px;color:var(--muted);padding-left:14px;border-left:3px solid var(--line)}.requirements strong{display:block;color:var(--ink);margin-bottom:5px}.preview{margin:0;min-width:0;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:var(--panel);box-shadow:0 22px 50px -30px #162b4855}.preview>a{display:grid;place-items:center;padding:18px;background:linear-gradient(145deg,var(--hero),var(--hero-end));min-height:260px}.preview img{display:block;width:auto;max-width:100%;max-height:520px;object-fit:contain;filter:drop-shadow(0 8px 18px #0003)}figcaption{font-size:14px;color:var(--muted);padding:14px 18px;line-height:1.5}.process{border:1px solid var(--line);border-radius:18px;background:var(--panel);padding:26px;margin:26px 0}.flow{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:0;gap:12px;counter-reset:step}.flow li{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--bg);overflow-wrap:anywhere}.flow li:before{counter-increment:step;content:counter(step,decimal-leading-zero);display:block;font-size:14px;color:var(--accent);font-weight:700;margin-bottom:5px}.start{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;padding:28px;border-radius:20px;background:var(--panel);border:1px solid var(--line);margin:28px 0 38px}.start p{color:var(--muted);margin:0}.start .actions{margin:0}.notice{padding:14px 16px;background:var(--tint);border-radius:12px;font-size:15px;color:var(--ink)}footer{display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between;border-top:1px solid var(--line);padding:26px 0 36px;font-size:14px;color:var(--muted)}footer nav{display:flex;gap:18px;flex-wrap:wrap}footer a{text-decoration:none}main:focus{outline:none}
-@media(max-width:900px){.product-hero{gap:24px}.lead{font-size:17px}.shell{padding:0 22px}}
-@media(max-width:760px){.product-hero{grid-template-columns:1fr;margin-top:0;gap:14px}.copy{padding:12px 0}.preview>a{min-height:0}.preview img{max-height:450px}.flow{grid-template-columns:1fr}.start{grid-template-columns:1fr;padding:22px}.process{padding:22px}.top{gap:14px}.navigation{width:100%;justify-content:space-between}.shell{padding:0 18px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
+ROOT = Path(__file__).resolve().parents[1]
+LANGS = ('ru', 'de', 'en')
+SITE = 'https://popovantondev.github.io/'
+PROFILE = SITE + 'popovantondev/'
+LANDING = {'de': 'index.html', 'en': 'index-en.html', 'ru': 'index-ru.html'}
+CATALOG = {l: PROFILE + LANDING[l] for l in LANGS}
+GITHUB = 'https://github.com/popovantondev/'
+TEXT = {
+ 'ru': dict(skip='К содержимому', nav='Основная навигация', all='Все программы', search='Поиск', kbd='Ctrl K',
+            search_label='Поиск по программам', theme='Сменить тему', legal='Правовая информация', new='НОВОЕ',
+            pill_release='Вышла версия {v}', pill_preview='Вышла предварительная версия {v}', more='Что нового →',
+            guide='Руководство', download='Скачать для', source='Исходный код', requirements='Перед запуском',
+            start='Первые шаги', release='Выпуск', preview='Предварительная версия', only='Только исходники',
+            flow='Как это работает', bento='Что внутри', bento_sub='Установка, функции, данные, проверка.',
+            inst='Установка', inst_sub='Проверить архив, распаковать, запустить.', feat='Функции', checked='Проверено',
+            shot='Демонстрационный интерфейс с искусственными данными. Открыть изображение целиком.',
+            illustration='Демонстрационная иллюстрация, не снимок работающей программы. Открыть целиком.',
+            source_note='Готового установочного пакета нет. Инструкции описывают настройку из исходников.',
+            terminal='Терминал', lang='Язык'),
+ 'de': dict(skip='Zum Inhalt', nav='Hauptnavigation', all='Alle Programme', search='Suchen', kbd='Strg K',
+            search_label='Programme durchsuchen', theme='Farbschema wechseln', legal='Rechtliches', new='NEU',
+            pill_release='Version {v} ist da', pill_preview='Vorabversion {v} ist da', more='Was ist neu →',
+            guide='Anleitung', download='Herunterladen für', source='Quellcode', requirements='Vor dem Start',
+            start='Erste Schritte', release='Release', preview='Vorabversion', only='Nur Quellcode',
+            flow='So funktioniert es', bento='Was drin steckt', bento_sub='Installation, Funktionen, Datenschutz, Prüfung.',
+            inst='Installation', inst_sub='Archiv prüfen, entpacken, starten.', feat='Funktionen', checked='Geprüft',
+            shot='Demo-Oberfläche mit künstlichen Daten. Vollständiges Bild öffnen.',
+            illustration='Demo-Illustration, kein Screenshot der laufenden Anwendung. Vollständig öffnen.',
+            source_note='Kein fertiges Installationspaket. Die Anleitung beschreibt die Einrichtung aus dem Quellcode.',
+            terminal='Terminal', lang='Sprache'),
+ 'en': dict(skip='Skip to content', nav='Main navigation', all='All programs', search='Search', kbd='Ctrl K',
+            search_label='Search programs', theme='Switch colour scheme', legal='Legal', new='NEW',
+            pill_release='Version {v} is out', pill_preview='Preview {v} is out', more="What's new →",
+            guide='User guide', download='Download for', source='Source code', requirements='Before you start',
+            start='First steps', release='Release', preview='Preview', only='Source only',
+            flow='How it works', bento="What's inside", bento_sub='Installation, features, privacy, checks.',
+            inst='Installation', inst_sub='Verify, extract, start.', feat='Features', checked='Checked',
+            shot='Demonstration interface with artificial data. Open the full image.',
+            illustration='Demonstration illustration, not a screenshot of the running application. Open in full.',
+            source_note='No ready-to-install package. The guide explains how to set up the source version.',
+            terminal='Terminal', lang='Language')}
+
+CSS = '''/* Generated by tools/build_presentation.py from tools/presentation.json. The shared kit lives in assets/kit. */
+:root{--ppk-accent:{l[accent]};--ppk-tint:{l[tint]};--ppk-hero:{l[hero]};--ppk-hero-end:{l[hero-end]}}
+:root[data-theme="dark"]{--ppk-accent:{d[accent]};--ppk-tint:{d[tint]};--ppk-hero:{d[hero]};--ppk-hero-end:{d[hero-end]}}
+@media (prefers-color-scheme:dark){:root:not([data-theme]){--ppk-accent:{d[accent]};--ppk-tint:{d[tint]};--ppk-hero:{d[hero]};--ppk-hero-end:{d[hero-end]}}}
+.ppk-stage a{display:block;line-height:0;border-radius:10px}
+.ppk-stage img{max-width:100%}
+.site-start{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;padding:28px;border:1px solid var(--ppk-line);border-radius:20px;background:var(--ppk-panel)}
+.site-start h2{margin:0 0 6px}.site-start p{margin:0;color:var(--ppk-muted)}.site-start .ppk-actions{margin:0}
+.site-notice{margin:14px 0 0;padding:12px 14px;border-radius:12px;background:var(--ppk-tint);font-size:15px}
+.site-third-note{margin:10px 0 0;font-size:14px;color:var(--ppk-muted)}
+@media(max-width:760px){.site-start{grid-template-columns:1fr;padding:22px}}
 '''
 
-def main():
- cfg=json.loads((ROOT/'tools/presentation.json').read_text(encoding='utf-8'))
- d=json.loads((ROOT/'public-release.json').read_text(encoding='utf-8'))
- site=ROOT/cfg['folder'];site.mkdir(exist_ok=True)
- (site/'presentation.css').write_text(CSS,encoding='utf-8')
- for lang in LANGS:
-  t=TEXT[lang];cat='index.html' if lang=='en' else 'index-'+lang+'.html'
-  guide='Guide-'+lang+'.html';status=t[{'release':'release','preview':'preview','source':'only'}[d['status']]]+' · '+d['version']
-  ready=d['status']!='source' and d.get('release_url')
-  action=t['download']+' '+('macOS' if 'macOS' in d['platform'] else 'Windows') if ready else t['source']
-  target=d['release_url'] if ready else d['source_url']
-  nav=''.join(f'<a href="index-{x}.html" lang="{x}" hreflang="{x}"'+(' aria-current="page"' if x==lang else '')+f'>{x.upper()}</a>' for x in LANGS)
-  caption=t[cfg.get('caption','shot')]
-  shot=cfg['shots'][lang]
-  flow=''.join('<li>'+e(x)+'</li>' for x in cfg['flow'][lang])
-  extra=cfg.get('notice',{}).get(lang,'')
-  if not ready:extra=t['source_note']+' '+extra
-  notice=f'<p class="notice">{e(extra)}</p>' if extra else ''
-  palette=';'.join('--'+k+':'+v for k,v in cfg['palette'].items())
-  html=f'''<!doctype html>
-<html lang="{lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="{e(d['description'][lang])}"><title>{e(d['name'])} — {e(t['guide'])} · {e(status)}</title><link rel="icon" href="{e(cfg['icon'])}"><link rel="stylesheet" href="presentation.css"></head>
-<body style="{palette}"><div class="shell"><header class="top"><a class="brand" href="index-{lang}.html"><img src="{e(cfg['icon'])}" width="44" height="44" alt="">{e(d['name'])}</a><div class="navigation"><a class="catalog-link" href="https://popovantondev.github.io/popovantondev/{cat}">← {t['all']}</a><nav class="languages" aria-label="Language">{nav}</nav></div></header>
-<main id="content"><section class="product-hero"><div class="copy"><p class="eyebrow">{e(d['platform'])}</p><h1>{e(d['name'])}</h1><p class="lead">{e(d['description'][lang])}</p><span class="status {d['status']}">{e(status)}</span><div class="actions"><a class="button primary" href="{e(target)}">{e(action)}</a><a class="button" href="{guide}">{t['guide']} ↗</a></div><p class="requirements"><strong>{t['requirements']}</strong>{e(d['requirements'][lang])}</p>{notice}</div><figure class="preview"><a href="{e(shot)}"><img src="{e(shot)}" alt="{e(d['name'])} — {e(caption)}" decoding="async"></a><figcaption>{e(caption)}</figcaption></figure></section>
-<section class="process" aria-labelledby="process-title"><h2 id="process-title">{t['flow']}</h2><ol class="flow">{flow}</ol></section><section class="start"><div><h2>{t['start']}</h2><p>{e(d['start'][lang])}</p></div><div class="actions"><a class="button" href="{guide}">{t['guide']} →</a></div></section></main>
-<footer><span>{e(d['name'])} · {e(status)}</span><nav><a href="{e(d['source_url'])}">GitHub ↗</a><a href="{e(d['feedback_url'])}">{t['support']}</a><a href="{e(d['source_url'])}#readme">{t['rights']}</a><a href="https://popovantondev.github.io/popovantondev/{cat}">{t['all']}</a></nav></footer></div></body></html>'''
-  (site/f'index-{lang}.html').write_text(html,encoding='utf-8')
-  if lang=='ru':(site/'index.html').write_text(html,encoding='utf-8')
 
-if __name__=='__main__':
- main()
- import polish_guides
- polish_guides.main()
+def load():
+    cfg = json.loads((ROOT / 'tools/presentation.json').read_text(encoding='utf-8'))
+    data = json.loads((ROOT / 'public-release.json').read_text(encoding='utf-8'))
+    return cfg, data
+
+
+def kit_version():
+    return (ROOT / load()[0]['folder'] / 'assets/kit/KIT_VERSION').read_text(encoding='utf-8').strip()
+
+
+def css_text(cfg):
+    pal = cfg['palette']
+    return CSS.replace('{l[accent]}', pal['light']['accent']).replace('{l[tint]}', pal['light']['tint']) \
+        .replace('{l[hero]}', pal['light']['hero']).replace('{l[hero-end]}', pal['light']['hero-end']) \
+        .replace('{d[accent]}', pal['dark']['accent']).replace('{d[tint]}', pal['dark']['tint']) \
+        .replace('{d[hero]}', pal['dark']['hero']).replace('{d[hero-end]}', pal['dark']['hero-end'])
+
+
+def file_hash(text):
+    return hashlib.sha1(text.encode('utf-8')).hexdigest()[:8]
+
+
+def status_text(d, lang):
+    t = TEXT[lang]
+    return t[{'release': 'release', 'preview': 'preview', 'source': 'only'}[d['status']]] + ' · ' + d['version']
+
+
+def head_block(cfg, d, version, extra_css=''):
+    """Kit includes shared by landing pages and guides (kit-theme.js first: no theme flash)."""
+    css = css_text(cfg)
+    v = file_hash(css)
+    out = ['<link rel="icon" href="%s">' % e(cfg['icon']),
+           '<script src="assets/kit/kit-theme.js"></script>',
+           '<link rel="stylesheet" href="assets/kit/kit.css?v=%s">' % version,
+           '<link rel="stylesheet" href="presentation.css?v=%s">' % v]
+    if extra_css:
+        out.append(extra_css)
+    out += ['<script src="assets/kit/programs.js?v=%s" defer></script>' % version,
+            '<script src="assets/kit/kit.js?v=%s" defer></script>' % version]
+    return '\n'.join(out)
+
+
+def header_block(cfg, d, lang, pages):
+    """Kit header. pages maps language to the file of the same page in that language."""
+    t = TEXT[lang]
+    langs = ''.join('<a href="%s" lang="%s" hreflang="%s"%s>%s</a>' % (
+        pages[x], x, x, ' aria-current="page"' if x == lang else '', x.upper()) for x in LANGS)
+    return ('<div class="ppk-nav-wrap" id="ppk-nav-wrap">\n'
+            '<nav class="ppk-nav" aria-label="%s">'
+            '<a class="ppk-brand" href="%s"><img src="%s" alt="" width="34" height="34"><span>%s</span></a>'
+            '<span class="ppk-spacer"></span>'
+            '<a class="ppk-back" href="%s">← %s</a>'
+            '<button class="ppk-search-btn" type="button" data-ppk-open-search aria-label="%s"><span>%s</span><kbd>%s</kbd></button>'
+            '<div class="ppk-langs">%s</div>'
+            '<button class="ppk-icon-btn ppk-theme-btn" type="button" data-ppk-theme aria-label="%s"></button>'
+            '<a class="ppk-icon-btn ppk-gh-btn" href="%s" aria-label="GitHub"></a>'
+            '</nav>\n</div>') % (
+        t['nav'], LANDING[lang], e(cfg['icon']), e(d['name']), CATALOG[lang], t['all'], t['search_label'],
+        t['search'], t['kbd'], langs, t['theme'], e(d['source_url']))
+
+
+LEGAL_LINKS = {'ru': ('Сообщить о проблеме', 'Условия использования'),
+               'de': ('Problem melden', 'Nutzungsbedingungen'),
+               'en': ('Report a problem', 'Terms of use')}
+
+
+def rights_url(d, lang):
+    """Link to the terms of use of the repository: RIGHTS in the page language, else RIGHTS.md, else LICENSE."""
+    for name in ('RIGHTS.%s.md' % lang, 'RIGHTS.md', 'LICENSE'):
+        if (ROOT / name).is_file():
+            return d['source_url'] + '/blob/main/' + name
+    raise SystemExit('no RIGHTS or LICENSE file for the footer link')
+
+
+def footer_block(d, lang):
+    t = TEXT[lang]
+    issue_label, rights_label = LEGAL_LINKS[lang]
+    return ('<footer class="ppk-footer">\n<span>© 2026 Anton Popov · %s %s</span>\n'
+            '<nav aria-label="%s"><a href="%simpressum.html">Impressum</a><a href="%sdatenschutz.html">Datenschutz</a>'
+            '<a href="%s">GitHub</a><a href="%s">%s</a><a href="%s">%s</a></nav>\n</footer>') % (
+        e(d['name']), e(d['version']), t['legal'], PROFILE, PROFILE, e(d['source_url']),
+        e(d['feedback_url']), issue_label, e(rights_url(d, lang)), rights_label)
+
+
+def resolve(text, d):
+    """Fill {zip}, {sha}, {exe}, {version}, {name} in installation lines."""
+    zipname = d['downloads'][0] if d['downloads'] else ''
+    return (text.replace('{base}', zipname[:-4] if zipname.endswith('.zip') else zipname)
+            .replace('{zip}', zipname)
+            .replace('{sha}', d['checksums'][0] if d['checksums'] else '')
+            .replace('{version}', d['version']).replace('{name}', d['name']))
+
+
+def pick(value, lang):
+    return value[lang] if isinstance(value, dict) else value
+
+
+def bento(cfg, d, lang):
+    t = TEXT[lang]
+    b = cfg['bento']
+    lines = ''.join('<div class="ppk-%s">%s</div>' % (cls, e(resolve(pick(text, lang), d))) for cls, text in b['terminal'])
+    third = b['third']
+    if third.get('live'):
+        extra = '<span class="ppk-live">%s</span>' % e(pick(third['label'], lang))
+    else:
+        extra = '<div class="ppk-chips">%s</div>' % ''.join('<span>%s</span>' % e(x) for x in pick(third['label'], lang))
+    chips = ''.join('<span>%s</span>' % e(x) for x in b['features'][lang])
+    checks = ''.join('<li>%s</li>' % e(x) for x in b['checks'][lang])
+    return (
+        '<section class="ppk-bento-section ppk-section ppk-reveal" aria-labelledby="bento-title">\n'
+        '<h2 id="bento-title">%s</h2><p class="ppk-sub">%s</p>\n<div class="ppk-bento">\n'
+        '<div class="ppk-tile ppk-wide"><h3>%s</h3><p>%s</p>'
+        '<div class="ppk-term" role="group" aria-label="%s"><div class="ppk-term-bar"><i></i><i></i><i></i></div>'
+        '<div class="ppk-term-out">%s</div></div></div>\n'
+        '<div class="ppk-tile"><h3>%s</h3><p>%s</p>%s</div>\n'
+        '<div class="ppk-tile"><h3>%s</h3><div class="ppk-chips">%s</div></div>\n'
+        '<div class="ppk-tile ppk-wide"><h3>%s</h3><ul class="ppk-checks">%s</ul></div>\n</div>\n</section>') % (
+        t['bento'], t['bento_sub'], t['inst'], t['inst_sub'], t['terminal'], lines,
+        e(pick(third['title'], lang)), e(pick(third['text'], lang)), extra, t['feat'], chips, t['checked'], checks)
+
+
+def landing(cfg, d, lang, version):
+    t = TEXT[lang]
+    guide = 'Guide-%s.html' % lang
+    status = status_text(d, lang)
+    ready = d['status'] != 'source' and d.get('release_url')
+    action = t['download'] + ' ' + ('macOS' if 'macOS' in d['platform'] else 'Windows') if ready else t['source']
+    target = d['release_url'] if ready else d['source_url']
+    caption = t[cfg.get('caption', 'shot')]
+    shot = cfg['shots'][lang]
+    flow = ''.join('<li>%s</li>' % e(x) for x in cfg['flow'][lang])
+    pill = ''
+    if d['status'] != 'source' or re.match(r'\d', d['version']):
+        key = 'pill_preview' if d['status'] == 'preview' else 'pill_release'
+        pill = '<a class="ppk-pill" href="%s"><span class="ppk-new">%s</span><span>%s</span> <span class="ppk-more">%s</span></a>' % (
+            e(d.get('release_url') or d['source_url'] + '/blob/main/CHANGELOG.md'), t['new'], e(t[key].format(v=d['version'])), t['more'])
+    notice = '' if ready else '<p class="site-notice">%s</p>' % e(t['source_note'])
+    pages = dict(LANDING)
+    csspath = css_text(cfg)
+    return '''<!doctype html>
+<html lang="%(lang)s"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="%(desc)s"><title>%(name)s · %(status)s</title>
+%(head)s
+</head>
+<body class="ppk-page">
+<a class="ppk-skip" href="#main">%(skip)s</a>
+%(header)s
+<main class="ppk-shell" id="main">
+<section class="ppk-hero"><div>
+%(pill)s
+<h1>%(name)s</h1><p class="ppk-lead">%(desc)s</p>
+<span class="ppk-status">%(status)s</span> <span class="ppk-chip">%(platform)s</span>
+<div class="ppk-actions"><a class="ppk-btn ppk-btn-primary" href="%(target)s">%(action)s</a><a class="ppk-btn ppk-btn-gh" href="%(src)s">%(source)s <span class="ppk-chip"><i class="ppk-dot"></i>%(stack)s</span></a><a class="ppk-btn" href="%(guide)s">%(guide_label)s ↗</a></div>
+<p class="ppk-requirements"><strong>%(req_title)s</strong>%(req)s</p>%(notice)s
+</div>
+<figure class="ppk-preview"><div class="ppk-stage"><a href="%(shot)s"><img src="%(shot)s" alt="%(alt)s" decoding="async"></a></div><figcaption>%(caption)s</figcaption></figure>
+</section>
+%(bento)s
+<section class="ppk-section ppk-process ppk-reveal" aria-labelledby="process-title"><h2 id="process-title">%(flow_title)s</h2><ol class="ppk-flow">%(flow)s</ol></section>
+<section class="ppk-section ppk-reveal"><div class="site-start"><div><h2>%(start_title)s</h2><p>%(start)s</p></div><div class="ppk-actions"><a class="ppk-btn" href="%(guide)s">%(guide_label)s →</a></div></div></section>
+</main>
+%(footer)s
+</body></html>
+''' % dict(lang=lang, desc=e(d['description'][lang]), name=e(d['name']), status=e(status),
+           head=head_block(cfg, d, version), skip=t['skip'], header=header_block(cfg, d, lang, pages), pill=pill,
+           platform=e(d['platform']), target=e(target), action=e(action), src=e(d['source_url']), source=t['source'],
+           stack=e(cfg['stack']), guide=guide, guide_label=t['guide'], req_title=t['requirements'],
+           req=e(d['requirements'][lang]), notice=notice, shot=e(shot), alt=e(d['name'] + ' — ' + caption),
+           caption=e(caption), bento=bento(cfg, d, lang), flow_title=t['flow'], flow=flow, start_title=t['start'],
+           start=e(d['start'][lang]), footer=footer_block(d, lang))
+
+
+def redirect(d):
+    """Old address of the German page: forwards to index.html and keeps all language links."""
+    base = SITE + d['repo'] + '/'
+    return ('<!doctype html>\n<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+            '<script>location.replace(\'index.html\'+location.hash)</script><meta http-equiv="refresh" content="0; url=index.html"><link rel="canonical" href="%sindex.html"><meta name="robots" content="noindex">'
+            '<title>%s</title></head>\n<body><p><a href="index.html">Weiter zur deutschen Seite</a> · '
+            '<a href="index-en.html" lang="en" hreflang="en">English</a> · <a href="index-ru.html" lang="ru" hreflang="ru">Русский</a></p></body></html>\n') % (
+        base, e(d['name']))
+
+
+def write(path, text):
+    path.write_bytes(text.encode('utf-8'))
+
+
+def main():
+    cfg, d = load()
+    site = ROOT / cfg['folder']
+    version = kit_version()
+    write(site / 'presentation.css', css_text(cfg))
+    for lang in LANGS:
+        write(site / LANDING[lang], landing(cfg, d, lang, version))
+    write(site / 'index-de.html', redirect(d))
+
+
+if __name__ == '__main__':
+    main()
+    import polish_guides
+    polish_guides.main()

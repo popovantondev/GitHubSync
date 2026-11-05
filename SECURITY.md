@@ -2,7 +2,7 @@
 
 Never attach tokens, passwords, SMS codes, private keys, personal configuration, unredacted logs or private repository/file names to public issues. Use artificial files and screenshots where possible. Revoke an exposed credential before relying on deletion; Git history may retain it.
 
-For a vulnerability, use GitHub private vulnerability reporting in the Security tab if the owner enables it. If unavailable, first request a private contact channel in an issue without sensitive details. Do not publish credentials or exploit data in that request.
+For a vulnerability, use GitHub private vulnerability reporting in the Security tab if the maintainer enables it. If unavailable, first request a private contact channel in an issue without sensitive details. Do not publish credentials or exploit data in that request.
 
 The app uses Git Credential Manager for official browser authentication. App settings, status snapshots and temporary operation requests do not store the token. Settings do contain local file paths, selected names and account identifiers. GCM and Windows may keep authorized credentials in their own protected credential store; this is separate from the source/portable package.
 
