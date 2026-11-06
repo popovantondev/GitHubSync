@@ -28,3 +28,6 @@
 .guide-tools ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 24px;margin:4px 0 12px;padding-left:22px}
 .guide-tools li{min-width:0}
 @media(max-width:760px){.guide-tools ol{grid-template-columns:1fr}.card{padding:18px}}
+.guide-home{margin:22px 0 4px}
+body.ppk-page a.guide-home-link{display:inline-flex;align-items:center;min-height:44px;padding:10px 20px;border:1px solid var(--ppk-accent);border-radius:999px;background:var(--ppk-tint);color:var(--ppk-accent);font-size:15px;font-weight:700;line-height:1.3;text-decoration:none}
+body.ppk-page a.guide-home-link:hover{background:var(--ppk-accent);color:var(--ppk-accent-ink,#fff)}

@@ -43,6 +43,17 @@ foreach ($relative in $paths) {
 foreach ($lang in @('de','ru','en')) {
     if (-not (Test-Path -LiteralPath (Join-Path $scanRoot "docs\Guide-$lang.html"))) { $findings.Add("Missing HTML guide: $lang") }
 }
+# Every guide opens with a visible button to the program page of its own language.
+$homeLabel = @{ ru = [regex]::Unescape('\u2190 \u041d\u0430\u0020\u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0443\u0020\u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u044b'); de = [regex]::Unescape('\u2190 Zur Programmseite'); en = [regex]::Unescape('\u2190 Program page') }
+$homePage = @{ de = 'index.html'; en = 'index-en.html'; ru = 'index-ru.html' }
+foreach ($lang in @('de','ru','en')) {
+    $guideFile = Join-Path $scanRoot "docs\Guide-$lang.html"
+    if (Test-Path -LiteralPath $guideFile) {
+        $guideHtml = [IO.File]::ReadAllText($guideFile)
+        $pattern = '<a\b[^>]*href="' + [regex]::Escape($homePage[$lang]) + '"[^>]*>\s*' + [regex]::Escape($homeLabel[$lang]) + '\s*</a>'
+        if ($guideHtml -notmatch $pattern) { $findings.Add("Guide lacks the program-page button: $lang") }
+    }
+}
 foreach ($relative in @($paths | Where-Object { $_ -notmatch '^runtime/' -and $_ -match '\.(html|md)$' })) {
     $document = Join-Path $scanRoot $relative
     $content = [IO.File]::ReadAllText($document)
