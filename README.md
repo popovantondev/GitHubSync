@@ -1,12 +1,20 @@
+<div align="center">
+  <img src="docs/presentation-icon.png" width="128" alt="GitHubSync Symbol">
+</div>
+
 # GitHubSync
 
-**Deutsch** · [Русский](README.ru.md) · [English](README.en.md)
+[Русский](README.ru.md) · **Deutsch** · [English](README.en.md)
 
 Dateien zu GitHub senden, herunterladen und fortsetzen. Hinweise auf Updates starten keine Übertragung.
 
-Windows 10/11 · x64 · 1.5.3 · Deutsch / Русский / English
+**Windows 10/11 · x64 · 1.5.3 · Deutsch / Русский / English**
 
-[Anleitung](https://popovantondev.github.io/GitHubSync/Guide-de.html) · [Portable herunterladen](https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip)
+**[Portable herunterladen](https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip)** · **[Webseite](https://popovantondev.github.io/GitHubSync/)** · **[Anleitung](https://popovantondev.github.io/GitHubSync/Guide-de.html)** · **[Fehler melden](https://github.com/popovantondev/GitHubSync/issues/new/choose)**
+
+**[Prüfsumme SHA-256](https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip.sha256)** · **[Release und getrennte Quellarchive](https://github.com/popovantondev/GitHubSync/releases/tag/v1.5.3)** · **[Sicherheit](SECURITY.md)**
+
+![Demonstration: Projektdateien](docs/Ui-de-code.png)
 
 ## Erste Schritte
 
@@ -15,8 +23,6 @@ Zuerst **Senden** oder **Herunterladen** wählen. Code enthält Projektdateien, 
 Schließen blendet das Fenster in den Infobereich aus; bestätigte Übertragungen laufen weiter. Doppelklick öffnet das Fenster. Beenden erfolgt im Tray-Menü. Downloads lassen sich pausieren und nach erneuter Prüfung fortsetzen. Update-Hinweise starten keine Übertragung.
 
 Gesamte Portable-ZIP entpacken, SHA-256 prüfen und `GitHubSync.exe` öffnen. Kein Installer oder Administratorrecht nötig. Git/Git Credential Manager sind enthalten; Windows PowerShell 5.1 und .NET Framework müssen verfügbar sein. Anmeldung einschließlich Google/SMS/2FA erfolgt im offiziellen Browser. Projekt auswählen/erstellen, Zielmodus wählen, Dateien prüfen, Upload ausdrücklich bestätigen und Ergebnis öffnen.
-
-![Demonstration: Projektdateien](docs/Ui-de-code.png)
 
 ![Demonstration: Herunterladen](docs/Ui-de-download.png)
 

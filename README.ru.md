@@ -1,12 +1,20 @@
+<div align="center">
+  <img src="docs/presentation-icon.png" width="128" alt="Значок GitHubSync">
+</div>
+
 # GitHubSync
 
-[Deutsch](README.md) · **Русский** · [English](README.en.md)
+**Русский** · [Deutsch](README.md) · [English](README.en.md)
 
 Отправляйте файлы на GitHub и скачивайте их обратно с проверкой и докачкой. Изменения обнаруживаются автоматически, передача — только с вашего разрешения.
 
-Windows 10/11 · x64 · 1.5.3 · Deutsch / Русский / English
+**Windows 10/11 · x64 · 1.5.3 · Deutsch / Русский / English**
 
-[Инструкция](https://popovantondev.github.io/GitHubSync/Guide-ru.html) · [Скачать portable](https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip)
+**[Скачать portable](https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip)** · **[Сайт](https://popovantondev.github.io/GitHubSync/index-ru.html)** · **[Руководство](https://popovantondev.github.io/GitHubSync/Guide-ru.html)** · **[Сообщить об ошибке](https://github.com/popovantondev/GitHubSync/issues/new/choose)**
+
+**[Контрольная сумма SHA-256](https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip.sha256)** · **[Релиз и отдельные архивы исходников](https://github.com/popovantondev/GitHubSync/releases/tag/v1.5.3)** · **[Безопасность](SECURITY.md)**
+
+![Учебный интерфейс: файлы проекта](docs/Ui-ru-code.png)
 
 ## Первые шаги
 
@@ -20,8 +28,6 @@ Windows 10/11 · x64 · 1.5.3 · Deutsch / Русский / English
 4. Выберите папку или файлы, проверьте список и назначение. Подтвердите отправку. Нажмите кнопку открытия результата.
 
 Папка читается в фоне. Можно сменить папку/режим; неполный список отправить нельзя. Проект по умолчанию создаётся приватным. Публикация релиза не меняет видимость проекта.
-
-![Учебный интерфейс: файлы проекта](docs/Ui-ru-code.png)
 
 ![Учебный интерфейс: скачивание](docs/Ui-ru-download.png)
 
@@ -38,7 +44,7 @@ Windows 10/11 · x64 · 1.5.3 · Deutsch / Русский / English
 
 Приложение хранит `config.json` и `ui-settings.json` рядом с EXE, ошибки — в локальном журнале. Токены в эти файлы не записываются; входом управляет Git Credential Manager. Настройки могут содержать имена файлов, имя аккаунта и локальные пути: не публикуйте их. Репозиторий исходников исключает папки `artifacts/`, `runtime/`, настройки, журналы и ключи.
 
-## Проверка и выпуск
+## Проверка, выпуск и права
 
 В версии 1.5.3 отправка в Code переведена с большого base64-запроса на встроенный Git: один коммит, без удаления остальных файлов и без force. Git готовит временный снимок ветки, не изменяя выбранную локальную папку. Прогресс объектов Git не означает подтверждения файлов; успех показывается после проверки коммита на GitHub. Трей-меню больше не пересоздаётся каждую секунду. Проверки и отдельно разрешённая приёмка искусственных файлов в закрытом TEST описаны в [отчёте 1.5.3](docs/VERIFICATION-1.5.3.md). Другие компьютеры и физическое переключение DPI не проверены.
 

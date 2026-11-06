@@ -1,14 +1,22 @@
+<div align="center">
+  <img src="docs/presentation-icon.png" width="128" alt="GitHubSync icon">
+</div>
+
 # GitHubSync
 
-[Deutsch](README.md) · [Русский](README.ru.md) · **English**
+[Русский](README.ru.md) · [Deutsch](README.md) · **English**
 
 Send files to GitHub, download project files or release attachments, resume downloads, and receive update notifications. Transfers always require approval.
 
-Windows 10/11 · x64 · **1.5.3** · Deutsch / Русский / English
+**Windows 10/11 · x64 · 1.5.3 · Deutsch / Русский / English**
 
-[User guide](https://popovantondev.github.io/GitHubSync/Guide-en.html) · [Security](SECURITY.md)
+**[Download portable ZIP](https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip)** · **[Website](https://popovantondev.github.io/GitHubSync/index-en.html)** · **[User guide](https://popovantondev.github.io/GitHubSync/Guide-en.html)** · **[Report a problem](https://github.com/popovantondev/GitHubSync/issues/new/choose)**
 
-[Download portable ZIP](https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip) · [SHA-256](https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip.sha256) · [Release and separate source archives](https://github.com/popovantondev/GitHubSync/releases/tag/v1.5.3)
+**[SHA-256](https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip.sha256)** · **[Release and separate source archives](https://github.com/popovantondev/GitHubSync/releases/tag/v1.5.3)** · **[Security](SECURITY.md)**
+
+![Project files](docs/Ui-en-code.png)
+
+These are actual WPF demonstration renders with artificial files, fictional accounts and neutral paths, not screenshots of a real GitHub transfer.
 
 ## First steps
 
@@ -22,6 +30,10 @@ Choose **Send** or **Download** first. Public downloads do not require signing i
 
 The close button hides the app in the **system tray** and approved transfers continue. Double-click to reopen; use **Exit** in the tray to quit. The two-arrow icon animates in the tray and window during transfer. Checks run every 15 minutes for one selected GitHub source while the app is running. Notifications never start a transfer. Windows autostart is not enabled.
 
+![Release attachments](docs/Ui-en.png)
+
+![Download release attachments](docs/Ui-en-download.png)
+
 ## Two destinations
 
 - **Project files:** files appear in **Code**, preserving nested relative paths. Review Added/Updated/Unchanged before one commit. No deletion of other files, no force-update or empty commit. A changed/protected branch stops the operation.
@@ -29,17 +41,7 @@ The close button hides the app in the **system tray** and approved transfers con
 
 Private remains private: publishing a release does not change repository visibility. Creating a project defaults to private.
 
-## Screenshots
-
-These are actual WPF demonstration renders with artificial files, fictional accounts and neutral paths, not screenshots of a real GitHub transfer.
-
-| Project files | Release attachments |
-| --- | --- |
-| ![Project files](docs/Ui-en-code.png) | ![Release attachments](docs/Ui-en.png) |
-
-![Download release attachments](docs/Ui-en-download.png)
-
-## Requirements and limitations
+## Requirements, limitations and privacy
 
 Code files above 100 MiB are rejected before writing; use Release attachments. Git LFS is not configured. `.git`/links are excluded; likely credential filenames do not start selected, but **review contents yourself**. `.gitignore` is not applied automatically. Internet and appropriate GitHub permissions are required. An empty existing repository needs an initial README/commit. Repositories created in this app get one.
 
@@ -49,13 +51,11 @@ Offline checks use mocks/local repositories and artificial files; separately aut
 
 Git LFS objects, submodules and Git history are not downloaded. Unsupported Windows filenames, links/junctions and unsafe paths stop the operation. GitHub blob API downloads have a 100 MiB limit. Uploads cannot byte-resume an unfinished release attachment: already confirmed files are skipped, the unfinished file is sent again.
 
-## Privacy
-
 `config.json`, `ui-settings.json` and error logs beside the extracted EXE may contain local paths, selected filenames and the account name: **do not publish them**. The app does not store tokens in these files; GCM manages authorized credentials separately in the user's credential store. No telemetry service is added. Git ignores generated apps/dependencies, local preferences, logs and keys; publication auditing checks the actual Git file set.
 
 Resumable task metadata is private under `%LOCALAPPDATA%/GitHubSync`. Temporary Code snapshots are under `code-transfers` there; normal completion cleans the generated session, but an interrupted worker may leave private repository data. Partial files and replacement backups are in `.githubsync` below the chosen download folder; this directory is excluded from uploads and source archives. No authentication token or signed CDN URL is stored there.
 
-## Build and release files
+## Build, release and rights
 
 See [CONTRIBUTING](CONTRIBUTING.md) for commands and folder structure. `Run-Checks.ps1` uses mocked GitHub/auth only. `tools/Build-Portable.ps1` builds locally and creates:
 
@@ -64,7 +64,5 @@ See [CONTRIBUTING](CONTRIBUTING.md) for commands and folder structure. `Run-Chec
 - the accompanying `.zip.sha256`
 
 Generated artifacts are **not** source commits. Upload the ZIP and checksum as release attachments. [Release notes](docs/RELEASE_NOTES-1.5.3.md) · [Verification](docs/VERIFICATION-1.5.3.md) · [Release checklist](docs/RELEASE_CHECKLIST.md) · [Architecture](docs/ARCHITECTURE.md) · [Design](docs/DESIGN.md) · [Changelog](CHANGELOG.md) · [Security](SECURITY.md).
-
-## Rights
 
 Existing application license: [MIT](LICENSE). Bundled Git/GCM and libraries retain their [independent licenses and source references](THIRD_PARTY.md). These must not be removed from a distributed portable package. Reports are welcome in German, Russian or English; redact personal information first.
