@@ -124,6 +124,7 @@ def polish_pages():
         if lang not in COPY:
             continue
         s = path.read_bytes().decode('utf-8').replace('\r\n', '\n')
+        s = re.sub(r'<title>.*?</title>', lambda _: '<title>%s</title>' % bp.e('%s — %s' % (d['name'], bp.TEXT[lang]['guide'])), s, count=1, flags=re.S)
         s = block(s, 'ppk-head', '\n' + bp.head_block(cfg, d, version, guide_css) + '\n')
         s = block(s, 'ppk-header', '\n<a class="ppk-skip" href="#main">%s</a>\n%s\n' % (bp.TEXT[lang]['skip'], bp.header_block(cfg, d, lang, pages)))
         s = block(s, 'ppk-footer', '\n' + bp.footer_block(d, lang) + '\n')

@@ -128,27 +128,36 @@ def header_block(cfg, d, lang, pages):
         t['search'], t['kbd'], langs, t['theme'], e(d['source_url']))
 
 
-LEGAL_LINKS = {'ru': ('Сообщить о проблеме', 'Условия использования'),
-               'de': ('Problem melden', 'Nutzungsbedingungen'),
-               'en': ('Report a problem', 'Terms of use')}
+def tagline(d, lang):
+    """Gist for <title>: the first sentence of the hero description, without the final full stop."""
+    return re.split(r'(?<=[.!?])\s', d['description'][lang].strip())[0].rstrip('.')
+
+
+LEGAL_LINKS = {'ru': ('Сообщить об ошибке', 'Права'),
+               'de': ('Problem melden', 'Rechte'),
+               'en': ('Report a problem', 'Rights')}
 
 
 def rights_url(d, lang):
-    """Link to the terms of use of the repository: RIGHTS in the page language, else RIGHTS.md, else LICENSE."""
-    for name in ('RIGHTS.%s.md' % lang, 'RIGHTS.md', 'LICENSE'):
+    """Rights page of the repository: RIGHTS in the page language, else RIGHTS.md, else LICENSE; None without any."""
+    for name in (f'RIGHTS.{lang}.md', 'RIGHTS.md', 'LICENSE'):
         if (ROOT / name).is_file():
             return d['source_url'] + '/blob/main/' + name
-    raise SystemExit('no RIGHTS or LICENSE file for the footer link')
+    return None
 
 
 def footer_block(d, lang):
+    """Footer of every site, one order: Impressum, Datenschutz, rights (if the repository has them), report a problem, GitHub."""
     t = TEXT[lang]
     issue_label, rights_label = LEGAL_LINKS[lang]
-    return ('<footer class="ppk-footer">\n<span>© 2026 Anton Popov · %s %s</span>\n'
-            '<nav aria-label="%s"><a href="%simpressum.html">Impressum</a><a href="%sdatenschutz.html">Datenschutz</a>'
-            '<a href="%s">GitHub</a><a href="%s">%s</a><a href="%s">%s</a></nav>\n</footer>') % (
-        e(d['name']), e(d['version']), t['legal'], PROFILE, PROFILE, e(d['source_url']),
-        e(d['feedback_url']), issue_label, e(rights_url(d, lang)), rights_label)
+    rights = rights_url(d, lang)
+    links = [f'<a href="{PROFILE}impressum.html">Impressum</a>', f'<a href="{PROFILE}datenschutz.html">Datenschutz</a>']
+    if rights:
+        links.append(f'<a href="{e(rights)}">{rights_label}</a>')
+    links += [f'<a href="{e(d["feedback_url"])}">{issue_label}</a>', f'<a href="{e(d["source_url"])}">GitHub</a>']
+    return (
+        f'<footer class="ppk-footer">\n<span>© 2026 Anton Popov · {e(d["name"])} {e(d["version"])}</span>\n'
+        f'<nav aria-label="{e(t["legal"])}">' + ''.join(links) + '</nav>\n</footer>')
 
 
 def resolve(text, d):
@@ -208,7 +217,7 @@ def landing(cfg, d, lang, version):
     csspath = css_text(cfg)
     return '''<!doctype html>
 <html lang="%(lang)s"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="%(desc)s"><title>%(name)s · %(status)s</title>
+<meta name="description" content="%(desc)s"><title>%(name)s — %(tagline)s</title>
 %(head)s
 </head>
 <body class="ppk-page">
@@ -230,7 +239,7 @@ def landing(cfg, d, lang, version):
 </main>
 %(footer)s
 </body></html>
-''' % dict(lang=lang, desc=e(d['description'][lang]), name=e(d['name']), status=e(status),
+''' % dict(lang=lang, desc=e(d['description'][lang]), name=e(d['name']), tagline=e(tagline(d, lang)), status=e(status),
            head=head_block(cfg, d, version), skip=t['skip'], header=header_block(cfg, d, lang, pages), pill=pill,
            platform=e(d['platform']), target=e(target), action=e(action), src=e(d['source_url']), source=t['source'],
            stack=e(cfg['stack']), guide=guide, guide_label=t['guide'], req_title=t['requirements'],
