@@ -253,7 +253,7 @@ def write(path, text):
     path.write_bytes(text.encode('utf-8'))
 
 
-def main():
+def build_site():
     cfg, d = load()
     site = ROOT / cfg['folder']
     version = kit_version()
@@ -261,6 +261,13 @@ def main():
     for lang in LANGS:
         write(site / LANDING[lang], landing(cfg, d, lang, version))
     write(site / 'index-de.html', redirect(d))
+
+
+def main():
+    build_site()
+    import site_images
+    cfg, d = load()
+    site_images.optimize(ROOT / cfg['folder'], d['repo'], ROOT, 'index*.html')
 
 
 if __name__ == '__main__':

@@ -112,7 +112,7 @@ def block(s, name, text):
     return re.sub(pattern, lambda _: '<!-- %s:start -->%s<!-- %s:end -->' % (name, text, name), s, count=1, flags=re.S)
 
 
-def main():
+def polish_pages():
     cfg, d = bp.load()
     site = ROOT / cfg['folder']
     version = bp.kit_version()
@@ -166,6 +166,13 @@ def main():
         s = home_link(s, lang)
         s = full_images(s, t[1])
         path.write_bytes(s.encode('utf-8'))
+
+
+def main():
+    polish_pages()
+    import site_images
+    cfg, d = bp.load()
+    site_images.optimize(ROOT / cfg['folder'], d['repo'], ROOT, 'Guide-*.html')
 
 
 if __name__ == '__main__':
