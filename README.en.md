@@ -1,10 +1,12 @@
 # GitHubSync
 
+[Deutsch](README.md) · [Русский](README.ru.md) · **English**
+
 Send files to GitHub, download project files or release attachments, resume downloads, and receive update notifications. Transfers always require approval.
 
 Windows 10/11 · x64 · **1.5.3** · Deutsch / Русский / English
 
-[Deutsch](README.md) · [Русский](README.ru.md) · [User guide](https://popovantondev.github.io/GitHubSync/Guide-en.html) · [Security](SECURITY.md)
+[User guide](https://popovantondev.github.io/GitHubSync/Guide-en.html) · [Security](SECURITY.md)
 
 [Download portable ZIP](https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip) · [SHA-256](https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip.sha256) · [Release and separate source archives](https://github.com/popovantondev/GitHubSync/releases/tag/v1.5.3)
 

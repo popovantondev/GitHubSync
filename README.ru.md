@@ -1,10 +1,12 @@
 # GitHubSync
 
+[Deutsch](README.md) · **Русский** · [English](README.en.md)
+
 Отправляйте файлы на GitHub и скачивайте их обратно с проверкой и докачкой. Изменения обнаруживаются автоматически, передача — только с вашего разрешения.
 
 Windows 10/11 · x64 · 1.5.3 · Deutsch / Русский / English
 
-[English](README.en.md) · [Deutsch](README.md) · [Инструкция](https://popovantondev.github.io/GitHubSync/Guide-ru.html) · [Скачать portable](https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip)
+[Инструкция](https://popovantondev.github.io/GitHubSync/Guide-ru.html) · [Скачать portable](https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip)
 
 ## Первые шаги
 

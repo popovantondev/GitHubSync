@@ -1,10 +1,12 @@
 # GitHubSync
 
+**Deutsch** · [Русский](README.ru.md) · [English](README.en.md)
+
 Dateien zu GitHub senden, herunterladen und fortsetzen. Hinweise auf Updates starten keine Übertragung.
 
 Windows 10/11 · x64 · 1.5.3 · Deutsch / Русский / English
 
-[English](README.en.md) · [Русский](README.ru.md) · [Anleitung](https://popovantondev.github.io/GitHubSync/Guide-de.html) · [Portable herunterladen](https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip)
+[Anleitung](https://popovantondev.github.io/GitHubSync/Guide-de.html) · [Portable herunterladen](https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip)
 
 ## Erste Schritte
 
