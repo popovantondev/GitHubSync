@@ -1,20 +1,30 @@
-<div align="center">
-  <img src="docs/presentation-icon.png" width="128" alt="Значок GitHubSync">
-</div>
+<!-- ppk-readme:head:start -->
+<a href="https://popovantondev.github.io/GitHubSync/index-ru.html"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/header-ru-dark.844252fb.svg"><img src="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/header-ru-light.06e92cba.svg" width="880" height="188" alt="GitHubSync — Отправляет файлы в GitHub и скачивает исходники и выпуски. Windows 10/11 · x64, Выпуск 1.5.3"></picture></a>
+<!-- ppk-readme:head:end -->
 
 # GitHubSync
 
 **Русский** · [Deutsch](README.md) · [English](README.en.md)
 
+<!-- ppk-readme:body:start -->
+<p>
+<a href="https://github.com/popovantondev/GitHubSync/releases/tag/v1.5.3"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/btn-download-ru-dark.54fe288f.svg"><img src="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/btn-download-ru-light.7bdae08f.svg" width="120" height="36" alt="Скачать"></picture></a>
+<a href="https://popovantondev.github.io/GitHubSync/index-ru.html"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/btn-website-ru-dark.7248cec3.svg"><img src="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/btn-website-ru-light.bd1a3ee8.svg" width="92" height="36" alt="Сайт"></picture></a>
+<a href="https://popovantondev.github.io/GitHubSync/Guide-ru.html"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/btn-guide-ru-dark.d2dd5a70.svg"><img src="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/btn-guide-ru-light.b24ad7ad.svg" width="161" height="36" alt="Руководство"></picture></a>
+<a href="https://github.com/popovantondev/GitHubSync/issues/new/choose"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/btn-bug-ru-dark.8c56749a.svg"><img src="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/btn-bug-ru-light.4ee3658a.svg" width="234" height="36" alt="Сообщить об ошибке"></picture></a>
+</p>
+
+<p><a href="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/Ui-ru-code.png"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/preview-ru-dark.2c5bceac.webp"><img src="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/preview-ru-light.fad4ab59.webp" width="880" height="516" alt="Интерфейс программы GitHubSync"></picture></a><br>
+<sub><a href="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/Ui-ru-code.png">Снимок целиком</a></sub></p>
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/divider-dark.cab62eca.svg"><img src="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/divider-light.96357132.svg" width="880" height="6" alt="Разделитель"></picture>
+<!-- ppk-readme:body:end -->
+
 Отправляйте файлы на GitHub и скачивайте их обратно с проверкой и докачкой. Изменения обнаруживаются автоматически, передача — только с вашего разрешения.
 
 **Windows 10/11 · x64 · 1.5.3 · Deutsch / Русский / English**
 
-**[Скачать portable](https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip)** · **[Сайт](https://popovantondev.github.io/GitHubSync/index-ru.html)** · **[Руководство](https://popovantondev.github.io/GitHubSync/Guide-ru.html)** · **[Сообщить об ошибке](https://github.com/popovantondev/GitHubSync/issues/new/choose)**
-
 **[Контрольная сумма SHA-256](https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip.sha256)** · **[Релиз и отдельные архивы исходников](https://github.com/popovantondev/GitHubSync/releases/tag/v1.5.3)** · **[Безопасность](SECURITY.md)**
-
-![Учебный интерфейс: файлы проекта](docs/Ui-ru-code.png)
 
 ## Первые шаги
 
@@ -28,8 +38,6 @@
 4. Выберите папку или файлы, проверьте список и назначение. Подтвердите отправку. Нажмите кнопку открытия результата.
 
 Папка читается в фоне. Можно сменить папку/режим; неполный список отправить нельзя. Проект по умолчанию создаётся приватным. Публикация релиза не меняет видимость проекта.
-
-![Учебный интерфейс: скачивание](docs/Ui-ru-download.png)
 
 Изображение — настоящий WPF-рендер с искусственными файлами, учебной учётной записью и путём. Личных данных в примере нет.
 

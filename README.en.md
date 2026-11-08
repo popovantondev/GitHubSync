@@ -1,20 +1,30 @@
-<div align="center">
-  <img src="docs/presentation-icon.png" width="128" alt="GitHubSync icon">
-</div>
+<!-- ppk-readme:head:start -->
+<a href="https://popovantondev.github.io/GitHubSync/index-en.html"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/header-en-dark.7fd6b1e1.svg"><img src="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/header-en-light.b4f44384.svg" width="880" height="188" alt="GitHubSync — Uploads files to GitHub and downloads project releases. Windows 10/11 · x64, Release 1.5.3"></picture></a>
+<!-- ppk-readme:head:end -->
 
 # GitHubSync
 
 [Русский](README.ru.md) · [Deutsch](README.md) · **English**
 
+<!-- ppk-readme:body:start -->
+<p>
+<a href="https://github.com/popovantondev/GitHubSync/releases/tag/v1.5.3"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/btn-download-en-dark.267fdbab.svg"><img src="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/btn-download-en-light.01e86ac0.svg" width="136" height="36" alt="Download"></picture></a>
+<a href="https://popovantondev.github.io/GitHubSync/index-en.html"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/btn-website-en-dark.0722d043.svg"><img src="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/btn-website-en-light.d3ab74fa.svg" width="120" height="36" alt="Website"></picture></a>
+<a href="https://popovantondev.github.io/GitHubSync/Guide-en.html"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/btn-guide-en-dark.1f690af5.svg"><img src="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/btn-guide-en-light.8e3548e9.svg" width="141" height="36" alt="User guide"></picture></a>
+<a href="https://github.com/popovantondev/GitHubSync/issues/new/choose"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/btn-bug-en-dark.69cb2119.svg"><img src="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/btn-bug-en-light.8546f5bd.svg" width="196" height="36" alt="Report a problem"></picture></a>
+</p>
+
+<p><a href="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/Ui-en-code.png"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/preview-en-dark.fc2c35e2.webp"><img src="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/preview-en-light.cbaa78d1.webp" width="880" height="516" alt="GitHubSync interface"></picture></a><br>
+<sub><a href="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/Ui-en-code.png">Full screenshot</a></sub></p>
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/divider-dark.cab62eca.svg"><img src="https://raw.githubusercontent.com/popovantondev/GitHubSync/main/docs/readme/divider-light.96357132.svg" width="880" height="6" alt="Divider"></picture>
+<!-- ppk-readme:body:end -->
+
 Send files to GitHub, download project files or release attachments, resume downloads, and receive update notifications. Transfers always require approval.
 
 **Windows 10/11 · x64 · 1.5.3 · Deutsch / Русский / English**
 
-**[Download portable ZIP](https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip)** · **[Website](https://popovantondev.github.io/GitHubSync/index-en.html)** · **[User guide](https://popovantondev.github.io/GitHubSync/Guide-en.html)** · **[Report a problem](https://github.com/popovantondev/GitHubSync/issues/new/choose)**
-
 **[SHA-256](https://github.com/popovantondev/GitHubSync/releases/download/v1.5.3/GitHubSync-1.5.3-win-x64.zip.sha256)** · **[Release and separate source archives](https://github.com/popovantondev/GitHubSync/releases/tag/v1.5.3)** · **[Security](SECURITY.md)**
-
-![Project files](docs/Ui-en-code.png)
 
 These are actual WPF demonstration renders with artificial files, fictional accounts and neutral paths, not screenshots of a real GitHub transfer.
 
@@ -29,10 +39,6 @@ Choose **Send** or **Download** first. Public downloads do not require signing i
 **Pause download** retains partial files. **Resume download…** restores the selection for a fresh review. Byte resume depends on server range support; a full response restarts that file instead of appending. Completed files are checked against available hashes; missing release digests are reported as size-only verification. Replacements have backups; unrelated local files are never deleted.
 
 The close button hides the app in the **system tray** and approved transfers continue. Double-click to reopen; use **Exit** in the tray to quit. The two-arrow icon animates in the tray and window during transfer. Checks run every 15 minutes for one selected GitHub source while the app is running. Notifications never start a transfer. Windows autostart is not enabled.
-
-![Release attachments](docs/Ui-en.png)
-
-![Download release attachments](docs/Ui-en-download.png)
 
 ## Two destinations
 
