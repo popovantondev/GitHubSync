@@ -25,9 +25,9 @@
       "live": false,
       "title": {"de": "Verbindung", "en": "Connection", "ru": "Подключение"},
       "text": {
-        "de": "Spricht nur mit GitHub (API und Dateidownloads über HTTPS). Die Anmeldung läuft im Browser; die App speichert keine Passwörter oder Tokens und fügt keine Telemetrie hinzu.",
-        "en": "Talks only to GitHub (API and file downloads over HTTPS). Sign-in happens in the browser; the app stores no passwords or tokens and adds no telemetry.",
-        "ru": "Работает только с GitHub (API и загрузка файлов по HTTPS). Вход выполняется в браузере; приложение не хранит пароли и токены и не добавляет телеметрию."
+        "de": "Spricht nur mit GitHub (API und Dateidownloads über HTTPS). Die Anmeldung läuft im Browser über den enthaltenen Git Credential Manager; die App selbst speichert keine Passwörter oder Tokens (der Manager legt die Anmeldung im geschützten Speicher von Windows ab) und fügt keine Telemetrie hinzu.",
+        "en": "Talks only to GitHub (API and file downloads over HTTPS). Sign-in happens in the browser through the bundled Git Credential Manager; the app itself stores no passwords or tokens (the manager keeps the sign-in in the protected Windows store) and adds no telemetry.",
+        "ru": "Работает только с GitHub (API и загрузка файлов по HTTPS). Вход выполняется в браузере через входящий в пакет Git Credential Manager; само приложение не хранит пароли и токены (менеджер держит вход в защищённом хранилище Windows) и не добавляет телеметрию."
       },
       "label": {
         "de": ["GitHub API", "HTTPS", "Anmeldung im Browser"],
